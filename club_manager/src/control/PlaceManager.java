@@ -2,7 +2,7 @@ package control;
 
 import java.util.*;
 
-public class PlaceMana {
+public class PlaceManager {
    
    public int modPinofo() {
       // TODO: implement
