@@ -1,4 +1,4 @@
-package kitchen.util;
+package util;
 
 public class DbException extends BaseException {
 	public DbException(java.lang.Throwable ex){
