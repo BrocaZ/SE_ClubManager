@@ -1,6 +1,9 @@
 package control;
 
+import java.sql.Connection;
 import java.util.*;
+
+import util.DBUtil;
 
 public class Announcement {
 	private int annoucementId;
@@ -14,7 +17,14 @@ public class Announcement {
 	private int remarks;
 
 	public int addAnno() {
-		// TODO: implement
+		Connection conn=null;
+		try {
+			conn = DBUtil.getConnection();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return 0;
 	}
 

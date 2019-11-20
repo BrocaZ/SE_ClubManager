@@ -8,5 +8,19 @@ public class ActManager {
       // TODO: implement
       return 0;
    }
+   public int modAct() {
+		// TODO: implement
+		return 0;
+	}
+
+	public int addAct() {
+		// TODO: implement
+		return 0;
+	}
+
+	public int delAct() {
+		// TODO: implement
+		return 0;
+	}
 
 }
