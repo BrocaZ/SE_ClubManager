@@ -1,4 +1,4 @@
-package kitchen.util;
+package util;
 
 import java.sql.Connection;
 
