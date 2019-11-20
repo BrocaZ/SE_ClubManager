@@ -2,15 +2,7 @@ package control;
 
 import java.util.*;
 
-public class Place {
-   
-   private int placeId;
-   
-   private String placeName;
-   
-   private int available;
-   private String status;
-   private String remarks;
+public class PlaceMana {
    
    public int modPinofo() {
       // TODO: implement

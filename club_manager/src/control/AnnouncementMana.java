@@ -5,16 +5,7 @@ import java.util.*;
 
 import util.DBUtil;
 
-public class Announcement {
-	private int annoucementId;
-	private int associationId;
-	private int annoContent;
-	private int time;
-	private int activityId;
-	private int place;
-	private int annoType;
-	private int status;
-	private int remarks;
+public class AnnouncementMana {
 
 	public int addAnno() {
 		Connection conn=null;
