@@ -2,24 +2,31 @@ package control;
 
 import java.util.*;
 
-public class AssoManager {
-   public int joinAsso() {
+public class PlaceMana {
+   
+   public int modPinofo() {
       // TODO: implement
       return 0;
    }
    
-   public int exitAsso() {
+   public int modPstatus() {
       // TODO: implement
       return 0;
    }
    
-   public int assoMemberList() {
+   public int addPlace() {
       // TODO: implement
       return 0;
    }
    
-   public int checkExitAsso() {
+   public int delPlace() {
       // TODO: implement
       return 0;
    }
+   
+   public int placeList() {
+      // TODO: implement
+      return 0;
+   }
+
 }
