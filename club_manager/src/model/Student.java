@@ -12,7 +12,7 @@ public class Student {
 	   private String password;
 	   private String status;
 	   private String remarks;
-	   public Student curStu=null;
+	   public static Student curStu=null;
 	public Student getCurStu() {
 		return curStu;
 	}
