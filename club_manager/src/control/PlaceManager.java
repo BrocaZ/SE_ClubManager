@@ -32,7 +32,7 @@ public class PlaceManager {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "UPDATE `pla` SET `state`=?  WHERE (`placeId`=?) ";
+			String sql = "UPDATE `pla` SET `state`=?  WHERE `placeId`=? ";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, p.getStatus());
 			pst.setInt(2, p.getPlaceId());
@@ -43,16 +43,28 @@ public class PlaceManager {
 	}
 
 	public int addPlace(Place p) throws BaseException {
+		// 新增场地时,默认状态为available
+		if (p.getPlaceName().equals(""))
+			throw new BaseException("名称不能为空");
+		if (p.getAvailable() == 0)
+			throw new BaseException("可容纳人数不能为0");
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql="select max(placeId) from pla";
+			String sql = "select max(placeId) from pla";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			java.sql.ResultSet rs = pst.executeQuery();
-			int id=1;
+			int id = 1;
+			if (rs.next())
+				id = rs.getInt(1) + 1;
+
+			sql = "select * from pla where placeName=?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, p.getPlaceName());
+			rs = pst.executeQuery();
 			if(rs.next())
-				id=rs.getInt(1)+1;
-			
+				throw new BaseException("该场地已存在");
+
 			sql = "INSERT INTO `se_clubmanager`.`pla` (`placeId`, `placeName`, `available`, `state`, `remarks`) "
 					+ "VALUES (?, ?, ?, ?, ?)";
 			pst = conn.prepareStatement(sql);
@@ -72,26 +84,26 @@ public class PlaceManager {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql="delete from pla where placeId=?";
+			String sql = "delete from pla where placeId=?";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setInt(1, p.getPlaceId());
-			pst.executeQuery();
+			pst.execute();
 		} catch (Exception e) {
 			throw new BaseException("删除失败");
 		}
-		
+
 	}
 
 	public List<Place> placeList() throws BaseException {
-		List<Place> result=new ArrayList<Place>();
+		List<Place> result = new ArrayList<Place>();
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql="select `placeId`, `placeName`, `available`, `state`, `remarks` from pla";
+			String sql = "select `placeId`, `placeName`, `available`, `state`, `remarks` from pla";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			java.sql.ResultSet rs = pst.executeQuery();
-			while(rs.next()) {
-				Place p=new Place();
+			while (rs.next()) {
+				Place p = new Place();
 				p.setPlaceId(rs.getInt(1));
 				p.setPlaceName(rs.getString(2));
 				p.setAvailable(rs.getInt(3));
@@ -103,6 +115,77 @@ public class PlaceManager {
 			throw new BaseException("加载失败");
 		}
 		return result;
+	}
+	
+	public List<Place> avaplaceList() throws BaseException {
+		List<Place> result = new ArrayList<Place>();
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select `placeId`, `placeName`, `available`, `state`, `remarks` from pla where `state` =?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1,"available" );
+			java.sql.ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				Place p = new Place();
+				p.setPlaceId(rs.getInt(1));
+				p.setPlaceName(rs.getString(2));
+				p.setAvailable(rs.getInt(3));
+				p.setStatus(rs.getString(4));
+				p.setRemarks(rs.getString(5));
+				result.add(p);
+			}
+		} catch (Exception e) {
+			throw new BaseException("加载失败");
+		}
+		return result;
+	}
+
+	public static void main(String[] args) throws BaseException {
+		PlaceManager pm = new PlaceManager();
+		Place p = null;
+		List<Place> result =null;
+
+//		System.out.println("Test1");
+//		p =new Place();
+//		p.setPlaceId(1);
+//		p.setPlaceName("文一312");
+//		p.setAvailable(500);
+//		p.setStatus("available");
+//		pm.modPinofo(p);
+
+//		System.out.println("Test2");
+//		p =new Place();
+//		p.setPlaceId(1);
+//		p.setStatus("unavailable");
+//		pm.modPstatus(p);
+
+//		System.out.println("Test3");
+//		p = new Place();
+//		p.setPlaceName("理四222");
+//		p.setAvailable(100);
+//		p.setStatus("available");
+//		pm.addPlace(p);
+
+//		System.out.println("Test4");
+//		p = new Place();
+//		p.setPlaceId(10);
+//		pm.delPlace(p);
+		
+//		System.out.println("Test5");
+//		result = pm.placeList();
+//		for(int i=0;i<result.size();i++) {
+//			p=result.get(i);
+//			System.out.println(p.getPlaceName());
+//		}
+		
+//		System.out.println("Test6");
+//		result = pm.avaplaceList();
+//		for(int i=0;i<result.size();i++) {
+//			p=result.get(i);
+//			System.out.println(p.getPlaceName());
+//		}
+		
 	}
 
 }
