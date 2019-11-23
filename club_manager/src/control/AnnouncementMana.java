@@ -14,7 +14,7 @@ public class AnnouncementMana {
 			throw new BaseException("标题不能为空");
 		if(anno.getAnnoContent().equals(""))
 			throw new BaseException("内容不能为空");
-		//公告类型做成 勾选框   A.公开(public)  B.仅社团内成员可见(secret)
+		//公告类型做成 勾选框   A.公开(public)  B.仅社团内成员可见(secret) 默认选项设置为私密
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
@@ -24,13 +24,12 @@ public class AnnouncementMana {
 			int id = 1;
 			if (rs.next())
 				id = rs.getInt(1) + 1;
-
 			sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `href`, `state`, `remarks`) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, id);
-			pst.setInt(2, anno.getActivityId());
-			pst.setString(3, anno.getAnnoContent());
+			pst.setInt(2, anno.getAssociationId());
+			pst.setInt(3, anno.getActivityId());
 			pst.setString(4, anno.gettitle());
 			pst.setString(5, anno.getAnnoContent());
 			pst.setTimestamp(6, new java.sql.Timestamp(new Date().getTime()));
@@ -40,7 +39,8 @@ public class AnnouncementMana {
 			pst.setString(10, anno.getRemarks());
 			pst.execute();
 		} catch (Exception e) {
-			throw new BaseException("注册失败");
+//			throw new BaseException(e.getMessage());
+			throw new BaseException("创建失败");
 		}
 		return 0;
 	}
@@ -52,9 +52,10 @@ public class AnnouncementMana {
 			String sql="delete from anno where annoId=?";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setInt(1, anno.getAnnoucementId());
-			pst.executeQuery();
+			pst.execute();
 		} catch (Exception e) {
-			throw new BaseException("删除失败");
+			throw new BaseException(e.getMessage());
+//			throw new BaseException("删除失败");
 		}
 	}
 	
@@ -124,7 +125,7 @@ public class AnnouncementMana {
 			String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
 					+ "anno.createtime,anno.href,asso.associationName " + 
 					"FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' "
-					+ "anno.title like ?";
+					+ "and anno.title like ?";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, "%"+text+"%");
 			java.sql.ResultSet rs = pst.executeQuery();
@@ -141,12 +142,54 @@ public class AnnouncementMana {
 				result.add(a);
 			}		
 		} catch (Exception e) {
-			throw new BaseException("加载失败");
+			throw new BaseException(e.getMessage());
+//			throw new BaseException("加载失败");
 		}
 		
 		return result;
 	}
-	public static void main(String[] args) {
+	//Test
+	public static void main(String[] args) throws BaseException {
+		AnnouncementMana am=new AnnouncementMana();
+		Announcement a=null;
+		Association asso=new Association();
+		//
+		System.out.println("Test1");
+		a=new Announcement();
+		a.setActivityId(4);
+		a.setAssociationId(6);
+		a.settitle("关于举办摄影知识讲座的通知");
+		a.setAnnoContent("摄影知识讲座将于xx月xx日 在xxx举办");
+		a.setAnnoType("public");
+		am.addAnno(a);
+		//
+		System.out.println("Test2");
+		a.setAnnoucementId(9);
+		am.delAnno(a);
+		//
+		System.out.println("Test3");
+		asso.setAssociationId(6);
+		List<Announcement> result=am.clubannoList(asso);
+		for(int i=0;i<result.size();i++) {
+			a=result.get(i);
+			System.out.println(a.getAnnoContent());
+		}
+		//
+		System.out.println("Test4");
+		result=am.publicannoList();
+		for(int i=0;i<result.size();i++) {
+			a=result.get(i);
+			System.out.println(a.getAnnoContent());
+		}
+		
+		//
+		System.out.println("Test5");
+		String text="摄影";
+		result=am.searchAnno(text);
+		for(int i=0;i<result.size();i++) {
+			a=result.get(i);
+			System.out.println(a.getAnnoContent());
+		}
 		
 	}
 
