@@ -1,15 +1,20 @@
 package model;
 
+import java.util.Date;
+
 public class Announcement {
 	private int annoucementId;
 	private int associationId;
-	private int annoContent;
-	private int time;
+	private String associationName;
 	private int activityId;
-	private int place;
-	private int annoType;
-	private int status;
-	private int remarks;
+	private String title;
+	private String annoContent;
+	private Date createtime;
+	private String place;
+	private String annoType;
+	private String status;
+	private String remarks;
+	private String href;
 	public int getAnnoucementId() {
 		return annoucementId;
 	}
@@ -22,46 +27,65 @@ public class Announcement {
 	public void setAssociationId(int associationId) {
 		this.associationId = associationId;
 	}
-	public int getAnnoContent() {
-		return annoContent;
-	}
-	public void setAnnoContent(int annoContent) {
-		this.annoContent = annoContent;
-	}
-	public int getTime() {
-		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
-	}
 	public int getActivityId() {
 		return activityId;
 	}
 	public void setActivityId(int activityId) {
 		this.activityId = activityId;
 	}
-	public int getPlace() {
+	public String gettitle() {
+		return title;
+	}
+	public void settitle(String title) {
+		this.title = title;
+	}
+	public String getAnnoContent() {
+		return annoContent;
+	}
+	public void setAnnoContent(String annoContent) {
+		this.annoContent = annoContent;
+	}
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+	public String getPlace() {
 		return place;
 	}
-	public void setPlace(int place) {
+	public void setPlace(String place) {
 		this.place = place;
 	}
-	public int getAnnoType() {
+	public String getAnnoType() {
 		return annoType;
 	}
-	public void setAnnoType(int annoType) {
+	public void setAnnoType(String annoType) {
 		this.annoType = annoType;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getRemarks() {
+	public String getRemarks() {
 		return remarks;
 	}
-	public void setRemarks(int remarks) {
+	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
+	}
+	public String getAssociationName() {
+		return associationName;
+	}
+	public void setAssociationName(String associationName) {
+		this.associationName = associationName;
+	}
+	
 }
