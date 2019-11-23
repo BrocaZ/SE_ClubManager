@@ -1,5 +1,7 @@
 package control;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.util.*;
 
@@ -36,13 +38,43 @@ public class StudentManager {
 		}
 	}
 
-	public void setHeadImage(Student s) throws BaseException{
+	public void setHeadImage(Student s,String path) throws BaseException{
 		Connection conn = null;
 		try {
-			
+			conn = DBUtil.getConnection();
+			FileInputStream images =new FileInputStream(new File(path));
+			String sql="update stu set head_image=? where sno = ?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setBinaryStream(1, images, images.available());
+			pst.setString(2, s.getSno());
+			pst.execute();
 		} catch (Exception e) {
+//			throw new BaseException(e.getMessage());
 			throw new BaseException("ÐÞ¸ÄÊ§°Ü");
 		}
 	}
-
+	
+	public static void main(String[] args) throws BaseException {
+		StudentManager sm=new StudentManager();
+		Student s=null;
+		
+//		System.out.println("Test1");
+//		s=new Student();
+//		s.setSno("31701004");
+//		s.setTel("13588332884");
+//		sm.modTel(s);
+//		
+//		System.out.println("Test2");
+//		s=new Student();
+//		s.setSno("31701004");
+//		s.setPassword("987654321");
+//		sm.setPwd(s);
+		
+		System.out.println("Test3");
+		String path="C:\\Users\\ANARKHWQH\\Desktop\\init_head_image.jpeg";
+		s=new Student();
+		s.setSno("31701004");
+		sm.setHeadImage(s, path);
+		
+	}
 }

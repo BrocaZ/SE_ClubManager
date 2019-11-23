@@ -142,8 +142,8 @@ public class AnnouncementMana {
 				result.add(a);
 			}		
 		} catch (Exception e) {
-			throw new BaseException(e.getMessage());
-//			throw new BaseException("加载失败");
+//			throw new BaseException(e.getMessage());
+			throw new BaseException("加载失败");
 		}
 		
 		return result;
@@ -153,36 +153,37 @@ public class AnnouncementMana {
 		AnnouncementMana am=new AnnouncementMana();
 		Announcement a=null;
 		Association asso=new Association();
-		//
-		System.out.println("Test1");
-		a=new Announcement();
-		a.setActivityId(4);
-		a.setAssociationId(6);
-		a.settitle("关于举办摄影知识讲座的通知");
-		a.setAnnoContent("摄影知识讲座将于xx月xx日 在xxx举办");
-		a.setAnnoType("public");
-		am.addAnno(a);
-		//
-		System.out.println("Test2");
-		a.setAnnoucementId(9);
-		am.delAnno(a);
-		//
-		System.out.println("Test3");
-		asso.setAssociationId(6);
-		List<Announcement> result=am.clubannoList(asso);
-		for(int i=0;i<result.size();i++) {
-			a=result.get(i);
-			System.out.println(a.getAnnoContent());
-		}
-		//
-		System.out.println("Test4");
-		result=am.publicannoList();
-		for(int i=0;i<result.size();i++) {
-			a=result.get(i);
-			System.out.println(a.getAnnoContent());
-		}
+		List<Announcement> result =null;
 		
-		//
+//		System.out.println("Test1");
+//		a=new Announcement();
+//		a.setActivityId(4);
+//		a.setAssociationId(6);
+//		a.settitle("关于举办摄影知识讲座的通知");
+//		a.setAnnoContent("摄影知识讲座将于xx月xx日 在xxx举办");
+//		a.setAnnoType("public");
+//		am.addAnno(a);
+		
+//		System.out.println("Test2");
+//		a=new Announcement();
+//		a.setAnnoucementId(9);
+//		am.delAnno(a);
+		
+//		System.out.println("Test3");
+//		asso.setAssociationId(6);
+//		result=am.clubannoList(asso);
+//		for(int i=0;i<result.size();i++) {
+//			a=result.get(i);
+//			System.out.println(a.getAnnoContent());
+//		}
+		
+//		System.out.println("Test4");
+//		result=am.publicannoList();
+//		for(int i=0;i<result.size();i++) {
+//			a=result.get(i);
+//			System.out.println(a.getAnnoContent());
+//		}
+		
 		System.out.println("Test5");
 		String text="摄影";
 		result=am.searchAnno(text);
