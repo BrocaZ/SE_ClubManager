@@ -1,1 +1,16 @@
-/* your styles go here */
+.chart {
+  padding: 20px;
+  background: #FFFFFF;/**/
+  color: #8a8d93;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.mycol-lg-4{
+	    flex: 0 0 46%;
+    max-width: 46%;
+}
+.mycol-lg-5{
+	    flex: 0 0 52%;
+    max-width: 52%;
+}
