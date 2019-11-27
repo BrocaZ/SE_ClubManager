@@ -38,10 +38,11 @@ public class StuDao extends BaseDao {
                 stu.setSex(res.getString(4));
                 stu.setTel(res.getString(5));
                 stu.setBranch(res.getString(6));
-                stu.setStuclass(res.getString(7));
-                stu.setPassword(res.getString(8));
-                stu.setStatus(res.getString(9));
-                stu.setRemarks(res.getString(10));
+                stu.setMajor(res.getString(7));
+                stu.setStuclass(res.getString(8));
+                stu.setPassword(res.getString(9));
+                stu.setStatus(res.getString(10));
+                stu.setRemarks(res.getString(11));
             }
         } catch (Exception e) {
             e.printStackTrace();

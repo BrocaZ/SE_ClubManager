@@ -38,9 +38,11 @@ public class doLogin extends HttpServlet {
             stuDao.setCurID(sno);
             System.out.println(stuDao.getCurID());
             try {
-                if(stuDao.findStu(sno)!=null){//存在这个用户，可以正常访问学生信息
-//                    request.getSession().setAttribute("user", stu);
+                if((stuDao.findStu(sno)!=null)&&(stuDao.findStu(sno).getPassword().equals(password))){
+                    //存在这个用户，可以正常访问学生信息
+//                  request.getSession().setAttribute("user", stu);
                     response.sendRedirect("actAnno.jsp");
+
 
                 }else{//不存在这个用户，给出提示，转回登录页面
                     String message = "用户名或密码错误";
