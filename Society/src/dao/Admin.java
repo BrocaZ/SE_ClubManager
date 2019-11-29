@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Admin extends BaseDao {
 
@@ -228,4 +230,12 @@ public class Admin extends BaseDao {
             e.printStackTrace();
         }
     }
+
+
+    public List<Activity> listActApprove() {
+        List<Activity> result = new ArrayList<>();
+
+        return result;
+    }
+
 }

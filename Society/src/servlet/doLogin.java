@@ -41,9 +41,12 @@ public class doLogin extends HttpServlet {
                 if((stuDao.findStu(sno)!=null)&&(stuDao.findStu(sno).getPassword().equals(password))){
                     //存在这个用户，可以正常访问学生信息
 //                  request.getSession().setAttribute("user", stu);
-                    response.sendRedirect("actAnno.jsp");
-
-
+                    if(stuDao.findStu(sno).getStatus()!=null&&stuDao.findStu(sno).getStatus().equals("管理员")){
+                        response.sendRedirect("admin_pages/approve.jsp");
+                    }
+                    else{
+                        response.sendRedirect("actAnno.jsp");
+                    }
                 }else{//不存在这个用户，给出提示，转回登录页面
                     String message = "用户名或密码错误";
                     request.getSession().setAttribute("msg", message);

@@ -180,7 +180,7 @@
                     </div>
                     <div class="mycol-lg-4">
                         <div class="lin-chart  chart">
-                            <div class="title"><strong>社团内部公告</strong></div>
+                            <div class="title"><strong>内部公告</strong></div>
                             <div class="messages-block">
                                 <div class="messages">
                                     <%
@@ -189,7 +189,11 @@
                                         for(int i=0;i<annolist.size();i++){
                                     %>
                                     <a href="#" class="message d-flex align-items-center">
-                                        <div class="content"> <strong class="d-block"><%=annolist.get(i).gettitle()%></strong><span class="d-block"><%=annolist.get(i).getAnnoContent()%></span><small class="date d-block"><%=annolist.get(i).getCreatetime()%></small></div>
+                                        <div class="content">
+                                            <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>
+                                            <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>
+                                            <small class="date d-block"><%=annolist.get(i).getCreatetime()%></small>
+                                        </div>
                                     </a>
                                     <%}%>
                                 </div>
