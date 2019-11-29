@@ -203,7 +203,8 @@ CREATE TABLE `stu` (
 -- ----------------------------
 -- Records of stu
 -- ----------------------------
-INSERT INTO `stu` VALUES ('31507128', null, '王五', '男', '13528372919', '商学院', '国际贸易', '1504', '123456', '管理员', null);
+INSERT INTO `stu` VALUES ('admin', null, '管理员', null, null, null, null, null, '123456', '管理员', null);
+INSERT INTO `stu` VALUES ('31507128', null, '王五', '男', '13528372919', '商学院', '国际贸易', '1504', '123456', null, null);
 INSERT INTO `stu` VALUES ('31701001', null, '陈章琦', '女', '13572638273', '计算分院', '计算机', '1701', '123456', null, null);
 INSERT INTO `stu` VALUES ('31701002', null, '罗灵洁', '女', '13588376250', '计算分院', '计算机', '1701', '123456', null, null);
 INSERT INTO `stu` VALUES ('31701003', null, '盛雪', '女', '18028172837', '计算分院', '计算机', '1701', '123456', null, null);
