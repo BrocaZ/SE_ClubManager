@@ -169,17 +169,35 @@
                         <a href="society.jsp?assoName=<%=assoName%>"><%=assoName%></a>
                     </li>
                     <%}%>
-<%--                    <li>--%>
-<%--                        <a href="#">文学社</a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">动漫社</a>--%>
-<%--                    </li>--%>
                 </ul>
             </li>
             <li class="active">
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览 </a>
             </li>
+            <%
+                //                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
+            %>
+            <li>
+                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <ul  class="collapse1 list-unstyled ">
+                    <li>
+                        <a href="addact.html">申请活动</a>
+                    </li>
+                    <li>
+                        <a href="post.html">发布公告</a>
+                    </li>
+                    <li class="active">
+                        <a href="addmember.html">添加社员</a>
+                    </li>
+                    <li>
+                        <a href="modleader.html">更换社长</a>
+                    </li>
+                </ul>
+            </li>
+            <%
+                }
+            %>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->

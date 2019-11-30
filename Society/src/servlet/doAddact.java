@@ -38,7 +38,7 @@ public class doAddact extends HttpServlet {
         String actleader=request.getParameter("actleader");
         String state="hold";
 
-        if(True){
+        if(true){
 
         }
 

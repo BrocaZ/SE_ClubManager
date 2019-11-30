@@ -1,0 +1,16 @@
+.chart {
+  padding: 20px;
+  background: #FFFFFF;/**/
+  color: #8a8d93;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.mycol-lg-4{
+	    flex: 0 0 44%;
+    max-width: 44%;
+}
+.mycol-lg-5{
+	    flex: 0 0 54%;
+    max-width: 54%;
+}

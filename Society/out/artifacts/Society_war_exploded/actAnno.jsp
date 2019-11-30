@@ -86,7 +86,8 @@
         border-bottom-right-radius: 15px;
         border-left: 0px;
     }
-    .message :hover{
+
+    .message :hover {
         color: white;
     }
 
@@ -98,24 +99,27 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header--><a href="actAnno.jsp" class="navbar-brand">
-                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
-                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div></a>
+                <div class="brand-text brand-big visible text-uppercase"><strong
+                        class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
+            </a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-<%--                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages"><a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                        <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                            <div class="status online"></div>--%>
-<%--                        </div>--%>
-<%--                        <div class="content" >   <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div></a>--%>
-<%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <%--                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
+                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages"><a href="#" class="dropdown-item message d-flex align-items-center">--%>
+                <%--                        <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+                <%--                            <div class="status online"></div>--%>
+                <%--                        </div>--%>
+                <%--                        <div class="content" >   <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div></a>--%>
+                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
+                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <!-- Log out               -->
-                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
+                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span
+                        class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -128,31 +132,58 @@
             <%
                 StuDao stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
-                if(name!=null){
+                if (name != null) {
             %>
             <div class="avatar">
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %></h1>
+                <h1 class="h5"><%=name %>
+                </h1>
             </div>
             <%} %>
         </div>
         <ul class="list-unstyled">
             <li class="active"><a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        List<Integer> list= assoDao.assoPersonList(stuDao.getCurID());
-                        for(int i=0;i<list.size();i++){
+                        List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
+                        for (int i = 0; i < list.size(); i++) {
                             String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%></a></li>
+                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    </a></li>
                     <%}%>
                 </ul>
             </li>
             <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
+            <%
+                //                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
+            %>
+            <li>
+                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <ul  class="collapse1 list-unstyled ">
+                    <li>
+                        <a href="addact.jsp">申请活动</a>
+                    </li>
+                    <li>
+                        <a href="post.html">发布公告</a>
+                    </li>
+                    <li class="active">
+                        <a href="addmember.html">添加社员</a>
+                    </li>
+                    <li>
+                        <a href="modleader.html">更换社长</a>
+                    </li>
+                </ul>
+            </li>
+            <%
+                }
+            %>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -164,7 +195,7 @@
         </div>
         <div class="row">
             <form action="" id="research" style="text-align: center">
-                <input type="text" name="keyword" autocomplete="off" placeholder="请输入社团名称" />
+                <input type="text" name="keyword" autocomplete="off" placeholder="请输入社团名称"/>
 
                 <button></button>
             </form>
@@ -174,16 +205,18 @@
                 <%
                     AnnoDao annoDao = new AnnoDao();
                     List<Announcement> annolist = annoDao.publicannoList();
-                    for(int i=0;i<annolist.size();i++){
+                    for (int i = 0; i < annolist.size(); i++) {
                 %>
                 <a href="#" class="message d-flex align-items-center">
                     <div class="profile">
                         <img src="img/logo1.jpg" alt="..." class="img-fluid">
                     </div>
                     <div class="content">
-                        <strong class="d-block"><%=annolist.get(i).getAssociationName()%></strong>
+                        <strong class="d-block"><%=annolist.get(i).getAssociationName()%>
+                        </strong>
                         <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>
-                        <small class="date d-block"><%=annolist.get(i).getCreatetime()%></small>
+                        <small class="date d-block"><%=annolist.get(i).getCreatetime()%>
+                        </small>
                     </div>
                 </a>
                 <%}%>
@@ -193,9 +226,9 @@
 </div>
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="vendor/popper.js/umd/popper.min.js"> </script>
+<script src="vendor/popper.js/umd/popper.min.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="js/charts-home.js"></script>

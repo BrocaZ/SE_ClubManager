@@ -161,7 +161,7 @@
             </li>
             <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <%
-                //                if (stuDao.isLeader(stuDao.getCurID())) {
+//                                if (stuDao.isLeader(stuDao.getCurID())) {
                 if (true) {
             %>
             <li>
