@@ -1,18 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: ANARKHWQH
-  Date: 2019/11/29
-  Time: 10:59
+  Date: 2019/11/30
+  Time: 15:53
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.PlaceDao" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dao.AssoDao" %>
-<%@ page import="entity.Place" %>
+<%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 
@@ -42,30 +41,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <style type="text/css">
-        .apply {
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-left: 220px;
-            padding-right: 220px;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            background-color: white;
-        }
 
-        .apply1 {
-            padding-top: 15px;
-        }
-
-        .apply-control-label {
-            width: 80px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .apply-submit {
-            padding-top: 30px;
-        }</style>
-
+    </style>
 </head>
 
 <body>
@@ -74,35 +51,30 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header-->
-                <a href="actAnno.jsp" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong
-                            class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <a href="index.html" class="navbar-brand">
+                    <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                     <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
                 </a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-<%--                <div class="list-inline-item dropdown">--%>
-<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
-<%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
-<%--                            class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                                <div class="status online"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
-<%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-<%--                        </a>--%>
-<%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <div class="list-inline-item dropdown">
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>
+                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
+                        <a href="#" class="dropdown-item message d-flex align-items-center">
+                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
+                                <div class="status online"></div>
+                            </div>
+                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
+                        </a>
+                        <a href="index.html" class="dropdown-item text-center message">
+                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
+                    </div>
+                </div>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
-                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
-                            class="icon-logout"></i></a>
+                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
                 </div>
             </div>
         </div>
@@ -128,11 +100,9 @@
             <%} %>
         </div>
         <ul class="list-unstyled">
-            <li>
-                <a href="index.html"> <i class="icon-home"></i>活动公告 </a>
-            </li>
-            <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
+            <li><a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a></li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
@@ -145,9 +115,7 @@
                     <%}%>
                 </ul>
             </li>
-            <li>
-                <a href="overview.html"> <i class="icon-grid"></i>社团总览</a>
-            </li>
+            <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <!--社长-->
             <%
                 //                                if (stuDao.isLeader(stuDao.getCurID())) {
@@ -177,52 +145,36 @@
             <!--社长-->
         </ul>
     </nav>
+    </nav>
     <!-- Sidebar Navigation end-->
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">申请活动</h2>
+                <h2 class="h5 no-margin-bottom">活动列表</h2>
             </div>
         </div>
-        <div class="apply">
-            <form action="${pageContext.request.contextPath}/doAddact" method="post">
-                <div class="apply1">
-                    <label class="apply-control-label">活动主题</label>
-                    <input type="text" class="apply-control" id="apply-control1" style="width: 450px" name="acttheme">
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label" id="apply-control2" name="actcontent">活动内容</label>
-                    <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">活动时间</label>
-                    <input type="datetime-local" class="apply-control" name="actstarttime">
-                    <label class="">~</label>
-                    <input type="datetime-local" class="apply-control" name="actendtime">
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">场地</label>
-                    <input type="text" class="apply-control" list="placelist" name="actplace">
-                    <datalist id="placelist">
-                        <%
-                            PlaceDao placeDao = new PlaceDao();
-                            List<Place> result = placeDao.avaplaceList();
-                            for (int i = 0; i < result.size(); i++) {
-                                String assoName = result.get(i).getPlaceName();
-                        %>
-                        <option><%=assoName%>
-                        </option>
-                        <%}%>
-                    </datalist>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">负责人</label>
-                    <input type="text" class="apply-control" name="actleader">
-                </div>
-                <div class="apply-submit">
-                    <input type="submit" value="提交" class="btn btn-primary">
-                </div>
-            </form>
+        <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
+            <div id="apply">
+                <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">+申请活动</a>
+            </div>
+            <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
+
+                <a href="#" class="message d-flex align-items-center ">
+                    <div class="content"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">院轮滑大赛</span><small class="date d-block">2020-1-2</small></div>
+                </a>
+                <a href="#" class="message d-flex align-items-center">
+                    <div class="content"> <strong class="d-block">乐雅合唱团</strong><span class="d-block">合唱比赛</span><small class="date d-block">2019-12-12</small></div>
+                </a>
+                <a href="#" class="message d-flex align-items-center">
+                    <div class="content"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">轮滑表演</span><small class="date d-block">2019-12-23</small></div>
+                </a>
+                <a href="#" class="message d-flex align-items-center">
+                    <div class="content"> <strong class="d-block">演讲与口才社</strong><span class="d-block">辩论新生赛</span><small class="date d-block">2019-11-23</small></div>
+                </a>
+                <a href="#" class="message d-flex align-items-center">
+                    <div class="content"> <strong class="d-block">网球协会</strong><span class="d-block">网球新生赛</span><small class="date d-block">2019-11-1</small></div>
+                </a>
+            </div>
         </div>
 
     </div>

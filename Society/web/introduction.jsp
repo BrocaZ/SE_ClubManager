@@ -121,30 +121,33 @@
             <li class="active">
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览 </a>
             </li>
+            <!--社长-->
             <%
-//                if (stuDao.isLeader(stuDao.getCurID())) {
-                    if (true) {
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
                     <li>
-                        <a href="addact.html">申请活动</a>
+                        <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li>
-                        <a href="post.html">发布公告</a>
-                    </li>
-                    <li class="active">
-                        <a href="addmember.html">添加社员</a>
+                        <a href="post-leader.jsp">发布公告</a>
                     </li>
                     <li>
-                        <a href="modleader.html">更换社长</a>
+                        <a href="addmember.jsp">添加社员</a>
+                    </li>
+                    <li>
+                        <a href="#">更换社长</a>
                     </li>
                 </ul>
             </li>
             <%
                 }
             %>
+
+            <!--社长-->
         </ul>
 
     </nav>

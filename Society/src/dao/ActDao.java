@@ -108,7 +108,7 @@ public class ActDao extends BaseDao {
             pst.setTimestamp(7, new java.sql.Timestamp(act.getEndTime().getTime()));
             pst.setInt(8, act.getAttendNumber());
             pst.setDouble(9, act.getBuget());
-            pst.setString(10,"待审批");
+            pst.setString(10,"hold");
             pst.setString(11, act.getRemarks());
             pst.execute();
         }

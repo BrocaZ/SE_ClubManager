@@ -82,6 +82,10 @@
 			.message :hover {
 				color: white;
 			}
+			
+			#apply-control1 {
+				width: 450px;
+			}
 		</style>
 	</head>
 
@@ -183,15 +187,15 @@
 					<form>
 						<div class="apply1">
 							<label class="apply-control-label">标题</label>
-							<input type="text" class="apply-control">
+							<input type="text" class="apply-control" id="apply-control1">
 						</div>
 						<div class="apply1">
-							<label class="apply-control-label">公告内容</label>
-							<input type="password" class="apply-control">
+							<label class="apply-control-label" id="apply-control2">公告内容</label>
+							<textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
 						</div>
 						<div class="apply1">
-								<label class="apply-control-label">推送链接</label>
-								<input type="text" class="apply-control">
+							<label class="apply-control-label">推送链接</label>
+							<input type="text" class="apply-control" id="apply-control1">
 						</div>
 						<div class="apply-submit">
 							<input type="submit" value="提交" class="btn btn-primary">
