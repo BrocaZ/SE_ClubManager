@@ -14,3 +14,39 @@
 	    flex: 0 0 54%;
     max-width: 54%;
 }
+.form1{
+    display: flex;
+    font-weight: 900;
+}
+.form1>a{
+    background-color: white;
+    margin-left:87%;
+    border: none;
+    color: #B0B0B0;
+    font-size: 17px;
+    font-weight: 900;
+    font-family: "微软雅黑";
+}
+.apply{
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-left: 220px;
+    padding-right: 220px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: white;
+}
+.apply1>div{
+
+}
+.apply1{
+    padding-top: 15px;
+}
+.apply-control-label{
+    width: 80px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.apply-submit{
+    padding-top: 30px;
+}

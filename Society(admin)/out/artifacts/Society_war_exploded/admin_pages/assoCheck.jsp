@@ -153,7 +153,10 @@
         </div>
         <ul class="list-unstyled">
             <li>
-                <a href="approve.jsp"> <i class="icon-home"></i>审批列表 </a>
+                <a href="approve.jsp"> <i class="icon-home"></i>社团审批列表 </a>
+            </li>
+            <li>
+                <a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a>
             </li>
             <li class="active">
                 <a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表 </a>
@@ -209,10 +212,7 @@
             </div>
         </div>
         <div class="col-sm-9 ml-auto" style="float: right; width:15%;">
-            <button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</button>
-<%--            <a href="${pageContext.request.contextPath }/servlet/delAsso?id=" onclick="return check()">--%>
-<%--                <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删减社团</button>--%>
-<%--            </a>--%>
+            <a href="addAsso.jsp"><button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</button></a>
         </div>
     </div>
 </div>

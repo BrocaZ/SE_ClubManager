@@ -35,60 +35,61 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <style type="text/css">#research {
-        width: 405px;
-        height: 50px;
-        display: flex;
-        float: left;
-        margin: auto;
-        /*margin-left: 300px;*/
-        background-color: #FFFFFF;
-        margin-bottom: 20px;
-        border-radius: 15px;
-        /*border-color: #2d3035;*/
-        font-family: 'Microsoft YaHei';
-        font-size: 25px;
-        /*margin-top: 30px;*/
-    }
+    <style type="text/css">
+        #research {
+            width: 405px;
+            height: 50px;
+            display: flex;
+            float: left;
+            margin: auto;
+            /*margin-left: 300px;*/
+            background-color: #FFFFFF;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            /*border-color: #2d3035;*/
+            font-family: 'Microsoft YaHei';
+            font-size: 25px;
+            /*margin-top: 30px;*/
+        }
 
-    #research input {
-        width: 355px;
-        height: 50px;
-        float: left;
-        font-size: 14px;
-        line-height: 63px;
-        border: solid 2px;
-        background-color: #FFFFFF;
-        text-align: left;
-        color: #b0b0b0;
-        text-indent: 6px;
-        /*border-color: #2d3035;*/
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
-        border-right: 0px;
-    }
+        #research input {
+            width: 355px;
+            height: 50px;
+            float: left;
+            font-size: 14px;
+            line-height: 63px;
+            border: solid 2px;
+            background-color: #FFFFFF;
+            text-align: left;
+            color: #b0b0b0;
+            text-indent: 6px;
+            /*border-color: #2d3035;*/
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-right: 0px;
+        }
 
-    #research button {
-        border: solid 2px;
-        width: 50px;
-        height: 50px;
-        float: left;
-        line-height: 50px;
-        background-color: #FFFFFF;
-        text-align: center;
-        color: #b0b0b0;
-        /*border-color: #2d3035;*/
-        background-image: url(img/sousuo.png);
-        background-size: 25px 25px;
-        background-position: 11px 13px;
-        background-repeat: no-repeat;
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
-        border-left: 0px;
-    }
-    .message :hover{
-        color: white;
-    }
+        #research button {
+            border: solid 2px;
+            width: 50px;
+            height: 50px;
+            float: left;
+            line-height: 50px;
+            background-color: #FFFFFF;
+            text-align: center;
+            color: #b0b0b0;
+            /*border-color: #2d3035;*/
+            background-image: url(img/sousuo.png);
+            background-size: 25px 25px;
+            background-position: 11px 13px;
+            background-repeat: no-repeat;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-left: 0px;
+        }
+        .message :hover{
+            color: white;
+        }
 
     </style>
 </head>

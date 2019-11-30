@@ -161,4 +161,9 @@ public class PlaceDao extends BaseDao {
         }
         return p;
     }
+
+    public Place searchPlaceByName(String name) {
+        Place p = new Place();
+        return p;
+    }
 }

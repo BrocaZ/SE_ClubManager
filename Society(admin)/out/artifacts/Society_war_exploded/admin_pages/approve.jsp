@@ -13,7 +13,7 @@
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>审批列表</title>
+    <title>社团审批列表</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -142,7 +142,8 @@
         <!-- Sidebar Navidation Menus-->
         <!--          <span class="heading">Main</span>-->
         <ul class="list-unstyled">
-            <li class="active"><a href="approve.jsp"> <i class="icon-home"></i>审批列表 </a></li>
+            <li class="active"><a href="approve.jsp"> <i class="icon-home"></i>社团审批列表 </a></li>
+            <li><a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a></li>
             <li><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
             <li><a href="place.jsp"> <i class="icon-windows"></i>场地列表</a></li>
         </ul>
@@ -151,58 +152,30 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">审批列表</h2>
+                <h2 class="h5 no-margin-bottom">社团审批列表</h2>
                 <!--        <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
             </div>
         </div>
-        <section>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="mycol-lg-6">
-                        <div class="messages-block block">
-                            <div class="title"><strong>活动列表</strong></div>
-                            <div class="messages">
-                                <%
-                                    Admin admin = new Admin();
-                                    AssoDao assoDao = new AssoDao();
-                                    List<Activity> activityList = admin.listActApprove();
-                                    for(int i=0;i<activityList.size();i++){
-                                %>
-                                <a href="checkAct.jsp" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;">
-                                    <strong class="d-block" ><%=assoDao.searchAssoById(activityList.get(i).getAssociationId()).getAssociationName()%></strong>
-                                    <span class="d-block">修改轮滑社社团信息<p style="float: right;">2019-11-26</p></span>
-                                </div>
-                                </a>
-                                <%}%>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mycol-lg-6">
-                        <div class="messages-block block">
-                            <div class="title"><strong>其他信息列表</strong></div>
-                            <div class="messages">
-                                <%
+        <div class="messages-block block">
+<%--                        <div class="title"><strong>其他信息列表</strong></div>--%>
+            <div class="messages">
+                <%
 
-                                %>
-                                <a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAsso.html';return false">
-                                    <strong class="d-block" >自由灵魂轮滑社</strong>
-                                    <span class="d-block">修改轮滑社社团信息<p style="float: right;">2019-11-26</p></span>
-                                </div>
-                                </a>
-                                <%%>
-                                <a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAct.html';return false"><strong class="d-block">乐雅合唱团</strong><span class="d-block">修改合唱比赛信息<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAsso.html';return false"><strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">修改自由灵魂轮滑社社长<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'check.html';return false"><strong class="d-block">演讲与口才社</strong><span class="d-block">取消辩论新生赛<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'check.html';return false"><strong class="d-block">网球协会</strong><span class="d-block">修改网球协会信息<p style="float: right;">2019-11-26</p></span></div></a>
-                            </div>
-                        </div>
-                    </div>
+                %>
+                <a href="#" class="message d-flex align-items-center">
+                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAsso.html';return false">
+                    <strong class="d-block" >自由灵魂轮滑社</strong>
+                    <span class="d-block">修改轮滑社社团信息<p style="float: right;">2019-11-26</p></span>
                 </div>
+                </a>
+                <%%>
+                <a href="#" class="message d-flex align-items-center">
+                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAct.html';return false"><strong class="d-block">乐雅合唱团</strong><span class="d-block">修改合唱比赛信息<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
+                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAsso.html';return false"><strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">修改自由灵魂轮滑社社长<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
+                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'check.html';return false"><strong class="d-block">演讲与口才社</strong><span class="d-block">取消辩论新生赛<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
+                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'check.html';return false"><strong class="d-block">网球协会</strong><span class="d-block">修改网球协会信息<p style="float: right;">2019-11-26</p></span></div></a>
             </div>
-        </section>
+        </div>
     </div>
 </div>
 <!-- JavaScript files-->

@@ -16,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -205,6 +205,9 @@
       <workItem from="1575015478357" duration="10930000" />
       <workItem from="1575076502398" duration="11011000" />
       <workItem from="1575094080066" duration="658000" />
+      <workItem from="1575096886815" duration="2780000" />
+      <workItem from="1575099746706" duration="338000" />
+      <workItem from="1575100127117" duration="6314000" />
     </task>
     <servers />
   </component>
