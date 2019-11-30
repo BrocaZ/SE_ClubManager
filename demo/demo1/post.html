@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>社团总览</title>
+		<title>活动公告</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="all,follow">
@@ -28,19 +28,19 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 		<style type="text/css">
 			#research {
-				width: 415px;
+				width: 405px;
 				height: 50px;
 				display: flex;
 				float: left;
 				margin: auto;
 				/*margin-left: 300px;*/
 				background-color: #FFFFFF;
-				margin-bottom: 40px;
+				margin-bottom: 20px;
 				border-radius: 15px;
-				/*  border-color: #2d3035;*/
+				/*border-color: #2d3035;*/
 				font-family: 'Microsoft YaHei';
 				font-size: 25px;
-				margin-top: 30px;
+				/*margin-top: 30px;*/
 			}
 			
 			#research input {
@@ -54,7 +54,7 @@
 				text-align: 5px;
 				color: #b0b0b0;
 				text-indent: 6px;
-				/* border-color: #2d3035;*/
+				/*border-color: #2d3035;*/
 				border-top-left-radius: 15px;
 				border-bottom-left-radius: 15px;
 				border-right: 0px;
@@ -62,14 +62,14 @@
 			
 			#research button {
 				border: solid 2px;
-				width: 60px;
+				width: 50px;
 				height: 50px;
 				float: left;
 				line-height: 50px;
 				background-color: #FFFFFF;
 				text-align: center;
 				color: #b0b0b0;
-				/* border-color: #2d3035;*/
+				/*border-color: #2d3035;*/
 				background-image: url(img/sousuo.png);
 				background-size: 25px 25px;
 				background-position: 11px 13px;
@@ -78,9 +78,10 @@
 				border-bottom-right-radius: 15px;
 				border-left: 0px;
 			}
-			/*.row{
-				background-color:white ;
-			}*/
+			
+			.message :hover {
+				color: white;
+			}
 		</style>
 	</head>
 
@@ -111,6 +112,7 @@
 									<strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
 							</div>
 						</div>
+						<!-- Log out               -->
 						<div class="list-inline-item logout">
 							<a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
 						</div>
@@ -126,17 +128,14 @@
 					<div class="avatar"><img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
 					<div class="title">
 						<h1 class="h5">姓名</h1>
-						<!--            <p>Web Designer</p>-->
 					</div>
 				</div>
-				<!-- Sidebar Navidation Menus-->
-				<!--        <span class="heading">Main</span>-->
 				<ul class="list-unstyled">
 					<li>
 						<a href="index.html"> <i class="icon-home"></i>活动公告 </a>
 					</li>
 					<li>
-						<a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
+						<a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
 						<ul id="exampledropdownDropdown" class="collapse list-unstyled ">
 							<li>
 								<a href="society1.html">书法社</a>
@@ -149,56 +148,70 @@
 							</li>
 						</ul>
 					</li>
-					<li class="active">
-						<a href="overview.html"> <i class="icon-grid"></i>社团总览 </a>
+					<li>
+						<a href="overview.html"> <i class="icon-grid"></i>社团总览</a>
 					</li>
+					<!--社长-->
+					<li>
+						<a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+						<ul id="exampledropdownDropdown" class="collapse1 list-unstyled ">
+							<li >
+								<a href="addact.html">申请活动</a>
+							</li>
+							<li class="active">
+								<a href="post.html">发布公告</a>
+							</li>
+							<li>
+								<a href="addmember.html">添加社员</a>
+							</li>
+							<li>
+								<a href="modleader.html">更换社长</a>
+							</li>
+						</ul>
+					</li>
+					<!--社长-->
 				</ul>
 			</nav>
 			<!-- Sidebar Navigation end-->
 			<div class="page-content">
-				<!-- Page Header-->
-				<div class="page-header no-margin-bottom">
+				<div class="page-header">
 					<div class="container-fluid">
-						<h2 class="h5 no-margin-bottom">社团总览</h2>
-						<!--        <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
+						<h2 class="h5 no-margin-bottom">申请活动</h2>
 					</div>
 				</div>
-				<!-- Breadcrumb-->
-				<div class="row">
-					<form action="" id="research">
-						<input type="text" name="keyword" autocomplete="off" placeholder="请输入社团名称" />
-						<button></button>
+				<div class="apply">
+					<form>
+						<div class="apply1">
+							<label class="apply-control-label">标题</label>
+							<input type="text" class="apply-control">
+						</div>
+						<div class="apply1">
+							<label class="apply-control-label">公告内容</label>
+							<input type="password" class="apply-control">
+						</div>
+						<div class="apply1">
+								<label class="apply-control-label">推送链接</label>
+								<input type="text" class="apply-control">
+						</div>
+						<div class="apply-submit">
+							<input type="submit" value="提交" class="btn btn-primary">
+						</div>
 					</form>
 				</div>
-				<div id="myblock">
-					<div class="d-block" style="margin-left: 14%; margin-top: 20px; margin-bottom: 50px;">
-						<!--      <div class="row" style="margin: auto">-->
-						<div class="d-block">
-							<a href="#"><img src="img/leya.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-							<a href="#"><img src="img/ziyou.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
-							<a href="#"><img src="img/tennis.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
-							<a href="#"><img src="img/gggl.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
-						</div>
-						<div class="d-block">
-							<a href="#"><img src="img/gx.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px; margin-top: 50px;" /></a>
-							<a href="#"><img src="img/ymbl.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-							<a href="#"><img src="img/yx.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-							<a href="#"><img src="img/fxyjh.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
-						</div>
-					</div>
-				</div>
+
 			</div>
-		</div>
-		<!-- JavaScript files-->
-		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-		<script src="vendor/popper.js/umd/popper.min.js">
-		</script>
-		<script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-		<script src="vendor/jquery.cookie/jquery.cookie.js">
-		</script>
-		<script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
-		<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-		<script src="js/front.js"></script>
+
+			<!-- JavaScript files-->
+			<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+			<script src="vendor/popper.js/umd/popper.min.js">
+			</script>
+			<script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+			<script src="vendor/jquery.cookie/jquery.cookie.js">
+			</script>
+			<script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
+			<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+			<script src="js/charts-home.js"></script>
+			<script src="js/front.js"></script>
 	</body>
 
 </html>
