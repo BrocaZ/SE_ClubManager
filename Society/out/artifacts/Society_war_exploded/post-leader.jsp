@@ -1,15 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: ANARKHWQH
-  Date: 2019/11/29
-  Time: 10:59
+  Date: 2019/11/30
+  Time: 16:39
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.PlaceDao" %>
 <%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dao.AssoDao" %>
-<%@ page import="entity.Place" %>
+<%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -42,30 +41,66 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <style type="text/css">
-        .apply {
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-left: 220px;
-            padding-right: 220px;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            background-color: white;
+        #research {
+            width: 405px;
+            height: 50px;
+            display: flex;
+            float: left;
+            margin: auto;
+            /*margin-left: 300px;*/
+            background-color: #FFFFFF;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            /*border-color: #2d3035;*/
+            font-family: 'Microsoft YaHei';
+            font-size: 25px;
+            /*margin-top: 30px;*/
         }
 
-        .apply1 {
-            padding-top: 15px;
+        #research input {
+            width: 355px;
+            height: 50px;
+            float: left;
+            font-size: 14px;
+            line-height: 63px;
+            border: solid 2px;
+            background-color: #FFFFFF;
+            text-align: 5px;
+            color: #b0b0b0;
+            text-indent: 6px;
+            /*border-color: #2d3035;*/
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-right: 0px;
         }
 
-        .apply-control-label {
-            width: 80px;
-            font-size: 16px;
-            font-weight: 600;
+        #research button {
+            border: solid 2px;
+            width: 50px;
+            height: 50px;
+            float: left;
+            line-height: 50px;
+            background-color: #FFFFFF;
+            text-align: center;
+            color: #b0b0b0;
+            /*border-color: #2d3035;*/
+            background-image: url(img/sousuo.png);
+            background-size: 25px 25px;
+            background-position: 11px 13px;
+            background-repeat: no-repeat;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-left: 0px;
         }
 
-        .apply-submit {
-            padding-top: 30px;
-        }</style>
+        .message :hover {
+            color: white;
+        }
 
+        .apply-control1 {
+            width: 450px;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,35 +109,30 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header-->
-                <a href="actAnno.jsp" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong
-                            class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <a href="index.html" class="navbar-brand">
+                    <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                     <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
                 </a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-<%--                <div class="list-inline-item dropdown">--%>
-<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
-<%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
-<%--                            class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                                <div class="status online"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
-<%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-<%--                        </a>--%>
-<%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <div class="list-inline-item dropdown">
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>
+                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
+                        <a href="#" class="dropdown-item message d-flex align-items-center">
+                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
+                                <div class="status online"></div>
+                            </div>
+                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
+                        </a>
+                        <a href="index.html" class="dropdown-item text-center message">
+                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
+                    </div>
+                </div>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
-                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
-                            class="icon-logout"></i></a>
+                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
                 </div>
             </div>
         </div>
@@ -128,11 +158,9 @@
             <%} %>
         </div>
         <ul class="list-unstyled">
-            <li>
-                <a href="index.html"> <i class="icon-home"></i>活动公告 </a>
-            </li>
-            <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
+            <li class="active"><a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a></li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
@@ -145,9 +173,7 @@
                     <%}%>
                 </ul>
             </li>
-            <li>
-                <a href="overview.html"> <i class="icon-grid"></i>社团总览</a>
-            </li>
+            <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <!--社长-->
             <%
                 //                                if (stuDao.isLeader(stuDao.getCurID())) {
@@ -156,7 +182,7 @@
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
-                    <li class="active">
+                    <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li>
@@ -185,39 +211,18 @@
             </div>
         </div>
         <div class="apply">
-            <form action="${pageContext.request.contextPath}/doAddact" method="post">
+            <form>
                 <div class="apply1">
-                    <label class="apply-control-label">活动主题</label>
-                    <input type="text" class="apply-control" id="apply-control1" style="width: 450px" name="acttheme">
+                    <label class="apply-control-label">标题</label>
+                    <input type="text" class="apply-control" class="apply-control1" name="title">
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label" id="apply-control2" name="actcontent">活动内容</label>
+                    <label class="apply-control-label" id="apply-control2">公告内容</label>
                     <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label">活动时间</label>
-                    <input type="datetime-local" class="apply-control" name="actstarttime">
-                    <label class="">~</label>
-                    <input type="datetime-local" class="apply-control" name="actendtime">
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">场地</label>
-                    <input type="text" class="apply-control" list="placelist" name="actplace">
-                    <datalist id="placelist">
-                        <%
-                            PlaceDao placeDao = new PlaceDao();
-                            List<Place> result = placeDao.avaplaceList();
-                            for (int i = 0; i < result.size(); i++) {
-                                String assoName = result.get(i).getPlaceName();
-                        %>
-                        <option><%=assoName%>
-                        </option>
-                        <%}%>
-                    </datalist>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">负责人</label>
-                    <input type="text" class="apply-control" name="actleader">
+                    <label class="apply-control-label">推送链接</label>
+                    <input type="text" class="apply-control" class="apply-control1" name="url">
                 </div>
                 <div class="apply-submit">
                     <input type="submit" value="提交" class="btn btn-primary">
