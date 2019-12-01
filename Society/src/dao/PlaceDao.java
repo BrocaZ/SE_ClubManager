@@ -115,7 +115,24 @@ public class PlaceDao extends BaseDao {
         }
         return result;
     }
-
+    public int getPlaceByName(String name) throws BaseException {
+        Place result = new Place();
+        int placeid = -1;
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            String sql = "select placeId from pla where placeName = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,name);
+            java.sql.ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                placeid = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            throw new BaseException("加载失败");
+        }
+        return placeid;
+    }
     public List<Place> avaplaceList() throws BaseException {
         List<Place> result = new ArrayList<Place>();
         Connection conn = null;
@@ -140,4 +157,12 @@ public class PlaceDao extends BaseDao {
         return result;
     }
 
+    public static void main(String[] args) {
+        PlaceDao pd = new PlaceDao();
+        try {
+            System.out.println(pd.getPlaceByName("文一312"));
+        } catch (BaseException e) {
+            e.printStackTrace();
+        }
+    }
 }
