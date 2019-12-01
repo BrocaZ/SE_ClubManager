@@ -112,6 +112,33 @@
             <li>
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览 </a>
             </li>
+            <!--社长-->
+            <%
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
+            %>
+            <li>
+                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <ul  class="collapse1 list-unstyled ">
+                    <li>
+                        <a href="societyact-leader.jsp">活动列表</a>
+                    </li>
+                    <li>
+                        <a href="post-leader.jsp">发布公告</a>
+                    </li>
+                    <li>
+                        <a href="addmember.jsp">添加社员</a>
+                    </li>
+                    <li>
+                        <a href="#">更换社长</a>
+                    </li>
+                </ul>
+            </li>
+            <%
+                }
+            %>
+
+            <!--社长-->
         </ul>
 
     </nav>
@@ -180,7 +207,7 @@
                     </div>
                     <div class="mycol-lg-4">
                         <div class="lin-chart  chart">
-                            <div class="title"><strong>内部公告</strong></div>
+                            <div class="title"><strong>社团内部公告</strong></div>
                             <div class="messages-block">
                                 <div class="messages">
                                     <%
@@ -189,11 +216,7 @@
                                         for(int i=0;i<annolist.size();i++){
                                     %>
                                     <a href="#" class="message d-flex align-items-center">
-                                        <div class="content">
-                                            <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>
-                                            <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>
-                                            <small class="date d-block"><%=annolist.get(i).getCreatetime()%></small>
-                                        </div>
+                                        <div class="content"> <strong class="d-block"><%=annolist.get(i).gettitle()%></strong><span class="d-block"><%=annolist.get(i).getAnnoContent()%></span><small class="date d-block"><%=annolist.get(i).getCreatetime()%></small></div>
                                     </a>
                                     <%}%>
                                 </div>

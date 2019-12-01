@@ -10,10 +10,10 @@ public class BaseDao {
     public Connection getConnection() {
         try {
             String name = "root";
-            String password = "zky0320";
+            String password = "";
             String url = "jdbc:mysql://localhost:3306/society?useUnicode=true&characterEncoding=utf8";
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, name, password);
+            connection = DriverManager.getConnection(url, name,null);
         } catch (Exception e) {
             e.printStackTrace();
         }

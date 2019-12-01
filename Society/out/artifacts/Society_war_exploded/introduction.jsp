@@ -118,19 +118,38 @@
                     <%}%>
                 </ul>
             </li>
-            <!--          <li><a href="forms.html"> <i class="icon-padnote"></i>活动公告 </a></li>-->
             <li class="active">
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览 </a>
             </li>
-            <!--          <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>-->
-            <!--          <li><a href="login.html"> <i class="icon-logout"></i>登陆界面 </a></li>-->
+            <!--社长-->
+            <%
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
+            %>
+            <li>
+                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <ul  class="collapse1 list-unstyled ">
+                    <li>
+                        <a href="societyact-leader.jsp">活动列表</a>
+                    </li>
+                    <li>
+                        <a href="post-leader.jsp">发布公告</a>
+                    </li>
+                    <li>
+                        <a href="addmember.jsp">添加社员</a>
+                    </li>
+                    <li>
+                        <a href="#">更换社长</a>
+                    </li>
+                </ul>
+            </li>
+            <%
+                }
+            %>
+
+            <!--社长-->
         </ul>
-        <!--        <span class="heading">Extras</span>-->
-        <!--        <ul class="list-unstyled">-->
-        <!--          <li> <a href="#"> <i class="icon-settings"></i>Demo </a></li>-->
-        <!--          <li> <a href="#"> <i class="icon-writing-whiteboard"></i>Demo </a></li>-->
-        <!--          <li> <a href="#"> <i class="icon-chart"></i>Demo </a></li>-->
-        <!--        </ul>-->
+
     </nav>
     <!-- Sidebar Navigation end-->
     <div class="page-content">
