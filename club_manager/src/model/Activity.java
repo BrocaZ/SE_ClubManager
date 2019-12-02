@@ -6,12 +6,12 @@ public class Activity {
 	private int activityId;
 	private int palceId;
 	private int associationId;
+	private String activityTheme;
 	private String activityContent;
 	private String leaderSno;
 	private Date startTime;
 	private Date endTime;
 	private int attendNumber;
-	private float buget;
 	private String status;
 	private String remarks;
 	public int getActivityId() {
@@ -31,6 +31,12 @@ public class Activity {
 	}
 	public void setAssociationId(int associationId) {
 		this.associationId = associationId;
+	}
+	public String getactivityTheme() {
+		return activityTheme;
+	}
+	public void setactivityTheme(String activityTheme) {
+		this.activityTheme = activityTheme;
 	}
 	public String getActivityContent() {
 		return activityContent;
@@ -61,12 +67,6 @@ public class Activity {
 	}
 	public void setAttendNumber(int attendNumber) {
 		this.attendNumber = attendNumber;
-	}
-	public float getBuget() {
-		return buget;
-	}
-	public void setBuget(float buget) {
-		this.buget = buget;
 	}
 	public String getStatus() {
 		return status;

@@ -176,8 +176,7 @@
             <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <!--社长-->
             <%
-                //                                if (stuDao.isLeader(stuDao.getCurID())) {
-                if (true) {
+                if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
@@ -207,22 +206,17 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">申请活动</h2>
+                <h2 class="h5 no-margin-bottom">发布公告</h2>
             </div>
         </div>
         <div class="apply">
-            <form>
+            <form action="${pageContext.request.contextPath}/doPostAnno" method="post">
+                <div class="form-group" style="font-size:13px; color: #9f3741;">
+                    <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
+                </div>
                 <div class="apply1">
                     <label class="apply-control-label">标题</label>
                     <input type="text" class="apply-control" class="apply-control1" name="title">
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">社团名称</label>
-                    <input type="text" class="apply-control" list="list1">
-                    <datalist id="list1">
-                        <option>男</option>
-                        <option>女</option>
-                    </datalist>
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label" id="apply-control2">公告内容</label>

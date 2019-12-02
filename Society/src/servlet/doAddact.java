@@ -67,7 +67,7 @@ public class doAddact extends HttpServlet {
         }
         Activity act = new Activity();
         act.setPalceId(plaid);
-        act.setactivityTheme(acttheme);
+        act.setActtheme(acttheme);
         act.setActivityContent(actcontent);
         act.setLeaderSno(actleader);
         act.setStartTime(starttime);

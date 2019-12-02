@@ -6,7 +6,7 @@ public class Activity {
 	private int activityId;
 	private int palceId;
 	private int associationId;
-	private String activityTheme;
+	private String Acttheme;
 	private String activityContent;
 	private String leaderSno;
 	private Date startTime;
@@ -32,11 +32,11 @@ public class Activity {
 	public void setAssociationId(int associationId) {
 		this.associationId = associationId;
 	}
-	public String getactivityTheme() {
-		return activityTheme;
+	public String getActtheme() {
+		return Acttheme;
 	}
-	public void setactivityTheme(String activityTheme) {
-		this.activityTheme = activityTheme;
+	public void setActtheme(String Acttheme) {
+		this.Acttheme = Acttheme;
 	}
 	public String getActivityContent() {
 		return activityContent;

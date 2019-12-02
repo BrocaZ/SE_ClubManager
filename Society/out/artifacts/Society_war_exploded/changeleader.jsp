@@ -114,7 +114,9 @@
             <li>
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a>
             </li>
-            <!--社长-->
+            <%
+                if (assoDao.isLeader(stuDao.getCurID())) {
+            %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul class="collapse1 list-unstyled ">
@@ -124,15 +126,18 @@
                     <li>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="addstu-leader.jsp">添加社员</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="changeleader.jsp">更换社长</a>
                     </li>
                 </ul>
             </li>
             <!--社长-->
+            <%
+                }
+            %>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -144,7 +149,6 @@
         </div>
         <div class="apply" style="padding-top: 100px; padding-bottom: 100px;">
             <form>
-
                 <div class="apply1">
                     <label class="apply-control-label">社团人员</label>
                     <input type="text" class="apply-control" list="placelist">

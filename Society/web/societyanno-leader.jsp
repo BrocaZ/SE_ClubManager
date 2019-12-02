@@ -12,6 +12,7 @@
 <%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 
@@ -52,7 +53,8 @@
             <div class="navbar-header">
                 <!-- Navbar Header-->
                 <a href="index.html" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                    <div class="brand-text brand-big visible text-uppercase"><strong
+                            class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                     <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
                 </a>
                 <!-- Sidebar Toggle Btn-->
@@ -60,13 +62,16 @@
             </div>
             <div class="right-menu list-inline no-margin-bottom">
                 <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span
+                            class="badge dashbg-1">1</span></a>
                     <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
                         <a href="#" class="dropdown-item message d-flex align-items-center">
                             <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
                                 <div class="status online"></div>
                             </div>
-                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
+                            <div class="content"><strong class="d-block">姓名</strong><span
+                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
                         </a>
                         <a href="index.html" class="dropdown-item text-center message">
                             <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
@@ -74,7 +79,8 @@
                 </div>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
-                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
+                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
+                            class="icon-logout"></i></a>
                 </div>
             </div>
         </div>
@@ -99,7 +105,7 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        StuDao stuDao=new StuDao();
+                        StuDao stuDao = new StuDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
                             String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
@@ -113,9 +119,12 @@
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a>
             </li>
             <!--社长-->
+            <%
+                if (assoDao.isLeader(stuDao.getCurID())) {
+            %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
-                <ul  class="collapse1 list-unstyled ">
+                <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
@@ -130,6 +139,9 @@
                     </li>
                 </ul>
             </li>
+            <%
+                }
+            %>
             <!--社长-->
         </ul>
     </nav>
@@ -141,57 +153,46 @@
             </div>
         </div>
         <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
-            <div id="apply">
-                <a href="post-leader.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">+发布公告</a>
-            </div>
-            <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
-
-                <a href="#" class="message d-flex align-items-center ">
-                    <div class="content" style="width: 90%;"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">院轮滑大赛</span><small class="date d-block">2020-1-2</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
+            <div class="messages"
+                 style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
+                <%
+                    AnnoDao annoDao = new AnnoDao();
+                    String time="";
+                    List<Announcement> result = annoDao.annoList();
+                    for (int i = 0; i < result.size(); i++) {
+                        Announcement anno = result.get(i);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        time=sdf.format(anno.getCreatetime());
+                %>
+                <a href="joinAct.jsp" class="message d-flex align-items-center ">
+                    <div class="content" style="width: 90%;"><strong class="d-block"><%=anno.gettitle()%>
+                    </strong><span class="d-block"><%=anno.getAnnoContent()%></span>
+                        <small class="date d-block"><%=time%></small></div>
+                    <form action="${pageContext.request.contextPath}/doDelAnno" method="post">
+                        <input type="submit" value="" class="btn btn-primary">
+<%--                        <i class="icon-close" style="position: absolute; height: " ></i>--%>
+                    </form>
                 </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%;"> <strong class="d-block">乐雅合唱团</strong><span class="d-block">合唱比赛</span><small class="date d-block">2019-12-12</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%;"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">轮滑表演</span><small class="date d-block">2019-12-23</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%;"> <strong class="d-block">演讲与口才社</strong><span class="d-block">辩论新生赛</span><small class="date d-block">2019-11-23</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%;"> <strong class="d-block">网球协会</strong><span class="d-block">网球新生赛</span><small class="date d-block">2019-11-1</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
+                <%
+                    }
+                %>
             </div>
         </div>
 
     </div>
 </div>
-    <!-- JavaScript files-->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js">
-    </script>
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js">
-    </script>
-    <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="js/charts-home.js"></script>
-    <script src="js/front.js"></script>/
+<!-- JavaScript files-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="vendor/popper.js/umd/popper.min.js">
+</script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js">
+</script>
+<script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="js/charts-home.js"></script>
+<script src="js/front.js"></script>
+/
 </body>
 
 </html>

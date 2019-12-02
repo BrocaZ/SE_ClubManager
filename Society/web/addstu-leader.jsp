@@ -46,6 +46,28 @@
             width: 450px;
         }
     </style>
+    <script type="text/javascript">
+        window.onload=function () {
+            var list2 = "<option>A</option>";
+            <%
+            request.setCharacterEncoding("utf-8");
+            String BranchName=request.getParameter("BranchName");
+            System.out.println(BranchName);
+             StuDao stuDao=new StuDao();
+             List<String> result = stuDao.majorInBranch("商学院");
+            for (int i = 0; i < result.size(); i++) {
+                String majorName = result.get(i);
+           %>
+            list2 = list2 + "<option>" + <%=majorName%> +"</option>";
+            <%}%>
+            // $("#list2").html('XXXX');
+            document.getElementById('list2').innerHTML = list2;
+        }
+
+
+
+
+    </script>
 </head>
 
 <body>
@@ -107,7 +129,7 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        StuDao stuDao = new StuDao();
+                        stuDao = new StuDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
                             String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
@@ -122,8 +144,7 @@
             </li>
             <!--社长-->
             <%
-                //                                if (stuDao.isLeader(stuDao.getCurID())) {
-                if (true) {
+                if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
@@ -164,36 +185,22 @@
                         <%
                             request.setCharacterEncoding("utf-8");
                             stuDao = new StuDao();
-                            List<String> result = stuDao.allBranch();
+                            result = stuDao.allBranch();
                             for (int i = 0; i < result.size(); i++) {
-                                String BranchName = result.get(i);
+                                BranchName = result.get(i);
                         %>
                         <option><%=BranchName%>
                         </option>
                         <%}%>
                     </datalist>
                 </div>
-
-
-                <%
-                    request.setCharacterEncoding("utf-8");
-                    String BranchName = request.getParameter("BranchName");
-                    result = stuDao.majorInBranch(BranchName);
-                    System.out.println(BranchName);
-                %>
                 <div class="apply1">
                     <label class="apply-control-label">专业</label>
-                    <input type="text" class="apply-control" list="list2" name="majorName">
+                    <input type="text" class="apply-control" list="list2" name="majorName" >
                     <datalist id="list2">
-                        <% for (int i = 0; i < result.size(); i++) {
-                            String majorName = result.get(i);
-                        %>
-                        <option><%=majorName%></option>
-                        <%}%>
-                    </datalist>
-                </div><%
 
-                %>
+                    </datalist>
+                </div>
                 <div class="apply1">
                     <label class="apply-control-label">班级</label>
                     <input type="text" class="apply-control" list="list3" name="class">

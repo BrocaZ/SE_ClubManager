@@ -83,22 +83,22 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-<%--                <div class="list-inline-item dropdown">--%>
-<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
-<%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
-<%--                            class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                                <div class="status online"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
-<%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-<%--                        </a>--%>
-<%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <%--                <div class="list-inline-item dropdown">--%>
+                <%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
+                <%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
+                <%--                            class="badge dashbg-1">1</span></a>--%>
+                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
+                <%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
+                <%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+                <%--                                <div class="status online"></div>--%>
+                <%--                            </div>--%>
+                <%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
+                <%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
+                <%--                        </a>--%>
+                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
+                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
                     <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
@@ -128,8 +128,8 @@
             <%} %>
         </div>
         <ul class="list-unstyled">
-            <li>
-                <a href="index.html"> <i class="icon-home"></i>活动公告 </a>
+            <li class="active">
+                <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
             </li>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
@@ -146,26 +146,27 @@
                 </ul>
             </li>
             <li>
-                <a href="overview.html"> <i class="icon-grid"></i>社团总览</a>
+                <a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a>
             </li>
             <!--社长-->
             <%
-                if (assoDao.isLeader(stuDao.getCurID())) {
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
-                    <li class="active">
+                    <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li>
-                        <a href="post-leader.jsp">发布公告</a>
+                        <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addmember.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
                     <li>
-                        <a href="#">更换社长</a>
+                        <a href="changeleader.jsp">更换社长</a>
                     </li>
                 </ul>
             </li>
@@ -180,67 +181,38 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">申请活动</h2>
+                <h2 class="h5 no-margin-bottom">报名活动</h2>
             </div>
         </div>
-        <div class="apply">
-            <form action="${pageContext.request.contextPath}/doAddact" method="post">
-                <div class="form-group" style="font-size:13px; color: #9f3741;">
-                    <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
+        <% Integer id=Integer.valueOf(request.getParameter("id"));
+            System.out.println(id);
+        %>
+        <div  class="messages-block block"style="height: 90%;">
+            <div class="messages"  style="width: 85%;padding-top: 50px">
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;">第十八届学生社团联盟第一次全体大会暨干训动员大会
+                </strong></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;">2019年11月29日，由学生社团联盟举办的第十八届学生社团联盟第一次全体大会暨干训动员大会于文一109顺利举行。参加本次会议的有学生社团联盟指导老师叶敏、主席朱林俊、副主席王琪、许昀萱、苏礼荣、兰艺鑫以及各部门部长、干事。</small></div>
+                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=id%>" method="post">
+                <div class="col-sm-9 ml-auto" style="float: right; width:20%;" >
+                    <button type="submit" class="btn btn-primary" >报名活动</button>
                 </div>
-                <div class="apply1">
-                    <label class="apply-control-label">活动主题</label>
-                    <input type="text" class="apply-control" id="apply-control1" style="width: 450px" name="acttheme">
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label" id="apply-control2">活动内容</label>
-                    <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">活动时间</label>
-                    <input type="datetime-local" class="apply-control" name="actstarttime">
-                    <label class="">~</label>
-                    <input type="datetime-local" class="apply-control" name="actendtime">
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">场地</label>
-                    <input type="text" class="apply-control" list="placelist" name="actplace">
-                    <datalist id="placelist">
-                        <%
-                            PlaceDao placeDao = new PlaceDao();
-                            List<Place> result = placeDao.avaplaceList();
-                            for (int i = 0; i < result.size(); i++) {
-                                String assoName = result.get(i).getPlaceName();
-                        %>
-                        <option><%=assoName%>
-                        </option>
-                        <%}%>
-                    </datalist>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">负责人</label>
-                    <input type="text" class="apply-control" name="actleader">
-                </div>
-
-                <div class="apply-submit">
-                    <input type="submit" value="提交" class="btn btn-primary">
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
 
     </div>
-
-    <!-- JavaScript files-->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js">
-    </script>
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js">
-    </script>
-    <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="js/charts-home.js"></script>
-    <script src="js/front.js"></script>
+</div>
+<!-- JavaScript files-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="vendor/popper.js/umd/popper.min.js">
+</script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js">
+</script>
+<script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="js/charts-home.js"></script>
+<script src="js/front.js"></script>
 </body>
 
 </html>

@@ -440,7 +440,7 @@ public class AssoDao extends BaseDao {
         }
         return stu;
     }
-    boolean isLeader(String sno){
+    public boolean isLeader(String sno){
         boolean res = false;
         Connection conn = null;
         try {
