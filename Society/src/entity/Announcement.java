@@ -14,7 +14,7 @@ public class Announcement {
 	private String annoType;
 	private String status;
 	private String remarks;
-	private String href;
+	private String annobrief;
 	public int getAnnoucementId() {
 		return annoucementId;
 	}
@@ -75,11 +75,11 @@ public class Announcement {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public String getHref() {
-		return href;
+	public String getAnnobrief() {
+		return annobrief;
 	}
-	public void setHref(String href) {
-		this.href = href;
+	public void setAnnobrief(String annobrief) {
+		this.annobrief = annobrief;
 	}
 	public String getAssociationName() {
 		return associationName;

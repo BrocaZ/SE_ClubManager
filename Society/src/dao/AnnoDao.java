@@ -26,7 +26,7 @@ public class AnnoDao extends BaseDao {
             int id = 1;
             if (rs.next())
                 id = rs.getInt(1) + 1;
-            sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `href`, `state`, `remarks`) "
+            sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, id);
@@ -36,7 +36,7 @@ public class AnnoDao extends BaseDao {
             pst.setString(5, anno.getAnnoContent());
             pst.setTimestamp(6, new java.sql.Timestamp(new Date().getTime()));
             pst.setString(7, anno.getAnnoType());
-            pst.setString(8, anno.getHref());
+            pst.setString(8, anno.getAnnobrief());
             pst.setString(9, anno.getStatus());
             pst.setString(10, anno.getRemarks());
             pst.execute();
@@ -68,7 +68,7 @@ public class AnnoDao extends BaseDao {
         try {
             conn = this.getConnection();
             String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
-                    + "anno.createtime,anno.href FROM anno WHERE anno.annomentType = 'secret' and anno.assoId = ?";
+                    + "anno.createtime,anno.annobrief FROM anno WHERE anno.annomentType = 'secret' and anno.assoId = ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, asso.getAssociationId());
             java.sql.ResultSet rs = pst.executeQuery();
@@ -80,7 +80,7 @@ public class AnnoDao extends BaseDao {
                 a.settitle(rs.getString(4));
                 a.setAnnoContent(rs.getString(5));
                 a.setCreatetime(rs.getTimestamp(6));
-                a.setHref(rs.getString(7));
+                a.setAnnobrief(rs.getString(7));
                 result.add(a);
             }
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class AnnoDao extends BaseDao {
         try {
             conn = this.getConnection();
             String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
-                    + "anno.createtime,anno.href,asso.associationName " +
+                    + "anno.createtime,anno.annobrief,asso.associationName " +
                     "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' ";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rs = pst.executeQuery();
@@ -108,7 +108,7 @@ public class AnnoDao extends BaseDao {
                 a.settitle(rs.getString(4));
                 a.setAnnoContent(rs.getString(5));
                 a.setCreatetime(rs.getTimestamp(6));
-                a.setHref(rs.getString(7));
+                a.setAnnobrief(rs.getString(7));
                 a.setAssociationName(rs.getString(8));
                 result.add(a);
             }
@@ -125,7 +125,7 @@ public class AnnoDao extends BaseDao {
         try {
             conn = this.getConnection();
             String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
-                    + "anno.createtime,anno.href,asso.associationName " +
+                    + "anno.createtime,anno.annobrief,asso.associationName " +
                     "FROM anno ,asso WHERE anno.assoId = asso.associationId and assoId=?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1,assoid);
@@ -138,7 +138,7 @@ public class AnnoDao extends BaseDao {
                 a.settitle(rs.getString(4));
                 a.setAnnoContent(rs.getString(5));
                 a.setCreatetime(rs.getTimestamp(6));
-                a.setHref(rs.getString(7));
+                a.setAnnobrief(rs.getString(7));
                 a.setAssociationName(rs.getString(8));
                 result.add(a);
             }
@@ -154,7 +154,7 @@ public class AnnoDao extends BaseDao {
         try {
             conn = this.getConnection();
             String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
-                    + "anno.createtime,anno.href,asso.associationName " +
+                    + "anno.createtime,anno.annobrief,asso.associationName " +
                     "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' "
                     + "and anno.title like ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
@@ -168,7 +168,7 @@ public class AnnoDao extends BaseDao {
                 a.settitle(rs.getString(4));
                 a.setAnnoContent(rs.getString(5));
                 a.setCreatetime(rs.getTime(6));
-                a.setHref(rs.getString(7));
+                a.setAnnobrief(rs.getString(7));
                 a.setAssociationName(rs.getString(8));
                 result.add(a);
             }

@@ -23,6 +23,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -166,7 +167,10 @@
                     </strong><span class="d-block"><%=anno.getAnnoContent()%></span>
                         <small class="date d-block"><%=time%></small></div>
                     <form action="${pageContext.request.contextPath}/doDelAnno" method="post">
-                        <button type="submit" style="background-color: white;border: none"><i class="icon-close"  ></i></button>
+
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px;"></i></button>
+
+
                     </form>
                 </a>
                 <%

@@ -25,6 +25,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -157,7 +158,7 @@
         </div>
         <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
             <div id="apply">
-                <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">+申请活动</a>
+                <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">申请活动</a>
             </div>
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
                 <%
@@ -171,12 +172,13 @@
                         asso=assoDao.searchAssoById(assoId);
                         String assoName=asso.getAssociationName();
                         String context=acts.get(i).getActivityContent();
-                        Date time=acts.get(i).getStartTime();
+                        String time=acts.get(i).getStatus();
                 %>
                 <a href="#" class="message d-flex align-items-center ">
                     <div class="content" style="width: 90%"> <strong class="d-block"><%=assoName%></strong><span class="d-block"><%=context%></span><small class="date d-block"><%=time%></small></div>
                     <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post">
-                        <button type="submit" style="background-color: white;border: none"><i class="icon-close" style="padding-right: 5px;" ></i></button>
+                        <object><a href="post-leader.jsp" style="color: gray"><i class="icon ion-plus-round" style="font-size: 26px;"></i></a></object>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray"></i></button>
                     </form>
                 </a>
                <%}%>

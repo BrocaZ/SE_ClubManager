@@ -541,6 +541,36 @@ public class AssoDao extends BaseDao {
         return associationId;
     }
 
+    public void modLeader(String leaderSno,Association asso) {
+        // TODO: implement
+        Connection conn=null;
+        try
+        {
+            conn=this.getConnection();
+            String sql="delete from asso_p where sno=? and associationId=?";
+            PreparedStatement pst=conn.prepareStatement(sql);
+            pst.setString(1,asso.getChiefSno());
+            pst.setInt(2,asso.getAssociationId());
+            pst.execute();
+
+            sql="update asso_p set role=? where sno=? and associationId=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1, "社长");
+            pst.setString(2,leaderSno);
+            pst.setInt(3,asso.getAssociationId());
+            pst.execute();
+
+            sql="update asso set chiefSno=? where associationId=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1, leaderSno);
+            pst.setInt(2,asso.getAssociationId());
+            pst.execute();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         AssoDao ad = new AssoDao();
 //        List<Student> l = ad.assoMemberList(2);

@@ -151,13 +151,16 @@
             </div>
         </div>
         <div class="apply" style="padding-top: 100px; padding-bottom: 100px;">
-            <form  action="${pageContext.request.contextPath}/doChaLea" method="post">
+            <%
+                int assoid=assoDao.getCurAssoId();
+            %>
+            <form  action="${pageContext.request.contextPath}/doChaLea?assoid=<%=assoid%>" method="post">
                 <div class="apply1">
                     <label class="apply-control-label">社团人员</label>
                     <input type="text" class="apply-control" list="placelist" name="stuname">
                     <datalist id="placelist">
                         <%
-                            int assoid=assoDao.getCurAssoId();
+
                             List<Student> result = assoDao.assoMemberList(assoid);
                             for (int i = 0; i < result.size(); i++) {
                                 String stu = result.get(i).getSno()+" "+result.get(i).getName();
