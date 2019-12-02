@@ -186,12 +186,15 @@
         </div>
         <div class="apply">
             <form action="${pageContext.request.contextPath}/doAddact" method="post">
+                <div class="form-group" style="font-size:13px; color: #9f3741;">
+                    <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
+                </div>
                 <div class="apply1">
                     <label class="apply-control-label">活动主题</label>
                     <input type="text" class="apply-control" id="apply-control1" style="width: 450px" name="acttheme">
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label" id="apply-control2" name="actcontent">活动内容</label>
+                    <label class="apply-control-label" id="apply-control2">活动内容</label>
                     <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
                 </div>
                 <div class="apply1">
@@ -219,6 +222,7 @@
                     <label class="apply-control-label">负责人</label>
                     <input type="text" class="apply-control" name="actleader">
                 </div>
+
                 <div class="apply-submit">
                     <input type="submit" value="提交" class="btn btn-primary">
                 </div>

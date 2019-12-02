@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class ActDao extends BaseDao {
@@ -50,16 +53,16 @@ public class ActDao extends BaseDao {
             {
                 associationId=rs.getInt(1);
             }
-            sql="update act set placeId=?,associationId=?,activityContent=?,leaderSno=?,start_time=?,end_time=?,attend_number=?,budget=?,state=?,remarks=? where activityId=?";
+            sql="update act set placeId=?,associationId=?,activityTheme=?,activityContent=?,leaderSno=?,start_time=?,end_time=?,attend_number=?,state=?,remarks=? where activityId=?";
             pst=conn.prepareStatement(sql);
             pst.setInt(1, act.getPalceId());
             pst.setInt(2,associationId);
-            pst.setString(3, act.getActivityContent());
-            pst.setString(4, act.getLeaderSno());
-            pst.setTimestamp(5, new java.sql.Timestamp(act.getStartTime().getTime()));
-            pst.setTimestamp(6, new java.sql.Timestamp(act.getEndTime().getTime()));
-            pst.setInt(7, act.getAttendNumber());
-            pst.setDouble(8, act.getBuget());
+            pst.setString(3, act.getactivityTheme());
+            pst.setString(4, act.getActivityContent());
+            pst.setString(5, act.getLeaderSno());
+            pst.setTimestamp(6, new java.sql.Timestamp(act.getStartTime().getTime()));
+            pst.setTimestamp(7, new java.sql.Timestamp(act.getEndTime().getTime()));
+            pst.setInt(8, act.getAttendNumber());
             pst.setString(9, "待审批");
             pst.setString(10, act.getRemarks());
             pst.setInt(11, act.getActivityId());
@@ -75,13 +78,13 @@ public class ActDao extends BaseDao {
     public void addAct(Activity act) throws BaseException {
         // TODO: implement   在增加活动的界面，每个属性后面的内容为空，需社长第一次输入
         Connection conn=null;
-        Student stu=new Student();
         try
         {
             conn=this.getConnection();
             String sql="select associationId from asso where chiefSno=?";
             PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1, stu.getCurStu().getSno());
+            StuDao stu=new StuDao();
+            pst.setString(1, stu.getCurID());
             ResultSet rs=pst.executeQuery();
             int associationId=0;
             while(rs.next())
@@ -96,25 +99,27 @@ public class ActDao extends BaseDao {
             {
                 activityId=rs.getInt(1);
             }
+
             activityId++;
             sql="insert into act values(?,?,?,?,?,?,?,?,?,?,?)";
             pst=conn.prepareStatement(sql);
             pst.setInt(1,activityId);
             pst.setInt(2, act.getPalceId());
             pst.setInt(3, associationId);
-            pst.setString(4, act.getActivityContent());
-            pst.setString(5,act.getLeaderSno());
-            pst.setTimestamp(6, new java.sql.Timestamp(act.getStartTime().getTime()));
-            pst.setTimestamp(7, new java.sql.Timestamp(act.getEndTime().getTime()));
-            pst.setInt(8, act.getAttendNumber());
-            pst.setDouble(9, act.getBuget());
-            pst.setString(10,"hold");
+            pst.setString(4, act.getactivityTheme());
+            pst.setString(5, act.getActivityContent());
+            pst.setString(6,act.getLeaderSno());
+            pst.setTimestamp(7, new java.sql.Timestamp(act.getStartTime().getTime()));
+            pst.setTimestamp(8, new java.sql.Timestamp(act.getEndTime().getTime()));
+            pst.setInt(9, act.getAttendNumber());
+            pst.setInt(10, activityId);
             pst.setString(11, act.getRemarks());
             pst.execute();
         }
         catch(Exception e)
         {
-            throw new BaseException("增加失败");
+            throw new BaseException(e.getMessage());
+//    	   throw new BaseException("增加失败");
         }
     }
 

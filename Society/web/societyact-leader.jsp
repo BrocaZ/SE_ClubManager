@@ -128,13 +128,13 @@
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li>
-                        <a href="post-leader.jsp">发布公告</a>
+                        <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addmember.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
                     <li>
-                        <a href="#">更换社长</a>
+                        <a href="changeleader.jsp">更换社长</a>
                     </li>
                 </ul>
             </li>
@@ -144,7 +144,6 @@
 
             <!--社长-->
         </ul>
-    </nav>
     </nav>
     <!-- Sidebar Navigation end-->
     <div class="page-content">
@@ -160,25 +159,40 @@
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
 
                 <a href="#" class="message d-flex align-items-center ">
-                    <div class="content"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">院轮滑大赛</span><small class="date d-block">2020-1-2</small></div>
+                    <div class="content" style="width: 90%"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">院轮滑大赛</span><small class="date d-block">2020-1-2</small></div>
+                    <div onclick="window.location.href= 'addAsso.html';return false">
+                        <i class="icon-close" style="padding-right: 5px;" ></i>
+                    </div>
                 </a>
                 <a href="#" class="message d-flex align-items-center">
-                    <div class="content"> <strong class="d-block">乐雅合唱团</strong><span class="d-block">合唱比赛</span><small class="date d-block">2019-12-12</small></div>
+                    <div class="content"style="width: 90%"> <strong class="d-block">乐雅合唱团</strong><span class="d-block">合唱比赛</span><small class="date d-block">2019-12-12</small></div>
+                    <div onclick="window.location.href= 'addAsso.html';return false">
+                        <i class="icon-close" style="padding-right: 5px;" ></i>
+                    </div>
                 </a>
                 <a href="#" class="message d-flex align-items-center">
-                    <div class="content"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">轮滑表演</span><small class="date d-block">2019-12-23</small></div>
+                    <div class="content"style="width: 90%"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">轮滑表演</span><small class="date d-block">2019-12-23</small></div>
+                    <div onclick="window.location.href= 'addAsso.html';return false">
+                        <i class="icon-close" style="padding-right: 5px;" ></i>
+                    </div>
                 </a>
                 <a href="#" class="message d-flex align-items-center">
-                    <div class="content"> <strong class="d-block">演讲与口才社</strong><span class="d-block">辩论新生赛</span><small class="date d-block">2019-11-23</small></div>
+                    <div class="content"style="width: 90%"> <strong class="d-block">演讲与口才社</strong><span class="d-block">辩论新生赛</span><small class="date d-block">2019-11-23</small></div>
+                    <div onclick="window.location.href= 'addAsso.html';return false">
+                        <i class="icon-close" style="padding-right: 5px;" ></i>
+                    </div>
                 </a>
                 <a href="#" class="message d-flex align-items-center">
-                    <div class="content"> <strong class="d-block">网球协会</strong><span class="d-block">网球新生赛</span><small class="date d-block">2019-11-1</small></div>
+                    <div class="content"style="width: 90%"> <strong class="d-block">网球协会</strong><span class="d-block">网球新生赛</span><small class="date d-block">2019-11-1</small></div>
+                    <div onclick="window.location.href= 'addAsso.html';return false">
+                        <i class="icon-close" style="padding-right: 5px;" ></i>
+                    </div>
                 </a>
             </div>
         </div>
 
     </div>
-
+</div>
     <!-- JavaScript files-->
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js">

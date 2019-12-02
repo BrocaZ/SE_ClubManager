@@ -172,13 +172,13 @@
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li>
-                        <a href="post-leader.jsp">发布公告</a>
+                        <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addmember.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
                     <li>
-                        <a href="#">更换社长</a>
+                        <a href="changeleader.jsp">更换社长</a>
                     </li>
                 </ul>
             </li>

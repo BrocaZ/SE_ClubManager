@@ -186,13 +186,13 @@
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li class="active">
-                        <a href="post-leader.jsp">发布公告</a>
+                        <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addmember.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
                     <li>
-                        <a href="#">更换社长</a>
+                        <a href="changeleader.jsp">更换社长</a>
                     </li>
                 </ul>
             </li>
@@ -217,6 +217,14 @@
                     <input type="text" class="apply-control" class="apply-control1" name="title">
                 </div>
                 <div class="apply1">
+                    <label class="apply-control-label">社团名称</label>
+                    <input type="text" class="apply-control" list="list1">
+                    <datalist id="list1">
+                        <option>男</option>
+                        <option>女</option>
+                    </datalist>
+                </div>
+                <div class="apply1">
                     <label class="apply-control-label" id="apply-control2">公告内容</label>
                     <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
                 </div>
@@ -231,7 +239,7 @@
         </div>
 
     </div>
-
+</div>
     <!-- JavaScript files-->
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js">
