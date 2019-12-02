@@ -119,15 +119,16 @@ public class AnnoDao extends BaseDao {
         return result;
     }
 
-    public List<Announcement> annoList() throws BaseException {
+    public List<Announcement> annoList(int assoid) throws BaseException {
         List<Announcement> result=new ArrayList<Announcement>();
         Connection conn = null;
         try {
             conn = this.getConnection();
             String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
                     + "anno.createtime,anno.href,asso.associationName " +
-                    "FROM anno ,asso WHERE anno.assoId = asso.associationId";
+                    "FROM anno ,asso WHERE anno.assoId = asso.associationId and assoId=?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1,assoid);
             java.sql.ResultSet rs = pst.executeQuery();
             while(rs.next()){
                 Announcement a=new Announcement();

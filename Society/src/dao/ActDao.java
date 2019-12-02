@@ -96,13 +96,13 @@ public class ActDao extends BaseDao {
     public void addAct(Activity act) throws BaseException {
         // TODO: implement   在增加活动的界面，每个属性后面的内容为空，需社长第一次输入
         Connection conn=null;
-        Student stu=new Student();
         try
         {
             conn=this.getConnection();
             String sql="select associationId from asso where chiefSno=?";
             PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1, stu.getCurStu().getSno());
+            StuDao stu=new StuDao();
+            pst.setString(1, stu.getCurID());
             ResultSet rs=pst.executeQuery();
             int associationId=0;
             while(rs.next())

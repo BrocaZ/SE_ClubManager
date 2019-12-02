@@ -51,37 +51,28 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
-                <!-- Navbar Header-->
-                <a href="index.html" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong
-                            class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
-                    <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
-                </a>
+                <!-- Navbar Header--><a href="actAnno.jsp" class="navbar-brand">
+                <div class="brand-text brand-big visible text-uppercase"><strong
+                        class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
+            </a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span
-                            class="badge dashbg-1">1</span></a>
-                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
-                        <a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
-                                <div class="status online"></div>
-                            </div>
-                            <div class="content"><strong class="d-block">姓名</strong><span
-                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
-                        </a>
-                        <a href="index.html" class="dropdown-item text-center message">
-                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
-                    </div>
-                </div>
+                <%--                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
+                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages"><a href="#" class="dropdown-item message d-flex align-items-center">--%>
+                <%--                        <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+                <%--                            <div class="status online"></div>--%>
+                <%--                        </div>--%>
+                <%--                        <div class="content" >   <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div></a>--%>
+                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
+                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <!-- Log out               -->
-                <div class="list-inline-item logout">
-                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
-                            class="icon-logout"></i></a>
-                </div>
+                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span
+                        class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -91,21 +82,27 @@
     <nav id="sidebar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title">
-                <h1 class="h5">姓名</h1>
+            <%
+                StuDao stuDao = new StuDao();
+                String name = stuDao.findStu(stuDao.getCurID()).getName();
+                if (name != null) {
+            %>
+            <div class="avatar">
+                <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
+            <div class="title">
+                <h1 class="h5"><%=name %>
+                </h1>
+            </div>
+            <%} %>
         </div>
         <ul class="list-unstyled">
-            <li>
-                <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
-            </li>
-            <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
+            <li><a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a></li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        StuDao stuDao = new StuDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
                             String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
@@ -115,16 +112,14 @@
                     <%}%>
                 </ul>
             </li>
-            <li>
-                <a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a>
-            </li>
+            <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <!--社长-->
             <%
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
-                <ul class="collapse1 list-unstyled ">
+                <ul  class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
@@ -142,6 +137,7 @@
             <%
                 }
             %>
+
             <!--社长-->
         </ul>
     </nav>
@@ -158,19 +154,19 @@
                 <%
                     AnnoDao annoDao = new AnnoDao();
                     String time="";
-                    List<Announcement> result = annoDao.annoList();
+                    int assoid=assoDao.getCurAssoId();
+                    List<Announcement> result = annoDao.annoList(assoid);
                     for (int i = 0; i < result.size(); i++) {
                         Announcement anno = result.get(i);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         time=sdf.format(anno.getCreatetime());
                 %>
-                <a href="joinAct.jsp" class="message d-flex align-items-center ">
+                <a href="joinAct.jsp?id=<%=anno.getActivityId()%>" class="message d-flex align-items-center ">
                     <div class="content" style="width: 90%;"><strong class="d-block"><%=anno.gettitle()%>
                     </strong><span class="d-block"><%=anno.getAnnoContent()%></span>
                         <small class="date d-block"><%=time%></small></div>
                     <form action="${pageContext.request.contextPath}/doDelAnno" method="post">
-                        <input type="submit" value="" class="btn btn-primary">
-<%--                        <i class="icon-close" style="position: absolute; height: " ></i>--%>
+                        <button type="submit" style="background-color: white;border: none"><i class="icon-close"  ></i></button>
                     </form>
                 </a>
                 <%

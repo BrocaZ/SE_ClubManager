@@ -2,6 +2,7 @@ package dao;
 
 import entity.Association;
 import entity.Student;
+import exception.BaseException;
 import exception.BusinessException;
 import exception.DbException;
 
@@ -10,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -519,6 +521,26 @@ public class AssoDao extends BaseDao {
         }
     }
 
+    public int getCurAssoId() throws BaseException {
+        Connection conn=null;
+        int associationId = 0;
+        try {
+            conn = this.getConnection();
+            String sql = "select associationId from asso where chiefSno=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            StuDao stu=new StuDao();
+            pst.setString(1, stu.getCurID());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                associationId = rs.getInt(1);
+            }
+        }catch(Exception e)
+        {
+            throw new BaseException("增加失败");
+        }
+        return associationId;
+    }
+
     public static void main(String[] args) {
         AssoDao ad = new AssoDao();
 //        List<Student> l = ad.assoMemberList(2);
@@ -537,4 +559,6 @@ public class AssoDao extends BaseDao {
             e.printStackTrace();
         }
     }
+
+
 }

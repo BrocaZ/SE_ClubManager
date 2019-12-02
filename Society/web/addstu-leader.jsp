@@ -46,28 +46,25 @@
             width: 450px;
         }
     </style>
-    <script type="text/javascript">
-        window.onload=function () {
-            var list2 = "<option>A</option>";
-            <%
-            request.setCharacterEncoding("utf-8");
-            String BranchName=request.getParameter("BranchName");
-            System.out.println(BranchName);
-             StuDao stuDao=new StuDao();
-             List<String> result = stuDao.majorInBranch("商学院");
-            for (int i = 0; i < result.size(); i++) {
-                String majorName = result.get(i);
-           %>
-            list2 = list2 + "<option>" + <%=majorName%> +"</option>";
-            <%}%>
-            // $("#list2").html('XXXX');
-            document.getElementById('list2').innerHTML = list2;
-        }
+<%--    <script type="text/javascript">--%>
+<%--        window.onload=function () {--%>
+<%--            var list2 = "<option>A</option>";--%>
+<%--            <%--%>
+<%--            request.setCharacterEncoding("utf-8");--%>
+<%--            String BranchName=request.getParameter("BranchName");--%>
+<%--            System.out.println(BranchName);--%>
+<%--             StuDao stuDao=new StuDao();--%>
+<%--             List<String> result = stuDao.majorInBranch("商学院");--%>
+<%--            for (int i = 0; i < result.size(); i++) {--%>
+<%--                String majorName = result.get(i);--%>
+<%--           %>--%>
+<%--            list2 = list2 + "<option>" + <%=majorName%> +"</option>";--%>
+<%--            <%}%>--%>
+<%--            // $("#list2").html('XXXX');--%>
+<%--            document.getElementById('list2').innerHTML = list2;--%>
+<%--        }--%>
 
-
-
-
-    </script>
+<%--    </script>--%>
 </head>
 
 <body>
@@ -76,7 +73,7 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header-->
-                <a href="index.html" class="navbar-brand">
+                <a href="actAnno.jsp" class="navbar-brand">
                     <div class="brand-text brand-big visible text-uppercase"><strong
                             class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                     <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
@@ -85,25 +82,25 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span
-                            class="badge dashbg-1">1</span></a>
-                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
-                        <a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
-                                <div class="status online"></div>
-                            </div>
-                            <div class="content"><strong class="d-block">姓名</strong><span
-                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
-                        </a>
-                        <a href="index.html" class="dropdown-item text-center message">
-                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
-                    </div>
-                </div>
+                <%--                <div class="list-inline-item dropdown">--%>
+                <%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
+                <%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
+                <%--                            class="badge dashbg-1">1</span></a>--%>
+                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
+                <%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
+                <%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+                <%--                                <div class="status online"></div>--%>
+                <%--                            </div>--%>
+                <%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
+                <%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
+                <%--                        </a>--%>
+                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
+                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
-                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
+                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
                             class="icon-logout"></i></a>
                 </div>
             </div>
@@ -115,10 +112,19 @@
     <nav id="sidebar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title">
-                <h1 class="h5">姓名</h1>
+            <%
+                StuDao stuDao = new StuDao();
+                String name = stuDao.findStu(stuDao.getCurID()).getName();
+                if (name != null) {
+            %>
+            <div class="avatar">
+                <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
+            <div class="title">
+                <h1 class="h5"><%=name %>
+                </h1>
+            </div>
+            <%} %>
         </div>
         <ul class="list-unstyled">
             <li>
@@ -182,16 +188,16 @@
                     <label class="apply-control-label">分院</label>
                     <input type="text" class="apply-control" list="list1" name="BranchName">
                     <datalist id="list1">
-                        <%
-                            request.setCharacterEncoding("utf-8");
-                            stuDao = new StuDao();
-                            result = stuDao.allBranch();
-                            for (int i = 0; i < result.size(); i++) {
-                                BranchName = result.get(i);
-                        %>
-                        <option><%=BranchName%>
-                        </option>
-                        <%}%>
+<%--                        <%--%>
+<%--                            request.setCharacterEncoding("utf-8");--%>
+<%--                            stuDao = new StuDao();--%>
+<%--                            result = stuDao.allBranch();--%>
+<%--                            for (int i = 0; i < result.size(); i++) {--%>
+<%--                                BranchName = result.get(i);--%>
+<%--                        %>--%>
+<%--                        <option><%=BranchName%>--%>
+<%--                        </option>--%>
+<%--                        <%}%>--%>
                     </datalist>
                 </div>
                 <div class="apply1">
@@ -205,30 +211,30 @@
                     <label class="apply-control-label">班级</label>
                     <input type="text" class="apply-control" list="list3" name="class">
                     <datalist id="list3">
-                        <%
-                            request.setCharacterEncoding("utf-8");
-                            result = stuDao.classInMajor(request.getParameter("majorName"));
-                            for (int i = 0; i < result.size(); i++) {
-                                String classname = result.get(i);
-                        %>
-                        <option><%=classname%>
-                        </option>
-                        <%}%>
+<%--                        <%--%>
+<%--                            request.setCharacterEncoding("utf-8");--%>
+<%--                            result = stuDao.classInMajor(request.getParameter("majorName"));--%>
+<%--                            for (int i = 0; i < result.size(); i++) {--%>
+<%--                                String classname = result.get(i);--%>
+<%--                        %>--%>
+<%--                        <option><%=classname%>--%>
+<%--                        </option>--%>
+<%--                        <%}%>--%>
                     </datalist>
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label">姓名</label>
                     <input type="text" class="apply-control" list="list4">
                     <datalist id="list4">
-                        <%
-                            request.setCharacterEncoding("utf-8");
-                            result = stuDao.stuInClass(request.getParameter("majorName"), request.getParameter("class"));
-                            for (int i = 0; i < result.size(); i++) {
-                                String stuname = result.get(i);
-                        %>
-                        <option><%=stuname%>
-                        </option>
-                        <%}%>
+<%--                        <%--%>
+<%--                            request.setCharacterEncoding("utf-8");--%>
+<%--                            result = stuDao.stuInClass(request.getParameter("majorName"), request.getParameter("class"));--%>
+<%--                            for (int i = 0; i < result.size(); i++) {--%>
+<%--                                String stuname = result.get(i);--%>
+<%--                        %>--%>
+<%--                        <option><%=stuname%>--%>
+<%--                        </option>--%>
+<%--                        <%}%>--%>
                     </datalist>
                 </div>
                 <div class="apply-submit">

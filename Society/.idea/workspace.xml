@@ -7,13 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2218a453-ebe8-4c42-99d1-21002b563eef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/servlet/doDelAct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/servlet/doJoinAct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/servlet/doChaLea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/ActDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/ActDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/AssoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/AssoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/actAnno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/actAnno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/addstu-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/addstu-leader.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/changeleader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/changeleader.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/joinAct.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/joinAct.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/societyact-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/societyact-leader.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/societyanno-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/societyanno-leader.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/ActDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ActDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AnnoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AnnoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AssoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AssoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/ActDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/ActDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/AssoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/AssoDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/actAnno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/actAnno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/addstu-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/addstu-leader.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/changeleader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/changeleader.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/joinAct.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/joinAct.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/societyact-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/societyact-leader.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/societyanno-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/societyanno-leader.jsp" afterDir="false" />
     </list>
@@ -54,6 +66,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -227,7 +240,7 @@
       <workItem from="1575213561070" duration="4261000" />
       <workItem from="1575217859793" duration="175000" />
       <workItem from="1575266015171" duration="4534000" />
-      <workItem from="1575270883608" duration="18372000" />
+      <workItem from="1575270883608" duration="21598000" />
     </task>
     <servers />
   </component>
