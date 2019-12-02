@@ -1,18 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: ANARKHWQH
-  Date: 2019/11/30
-  Time: 22:15
+  Date: 2019/11/29
+  Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="dao.PlaceDao" %>
 <%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dao.AssoDao" %>
-<%@ page import="entity.Association" %>
+<%@ page import="entity.Place" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 
@@ -42,8 +42,30 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <style type="text/css">
+        .apply {
+            margin-left: 80px;
+            margin-right: 80px;
+            padding-left: 220px;
+            padding-right: 220px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            background-color: white;
+        }
 
-    </style>
+        .apply1 {
+            padding-top: 15px;
+        }
+
+        .apply-control-label {
+            width: 80px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .apply-submit {
+            padding-top: 30px;
+        }</style>
+
 </head>
 
 <body>
@@ -52,7 +74,7 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header-->
-                <a href="index.html" class="navbar-brand">
+                <a href="actAnno.jsp" class="navbar-brand">
                     <div class="brand-text brand-big visible text-uppercase"><strong
                             class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                     <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
@@ -61,25 +83,25 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span
-                            class="badge dashbg-1">1</span></a>
-                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
-                        <a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
-                                <div class="status online"></div>
-                            </div>
-                            <div class="content"><strong class="d-block">姓名</strong><span
-                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
-                        </a>
-                        <a href="index.html" class="dropdown-item text-center message">
-                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
-                    </div>
-                </div>
+                <%--                <div class="list-inline-item dropdown">--%>
+                <%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
+                <%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
+                <%--                            class="badge dashbg-1">1</span></a>--%>
+                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
+                <%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
+                <%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+                <%--                                <div class="status online"></div>--%>
+                <%--                            </div>--%>
+                <%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
+                <%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
+                <%--                        </a>--%>
+                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
+                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
-                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
+                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
                             class="icon-logout"></i></a>
                 </div>
             </div>
@@ -91,13 +113,22 @@
     <nav id="sidebar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title">
-                <h1 class="h5">姓名</h1>
+            <%
+                StuDao stuDao = new StuDao();
+                String name = stuDao.findStu(stuDao.getCurID()).getName();
+                if (name != null) {
+            %>
+            <div class="avatar">
+                <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
+            <div class="title">
+                <h1 class="h5"><%=name %>
+                </h1>
+            </div>
+            <%} %>
         </div>
         <ul class="list-unstyled">
-            <li>
+            <li class="active">
                 <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
             </li>
             <li>
@@ -105,7 +136,6 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        StuDao stuDao = new StuDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
                             String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
@@ -120,15 +150,16 @@
             </li>
             <!--社长-->
             <%
-                if (assoDao.isLeader(stuDao.getCurID())) {
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
-                <ul class="collapse1 list-unstyled ">
+                <ul  class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
@@ -142,6 +173,7 @@
             <%
                 }
             %>
+
             <!--社长-->
         </ul>
     </nav>
@@ -149,32 +181,22 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">公告列表</h2>
+                <h2 class="h5 no-margin-bottom">报名活动</h2>
             </div>
         </div>
-        <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
-            <div class="messages"
-                 style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
-                <%
-                    AnnoDao annoDao = new AnnoDao();
-                    String time="";
-                    List<Announcement> result = annoDao.annoList();
-                    for (int i = 0; i < result.size(); i++) {
-                        Announcement anno = result.get(i);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        time=sdf.format(anno.getCreatetime());
-                %>
-                <a href="joinAct.jsp?id=<%=anno.getActivityId()%>" class="message d-flex align-items-center ">
-                    <div class="content" style="width: 90%;"><strong class="d-block"><%=anno.gettitle()%>
-                    </strong><span class="d-block"><%=anno.getAnnoContent()%></span>
-                        <small class="date d-block"><%=time%></small></div>
-                    <form action="${pageContext.request.contextPath}/doDelAnno" method="post">
-                        <button type="submit" style="background-color: white;border: none"><i class="icon-close"  ></i></button>
-                    </form>
-                </a>
-                <%
-                    }
-                %>
+        <% Integer id=Integer.valueOf(request.getParameter("id"));
+            System.out.println(id);
+        %>
+        <div  class="messages-block block"style="height: 90%;">
+            <div class="messages"  style="width: 85%;padding-top: 50px">
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;">第十八届学生社团联盟第一次全体大会暨干训动员大会
+                </strong></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;">2019年11月29日，由学生社团联盟举办的第十八届学生社团联盟第一次全体大会暨干训动员大会于文一109顺利举行。参加本次会议的有学生社团联盟指导老师叶敏、主席朱林俊、副主席王琪、许昀萱、苏礼荣、兰艺鑫以及各部门部长、干事。</small></div>
+                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=id%>" method="post">
+                <div class="col-sm-9 ml-auto" style="float: right; width:20%;" >
+                    <button type="submit" class="btn btn-primary" >报名活动</button>
+                </div>
+                </form>
             </div>
         </div>
 
@@ -191,7 +213,6 @@
 <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="js/charts-home.js"></script>
 <script src="js/front.js"></script>
-/
 </body>
 
 </html>

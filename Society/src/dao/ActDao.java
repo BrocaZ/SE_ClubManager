@@ -18,12 +18,13 @@ public class ActDao extends BaseDao {
         // TODO: implement
         Connection conn=null;
         Student stu=new Student();
+        StuDao stuDao=new StuDao();
         try
         {
             conn=this.getConnection();
             String sql="insert into act_p(sno,activityId,state) values(?,?,?)";
             PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1,stu.getCurStu().getSno());
+            pst.setString(1,stuDao.getCurID());
             pst.setInt(2, actId);
             pst.setString(3, "报名");
             pst.execute();
@@ -39,14 +40,14 @@ public class ActDao extends BaseDao {
     public void modAct(Activity act) throws BaseException {
         // TODO: implement   在修改活动的界面中，会在每一个属性后面显示已有信息，社长可选择改或者不改
         Connection conn=null;
+        Student stu=new Student();
         try
         {
             //获取社团id
             conn=this.getConnection();
             String sql="select associationId from asso where chiefSno=?";
             PreparedStatement pst=conn.prepareStatement(sql);
-            StuDao stu=new StuDao();
-            pst.setString(1, stu.getCurID());
+            pst.setString(1, stu.getCurStu().getSno());
             ResultSet rs=pst.executeQuery();
             int associationId=0;
             while(rs.next())
@@ -140,7 +141,7 @@ public class ActDao extends BaseDao {
     }
 
     //直接点击活动后面的删除按钮即可
-    public void delAct(Activity act) throws BaseException {
+    public void delAct(int actid) throws BaseException {
         // TODO: implement
         Connection conn=null;
         try
@@ -149,7 +150,7 @@ public class ActDao extends BaseDao {
             String sql="update act set state=? where activityId=?";
             PreparedStatement pst=conn.prepareStatement(sql);
             pst.setString(1, "del");
-            pst.setInt(2,act.getActivityId());
+            pst.setInt(2,actid);
             pst.execute();
         }
         catch(Exception e)
@@ -192,13 +193,14 @@ public class ActDao extends BaseDao {
     public List<Activity> listActInAsso() {
         List<Activity> result = new ArrayList<>();
         Connection conn = null;
+        StuDao stuDao=new StuDao();
         try {
             //获取社团id
             Student stu = new Student();
             conn=this.getConnection();
             String sql="select associationId from asso where chiefSno=?";
             PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1, stu.getCurStu().getSno());
+            pst.setString(1, stuDao.getCurID());
             ResultSet rs=pst.executeQuery();
             int associationId=0;
             while(rs.next())

@@ -162,7 +162,8 @@
             <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <!--社长-->
             <%
-                if (assoDao.isLeader(stuDao.getCurID())) {
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
@@ -208,8 +209,9 @@
                     AnnoDao annoDao = new AnnoDao();
                     List<Announcement> annolist = annoDao.publicannoList();
                     for (int i = 0; i < annolist.size(); i++) {
+                        int id=annolist.get(i).getActivityId();
                 %>
-                <a href="joinAct.jsp" class="message d-flex align-items-center">
+                <a href="joinAct.jsp?id=<%=id%>" class="message d-flex align-items-center">
                     <div class="profile">
                         <img src="img/logo1.jpg" alt="..." class="img-fluid">
                     </div>

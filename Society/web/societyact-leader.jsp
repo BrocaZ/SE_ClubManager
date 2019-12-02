@@ -12,6 +12,9 @@
 <%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="dao.ActDao" %>
+<%@ page import="entity.Activity" %>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 
@@ -118,7 +121,8 @@
             <li><a href="overview.jsp"> <i class="icon-grid"></i>社团总览</a></li>
             <!--社长-->
             <%
-                if (assoDao.isLeader(stuDao.getCurID())) {
+                //                                if (stuDao.isLeader(stuDao.getCurID())) {
+                if (true) {
             %>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
@@ -156,37 +160,26 @@
                 <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">+申请活动</a>
             </div>
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
-
+                <%
+                    ActDao actDao=new ActDao();
+                    String sno=stuDao.getCurID();
+                    List<Activity> acts=actDao.listActInAsso();
+                    Association asso=new Association();
+                    for (int i = 0; i < acts.size(); i++) {
+                        int id=acts.get(i).getActivityId();
+                        int assoId=acts.get(i).getAssociationId();
+                        asso=assoDao.searchAssoById(assoId);
+                        String assoName=asso.getAssociationName();
+                        String context=acts.get(i).getActivityContent();
+                        Date time=acts.get(i).getStartTime();
+                %>
                 <a href="#" class="message d-flex align-items-center ">
-                    <div class="content" style="width: 90%"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">院轮滑大赛</span><small class="date d-block">2020-1-2</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
+                    <div class="content" style="width: 90%"> <strong class="d-block"><%=assoName%></strong><span class="d-block"><%=context%></span><small class="date d-block"><%=time%></small></div>
+                    <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post">
+                        <button type="submit" style="background-color: white;border: none"><i class="icon-close" style="padding-right: 5px;" ></i></button>
+                    </form>
                 </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%"> <strong class="d-block">乐雅合唱团</strong><span class="d-block">合唱比赛</span><small class="date d-block">2019-12-12</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%"> <strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">轮滑表演</span><small class="date d-block">2019-12-23</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%"> <strong class="d-block">演讲与口才社</strong><span class="d-block">辩论新生赛</span><small class="date d-block">2019-11-23</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
-                <a href="#" class="message d-flex align-items-center">
-                    <div class="content"style="width: 90%"> <strong class="d-block">网球协会</strong><span class="d-block">网球新生赛</span><small class="date d-block">2019-11-1</small></div>
-                    <div onclick="window.location.href= 'addAsso.html';return false">
-                        <i class="icon-close" style="padding-right: 5px;" ></i>
-                    </div>
-                </a>
+               <%}%>
             </div>
         </div>
 

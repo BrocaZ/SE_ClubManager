@@ -12,6 +12,7 @@
 <%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="entity.Student" %>
 <!DOCTYPE html>
 <html>
 
@@ -153,8 +154,15 @@
                     <label class="apply-control-label">社团人员</label>
                     <input type="text" class="apply-control" list="placelist">
                     <datalist id="placelist">
-                        <option>男</option>
+                        <%
 
+                            List<Student> result = assoDao.assoMemberList();
+                            for (int i = 0; i < result.size(); i++) {
+                                String stu = result.get(i).getSno()+" "+result.get(i).getName();
+                        %>
+                        <option><%=stu%>
+                        </option>
+                        <%}%>
                     </datalist>
                 </div>
                 <div class="apply-submit">
