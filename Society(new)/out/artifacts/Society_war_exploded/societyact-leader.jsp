@@ -175,7 +175,7 @@
                 <a href="#" class="message d-flex align-items-center ">
                     <div class="content" style="width: 90%"> <strong class="d-block"><%=assoName%></strong><span class="d-block"><%=context%></span><small class="date d-block"><%=time%></small></div>
                     <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post">
-                        <object><a href="post-leader.jsp" style="color: gray"><i class="icon ion-plus-round" style="font-size: 26px;"></i></a></object>
+                        <object><a href="post-leader.jsp?id=<%=id%>" style="color: gray"><i class="icon ion-plus-round" style="font-size: 26px;"></i></a></object>
                         <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray"></i></button>
                     </form>
                 </a>

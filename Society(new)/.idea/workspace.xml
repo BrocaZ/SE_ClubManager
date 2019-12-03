@@ -46,7 +46,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/dao" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -60,9 +60,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/dao" />
       <recent name="$PROJECT_DIR$/web" />
       <recent name="$PROJECT_DIR$/src/servlet" />
-      <recent name="$PROJECT_DIR$/src/dao" />
       <recent name="$PROJECT_DIR$/web/admin_pages" />
       <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
     </key>
@@ -232,7 +232,8 @@
       <workItem from="1575283880083" duration="13299000" />
       <workItem from="1575332963611" duration="4527000" />
       <workItem from="1575348162501" duration="2348000" />
-      <workItem from="1575350865697" duration="5891000" />
+      <workItem from="1575350865697" duration="7055000" />
+      <workItem from="1575358362214" duration="5151000" />
     </task>
     <servers />
   </component>

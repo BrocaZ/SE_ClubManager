@@ -74,14 +74,8 @@ public class doAddact extends HttpServlet {
 
         ActDao actDao = new ActDao();
         try {
-            if (acttheme.equals("") || acttheme == null || actcontent.equals("") || actcontent == null || actstarttime.equals("") || actstarttime == null || actendtime.equals("") || actendtime == null || actplace.equals("") || actplace == null || actleader.equals("") || actleader == null) {
-                String message = "任意字段不能为空";
-                request.getSession().setAttribute("msg", message);
-                response.sendRedirect("addact.jsp");
-            } else {
-                actDao.addAct(act);
-                response.sendRedirect("societyact-leader.jsp");
-            }
+            actDao.addAct(act);
+            response.sendRedirect("societyact-leader.jsp");
         } catch (BaseException e) {
             e.printStackTrace();
         }

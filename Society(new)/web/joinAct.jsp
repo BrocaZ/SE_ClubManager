@@ -5,13 +5,11 @@
   Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.PlaceDao" %>
-<%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dao.AssoDao" %>
 <%@ page import="entity.Place" %>
-<%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="entity.Activity" %>
+<%@ page import="dao.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -183,13 +181,16 @@
                 <h2 class="h5 no-margin-bottom">报名活动</h2>
             </div>
         </div>
-        <% Integer id=Integer.valueOf(request.getParameter("id"));
+        <%
+            int id=Integer.valueOf(request.getParameter("id"));
             System.out.println(id);
+            ActDao actDao = new ActDao();
+            Activity act = actDao.getActById(id);
+            if(act!=null){
         %>
         <div  class="messages-block block"style="height: 90%;">
             <div class="messages"  style="width: 85%;padding-top: 50px">
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;">第十八届学生社团联盟第一次全体大会暨干训动员大会
-                </strong></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;"><%=act%></strong></div>
                 <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;">2019年11月29日，由学生社团联盟举办的第十八届学生社团联盟第一次全体大会暨干训动员大会于文一109顺利举行。参加本次会议的有学生社团联盟指导老师叶敏、主席朱林俊、副主席王琪、许昀萱、苏礼荣、兰艺鑫以及各部门部长、干事。</small></div>
                 <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=id%>" method="post">
                 <div class="col-sm-9 ml-auto" style="float: right; width:20%;" >
@@ -198,7 +199,7 @@
                 </form>
             </div>
         </div>
-
+        <%}%>
     </div>
 </div>
 <!-- JavaScript files-->

@@ -42,7 +42,18 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-
+    <script>
+        function check() {
+            for (var i = 0; i < document.f.elements.length - 1; i++) {
+                if (document.f.elements[i].value == "") {
+                    alert("当前表单不能有空项");
+                    document.f.elements[i].focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -160,7 +171,7 @@
             </div>
         </div>
         <div class="apply">
-            <form action="${pageContext.request.contextPath}/doAddact" method="post">
+            <form action="${pageContext.request.contextPath}/doAddact" method="post" name="f" onsubmit="return check()">
                 <div class="form-group" style="font-size:13px; color: #9f3741;">
                     <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
                 </div>

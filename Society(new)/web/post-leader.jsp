@@ -22,6 +22,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -34,7 +35,6 @@
     <link rel="stylesheet" href="css/style.pink.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Tweaks for older IEs-->
@@ -101,8 +101,19 @@
         .apply-control1 {
             width: 450px;
         }
-
     </style>
+    <script>
+        function check() {
+            for (var i = 0; i < document.f.elements.length - 1; i++) {
+                if (document.f.elements[i].value == "") {
+                    alert("当前表单不能有空项");
+                    document.f.elements[i].focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -128,7 +139,7 @@
 <%--                            </div>--%>
 <%--                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
 <%--                        </a>--%>
-<%--                        <a href="" class="dropdown-item text-center message">--%>
+<%--                        <a href="index.html" class="dropdown-item text-center message">--%>
 <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
 <%--                    </div>--%>
 <%--                </div>--%>
@@ -183,10 +194,10 @@
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
-                    <li>
+                    <li class="active">
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
@@ -212,23 +223,27 @@
             </div>
         </div>
         <div class="apply">
-            <form action="${pageContext.request.contextPath}/doPostAnno" method="post">
+            <form action="${pageContext.request.contextPath}/doPostAnno?id=<%=request.getParameter("id")%>" method="post" name="f" onsubmit="return check()">
                 <div class="form-group" style="font-size:13px; color: #9f3741;">
                     <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label">标题</label>
-                    <input type="text" class="apply-control" class="apply-control1" name="title">
+                    <label class="apply-control-label">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</label>
+                    <textarea name="title" cols="40" rows="1" style="vertical-align:top"></textarea>
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label" id="apply-control2">公告内容</label>
-                    <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
+                    <label class="apply-control-label" id="apply-control2">内容概要</label>
+                    <textarea name="brief" cols="40" rows="2" style="vertical-align:top"></textarea>
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label">推送链接</label>
-                    <input type="text" class="apply-control" class="apply-control1" name="url">
+                    <label class="apply-control-label">公告内容</label>
+                    <textarea name="content" cols="40" rows="10" style="vertical-align:top"></textarea>
                 </div>
-                <div class="apply-submit" style="text-align: center" >
+                <div class="apply1" style="padding-left: 30px;">
+                    <label style="padding-left: 50px; font-size: 16px; font-weight: 600;"><input name="type" type="radio" value="1" />&nbsp;公开</label>
+                    <label style="padding-left: 50px; font-size: 16px; font-weight: 600;"><input name="type" type="radio" value="2" checked="checked"/>&nbsp;私密</label>
+                </div>
+                <div class="apply-submit" style="margin-left: 44%;">
                     <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
                 </div>
             </form>

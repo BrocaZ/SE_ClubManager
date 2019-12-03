@@ -7,57 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2218a453-ebe8-4c42-99d1-21002b563eef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/ActDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/ActDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/Admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/AnnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/AnnoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/AssoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/AssoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/BaseDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/PlaceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/PlaceDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/StuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/dao/StuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Activity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Activity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Announcement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Announcement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Association.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Association.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Place.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Place.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/entity/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/exception/BaseException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/exception/BaseException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/exception/BusinessException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/exception/BusinessException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/exception/DbException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/exception/DbException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doAddact.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doAddact.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doChaLea.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doChaLea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doDelAct.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doDelAct.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doDelAnno.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doDelAnno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doJoinAct.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doJoinAct.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doPostAnno.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doPostAnno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/societyact-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/societyact-leader.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/ActDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ActDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/BaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/BaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/doPostAnno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/servlet/doPostAnno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/ActDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/ActDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/Admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/AnnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/AnnoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/AssoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/AssoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/BaseDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/PlaceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/PlaceDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/dao/StuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/dao/StuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Activity.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Activity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Announcement.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Announcement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Association.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Association.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Place.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Place.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/entity/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/exception/BaseException.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/exception/BaseException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/exception/BusinessException.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/exception/BusinessException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/exception/DbException.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/exception/DbException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doAddact.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doAddact.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doChaLea.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doChaLea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doDelAct.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doDelAct.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doDelAnno.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doDelAnno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doJoinAct.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doJoinAct.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doPostAnno.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doPostAnno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/societyact-leader.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/societyact-leader.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../demo原白/.idea/demo1.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../demo原白/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../demo原白/.idea/misc.xml" beforeDir="false" />
@@ -172,7 +122,6 @@
       <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/popper.min.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/umd/popper.min.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../demo原白/www.jq22.com.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../demo原黑/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -390,6 +339,7 @@
       <workItem from="1575334401001" duration="2904000" />
       <workItem from="1575350700436" duration="106000" />
       <workItem from="1575350811613" duration="1627000" />
+      <workItem from="1575358361057" duration="1422000" />
     </task>
     <servers />
   </component>

@@ -18,13 +18,12 @@ public class ActDao extends BaseDao {
         // TODO: implement
         Connection conn=null;
         Student stu=new Student();
-        StuDao stuDao=new StuDao();
         try
         {
             conn=this.getConnection();
             String sql="insert into act_p(sno,activityId,state) values(?,?,?)";
             PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1,stuDao.getCurID());
+            pst.setString(1,stu.getCurStu().getSno());
             pst.setInt(2, actId);
             pst.setString(3, "报名");
             pst.execute();
@@ -78,12 +77,12 @@ public class ActDao extends BaseDao {
             pst.setString(10,act.getActivityId()+"");
             pst.setString(11, act.getRemarks());
             pst.execute();
-            //更新原记录的state
-            sql="update act set state = ? where activityId = ?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,act.getActivityId()+"");
-            pst.setInt(2,act.getActivityId());
-            pst.execute();
+//            //更新原记录的state
+//            sql="update act set state = ? where activityId = ?";
+//            pst=conn.prepareStatement(sql);
+//            pst.setString(1,act.getActivityId()+"");
+//            pst.setInt(2,act.getActivityId());
+//            pst.execute();
         }
         catch(Exception e)
         {
@@ -96,13 +95,13 @@ public class ActDao extends BaseDao {
     public void addAct(Activity act) throws BaseException {
         // TODO: implement   在增加活动的界面，每个属性后面的内容为空，需社长第一次输入
         Connection conn=null;
+        Student stu=new Student();
         try
         {
             conn=this.getConnection();
             String sql="select associationId from asso where chiefSno=?";
             PreparedStatement pst=conn.prepareStatement(sql);
-            StuDao stu=new StuDao();
-            pst.setString(1, stu.getCurID());
+            pst.setString(1, stu.getCurStu().getSno());
             ResultSet rs=pst.executeQuery();
             int associationId=0;
             while(rs.next())
@@ -129,7 +128,7 @@ public class ActDao extends BaseDao {
             pst.setTimestamp(7, new java.sql.Timestamp(act.getEndTime().getTime()));
             pst.setInt(8, act.getAttendNumber());
             pst.setString(9, act.getActtheme());
-            pst.setString(10,act.getActivityId()+"");
+            pst.setString(10,"add");
             pst.setString(11, act.getRemarks());
             pst.execute();
         }
@@ -193,10 +192,9 @@ public class ActDao extends BaseDao {
     public List<Activity> listActInAsso() {
         List<Activity> result = new ArrayList<>();
         Connection conn = null;
-        StuDao stuDao=new StuDao();
         try {
             //获取社团id
-            Student stu = new Student();
+            StuDao stuDao = new StuDao();
             conn=this.getConnection();
             String sql="select associationId from asso where chiefSno=?";
             PreparedStatement pst=conn.prepareStatement(sql);
@@ -225,9 +223,7 @@ public class ActDao extends BaseDao {
                 a.setStatus(rs.getString(10));
                 a.setRemarks(rs.getString(11));
                 String str = a.getStatus();
-                if(str.equals("ok") || str.equals(""+a.getActivityId()) || str.equals("del")){
-                    result.add(a);
-                }
+                 result.add(a);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,7 +245,7 @@ public class ActDao extends BaseDao {
 //        stu.setSno("31701005");
 //        Student.curStu = stu;
 //        ActDao ad = new ActDao();
-
+//
 //        Activity act = new Activity();
 //        act.setActivityId(8);
 //        act.setPalceId(1);
@@ -260,7 +256,7 @@ public class ActDao extends BaseDao {
 //        try {
 //            ad.addAct(act);
 //            ad.modAct(act);
-//            ad.delAct(act);
+//            ad.delAct(act.getActivityId());
 //        } catch (BaseException e) {
 //            e.printStackTrace();
 //        }
