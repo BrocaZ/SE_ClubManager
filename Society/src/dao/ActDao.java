@@ -244,11 +244,11 @@ public class ActDao extends BaseDao {
         }
         return result;
     }
-    public static void main(String[] args) {
-        Student stu = new Student();
-        stu.setSno("31701005");
-        Student.curStu = stu;
-        ActDao ad = new ActDao();
+//    public static void main(String[] args) {
+//        Student stu = new Student();
+//        stu.setSno("31701005");
+//        Student.curStu = stu;
+//        ActDao ad = new ActDao();
 
 //        Activity act = new Activity();
 //        act.setActivityId(8);
@@ -264,12 +264,12 @@ public class ActDao extends BaseDao {
 //        } catch (BaseException e) {
 //            e.printStackTrace();
 //        }
-        List<Activity> l = ad.listActInAsso();
-        for (Activity a : l){
-            System.out.println(a.getActtheme());
-        }
-
-        System.out.println(ad.getActById(1).getActivityContent());
-    }
+//        List<Activity> l = ad.listActInAsso();
+//        for (Activity a : l){
+//            System.out.println(a.getActtheme());
+//        }
+//
+//        System.out.println(ad.getActById(1).getActivityContent());
+//    }
 
 }

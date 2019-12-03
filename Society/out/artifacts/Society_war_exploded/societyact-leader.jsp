@@ -158,7 +158,7 @@
         </div>
         <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
             <div id="apply">
-                <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; "><i class="icon ion-plus-round" style="font-size: 20px;"></i>申请活动</a>
+                <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">申请活动</a>
             </div>
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
                 <%

@@ -55,7 +55,7 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header-->
-                <a href="index.html" class="navbar-brand">
+                <a href="actAnno.jsp" class="navbar-brand">
                     <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                     <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
                 </a>
@@ -63,22 +63,22 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>
-                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
-                        <a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">
-                                <div class="status online"></div>
-                            </div>
-                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>
-                        </a>
-                        <a href="index.html" class="dropdown-item text-center message">
-                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
-                    </div>
-                </div>
+<%--                <div class="list-inline-item dropdown">--%>
+<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
+<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
+<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
+<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+<%--                                <div class="status online"></div>--%>
+<%--                            </div>--%>
+<%--                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
+<%--                        </a>--%>
+<%--                        <a href="index.html" class="dropdown-item text-center message">--%>
+<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
-                    <a id="logout" href="login.html" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
+                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
                 </div>
             </div>
         </div>
@@ -157,8 +157,8 @@
             </div>
         </div>
         <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
-            <div id="apply">
-                <a href="addact.jsp" style=" font-size: 18px;font-weight: 600; margin-left: 880px; ">申请活动</a>
+            <div id="apply" style="margin-left: 86.5%; background-color: white;">
+                <a href=" " style="font-size: 20px; font-weight: 600;">申请活动</a >
             </div>
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
                 <%

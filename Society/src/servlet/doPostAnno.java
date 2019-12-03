@@ -50,7 +50,7 @@ public class doPostAnno extends HttpServlet {
             } else {
                 anno.settitle(title);
                 anno.setAnnoContent(content);
-                anno.setHref(url);
+//                anno.setHref(url);
                 annoDao.addAnno(anno);
                 response.sendRedirect("societyanno-leader.jsp");
             }
