@@ -175,8 +175,8 @@
             </div>
         </div>
         <div class="col-sm-9 ml-auto" style="float: right; width:20%;">
-            <form action="${pageContext.request.contextPath}/checkAsso?res=yes" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
-            <form action="${pageContext.request.contextPath}/checkAsso?res=no" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
+            <form action="${pageContext.request.contextPath}/checkAsso?res=yes&assoid=<%=assoid%>" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
+            <form action="${pageContext.request.contextPath}/checkAsso?res=no&assoid=<%=assoid%>" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
         </div>
     </div>
 </div>

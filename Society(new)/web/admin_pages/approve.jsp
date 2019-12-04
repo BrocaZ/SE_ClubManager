@@ -177,14 +177,6 @@
                     %>
                     <span class="d-block">修改信息<p style="float: right;"><%=assoList.get(i).getRemarks()%></p></span>
                     <%}
-                        else if(assoList.get(i).getStatus().equals("del")){
-                    %>
-                    <span class="d-block">申请删除<p style="float: right;"><%=assoList.get(i).getRemarks()%></p></span>
-                    <%}
-                        else if(assoList.get(i).getStatus().equals("add")){
-                    %>
-                    <span class="d-block">申请添加<p style="float: right;"><%=assoList.get(i).getRemarks()%></p></span>
-                    <%}
                         else{
                     %>
                     <span class="d-block"><%=assoList.get(i).getStatus()%><p style="float: right;"><%=assoList.get(i).getRemarks()%></p></span>

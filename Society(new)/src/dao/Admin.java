@@ -144,7 +144,7 @@ public class Admin extends BaseDao {
            conn=this.getConnection();
            if(accept){
                int id = Integer.parseInt(asso.getStatus());
-               String sql="UPDATE asso set placeId,associationName,chiefSno,brief_introduction where associationId = ?";
+               String sql="UPDATE asso set placeId = ?,associationName = ?,chiefSno = ?,brief_introduction = ? where associationId = ?";
                PreparedStatement pst=conn.prepareStatement(sql);
                pst.setInt(1,asso.getPlacId());
                pst.setString(2,asso.getAssociationName());

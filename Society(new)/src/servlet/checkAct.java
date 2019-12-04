@@ -1,7 +1,10 @@
 package servlet;
 
+import dao.ActDao;
+import dao.Admin;
 import dao.AssoDao;
 import dao.StuDao;
+import entity.Activity;
 import entity.Association;
 import entity.Student;
 import exception.BaseException;
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/checkAct")
 public class checkAct extends HttpServlet {
@@ -34,8 +39,36 @@ public class checkAct extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("checkAct连接数据库成功");
+        boolean accept = false;
         String choose = request.getParameter("res");
-
+        int actid = Integer.valueOf(request.getParameter("actid"));
+        Admin admin = new Admin();
+        ActDao actDao = new ActDao();
+        Activity act = actDao.getActById(actid);
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(act.getStatus());
+        if(choose.equals("yes")){
+            accept = true;
+        }
+        try {
+            if(isNum.matches()){
+                //修改信息
+                admin.checkModAct(act,accept);
+            }
+            else if(act.getStatus().equals("del")){
+                //申请删除
+                admin.checkDelAct(act,accept);
+            }
+            else if(act.getStatus().equals("add")){
+                //申请添加
+                admin.checkAddAct(act,accept);
+            }
+            else{
+                //其他
+            }
+        } catch (BaseException e) {
+            e.printStackTrace();
+        }
         response.sendRedirect("admin_pages/checkActList.jsp");
     }
 

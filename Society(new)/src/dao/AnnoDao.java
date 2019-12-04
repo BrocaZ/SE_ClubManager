@@ -179,4 +179,32 @@ public class AnnoDao extends BaseDao {
 
         return result;
     }
+
+    public Announcement searchAnnoById(int id) throws BaseException {
+        Announcement result=new Announcement();
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            String sql = "SELECT annoId,assoId,activityId,title,annoContent,createtime,annobrief,annomentType,state,remarks FROM anno WHERE annoId = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            java.sql.ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                result.setAnnoucementId(rs.getInt(1));
+                result.setAssociationId(rs.getInt(2));
+                result.setActivityId(rs.getInt(3));
+                result.settitle(rs.getString(4));
+                result.setAnnoContent(rs.getString(5));
+                result.setCreatetime(rs.getTime(6));
+                result.setAnnobrief(rs.getString(7));
+                result.setAnnoType(rs.getString(8));
+                result.setStatus(rs.getString(9));
+                result.setRemarks(rs.getString(10));
+            }
+        } catch (Exception e) {
+//			throw new BaseException(e.getMessage());
+            throw new BaseException("加载失败");
+        }
+        return result;
+    }
 }

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: ANARKHWQH
-  Date: 2019/11/29
-  Time: 10:59
+  User: lenovo
+  Date: 2019/12/4
+  Time: 9:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="java.util.List" %>
@@ -10,9 +10,12 @@
 <%@ page import="entity.Announcement" %>
 <%@ page import="entity.Activity" %>
 <%@ page import="dao.*" %>
+<%@ page import="entity.Student" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,58 +37,29 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <%
-        StuDao stuDao=new StuDao();
-        ActDao actDao=new ActDao();
-        AnnoDao annDao = new AnnoDao();
-
-        int annoid = Integer.valueOf(request.getParameter("annoid"));
-        int actid = annDao.searchAnnoById(annoid).getActivityId();
-        String in=request.getParameter("in");
-        String sno=stuDao.getCurID();
-    %>
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <script>
         function check() {
             <%
-             boolean bool=actDao.isJoinedAct(actid,sno);
-             if(bool==true){
+               String pw2=request.getParameter("stupw");
+               String pw1=request.getParameter("stupw1");
+                System.out.println(pw2);
+                if(pw1==null)
+                    {
             %>
-                alert("已报名当前活动");
-                return false;
+            alert("确认密码不能为空");
+            return false;
+                <%}
+                else if(pw1.compareTo(pw2)!=0)
+                    {
+                    %>
+            alert("两次输入的密码应一致");
+            return false;
             <%}%>
             return true;
 
         }
     </script>
-    <style type="text/css">
-        .apply {
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-left: 220px;
-            padding-right: 220px;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            background-color: white;
-        }
-
-        .apply1 {
-            padding-top: 15px;
-        }
-
-        .apply-control-label {
-            width: 80px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .apply-submit {
-            padding-top: 30px;
-        }
-    </style>
 </head>
 
 <body>
@@ -103,22 +77,6 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <%--                <div class="list-inline-item dropdown">--%>
-                <%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
-                <%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
-                <%--                            class="badge dashbg-1">1</span></a>--%>
-                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-                <%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-                <%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-                <%--                                <div class="status online"></div>--%>
-                <%--                            </div>--%>
-                <%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
-                <%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-                <%--                        </a>--%>
-                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
                 <!-- Log out               -->
                 <div class="list-inline-item logout">
                     <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
@@ -134,7 +92,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                stuDao = new StuDao();
+                StuDao stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if (name != null) {
             %>
@@ -147,19 +105,9 @@
             <%} %>
         </div>
         <ul class="list-unstyled">
-            <%
-                if(in.equals("yes")){
-            %>
-            <li class="active">
-                <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
-            </li>
-            <%
-                }else{
-            %>
             <li>
                 <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
             </li>
-            <%}%>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
@@ -187,21 +135,11 @@
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
-                    <%
-                        if(in.equals("yes")){
-                    %>
                     <li>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
-                    <%
-                        }else{
-                    %>
-                    <li class="active">
-                        <a href="societyanno-leader.jsp">公告列表</a>
-                    </li>
-                    <%}%>
                     <li>
-                        <a href="addstu-leader.jsp?check=0">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
                     <li>
                         <a href="changeleader.jsp">修改社团信息</a>
@@ -211,7 +149,6 @@
             <%
                 }
             %>
-
             <!--社长-->
         </ul>
     </nav>
@@ -219,39 +156,46 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">报名活动</h2>
+                <h2 class="h5 no-margin-bottom">修改个人信息</h2>
             </div>
         </div>
-        <%
-//            System.out.println(id);
-            Announcement anno = annDao.searchAnnoById(annoid);
-            if(anno!=null){
-        %>
-        <div  class="messages-block block"style="height: 90%;">
-            <div class="messages"  style="width: 85%;padding-top: 50px">
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;"><%=anno.gettitle()%></strong></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;"><%=anno.getAnnoContent()%></small></div>
-                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=actid%>" method="post" onsubmit="return check()">
-                <%
-                    if(in.equals("yes")){
-                %>
-                <div class="col-sm-9 ml-auto" style="float: right; width:20%;" >
-                    <button type="submit" class="btn btn-primary" >报名活动</button>
+        <div class="apply" style="padding-left: 30%;">
+                <div class="apply1">
+                    <label class="apply-control-label">头像</label>
+                    <img src="img/t7.jpg" alt="..." style="width:100px;height:100px;">
                 </div>
-                <%}%>
-                </form>
-            </div>
+                <%
+                    String sno=stuDao.getCurID();
+                    Student stu=stuDao.findStu(sno);
+                    String tel=stu.getTel();
+                    String pw=stu.getPassword();
+                %>
+            <form action="${pageContext.request.contextPath}/doModifyInfo" method="post">
+                <div class="apply1">
+                    <label class="apply-control-label" id="apply-control2">电话</label>
+                    <input type="text" class="apply-control" value="<%=tel%>" name="stutel">
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label" id="apply-control3">密码</label>
+                    <input type="text" class="apply-control" value="<%=pw%>" name="stupw">
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label" id="apply-control4">密码确认</label>
+                    <input type="text" class="apply-control" name="stupw1">
+                </div>
+                <div class="apply-submit"style="margin-left: 24%;">
+                    <button  type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
+                </div>
+            </form>
         </div>
-        <%}%>
     </div>
 </div>
+
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="vendor/popper.js/umd/popper.min.js">
-</script>
+<script src="vendor/popper.js/umd/popper.min.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="vendor/jquery.cookie/jquery.cookie.js">
-</script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="js/charts-home.js"></script>
@@ -259,3 +203,4 @@
 </body>
 
 </html>
+

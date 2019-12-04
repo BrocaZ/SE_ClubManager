@@ -13,6 +13,7 @@
 <%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="entity.Student" %>
 <!DOCTYPE html>
 <html>
 
@@ -23,6 +24,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -117,8 +119,7 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
@@ -158,10 +159,10 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li class="active">
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -178,12 +179,51 @@
                 <h2 class="h5 no-margin-bottom">添加社员</h2>
             </div>
         </div>
-        <div class="apply" style="padding-top: 50px; padding-left:350px;padding-bottom: 100px;">
-            <form style="text-align: center">
+        <div class="apply" style="padding-top: 50px; padding-left:200px;padding-bottom: 100px;">
+            <form  action="${pageContext.request.contextPath}/AddStu?check=<%=request.getParameter("check")%>" method="post" style="text-align: center">
+                <%
+                    String sno="";
+                    String check=request.getParameter("check");
+                    if(!check.equals("0"))
+                        sno=check;
+                %>
+                <div class="apply1">
+                    <label class="apply-control-label">学号</label>
+                    <input type="text" class="apply-control" style="width: 200px" name="sno" value="<%=sno%>">
+                </div>
+                <%
+
+                    if (!check.equals("0")){
+                        Student stu=stuDao.findStu(check);
+
+                %>
+                <div class="apply1">
+                    <label class="apply-control-label">姓名</label>
+                    <label class="apply-control" style="width: 200px; font-size: 17px; text-align: left"><%=stu.getName()%></label>
+                </div>
                 <div class="apply1">
                     <label class="apply-control-label">分院</label>
-                    <input type="text" class="apply-control" list="list1" name="BranchName">
-                    <datalist id="list1">
+                    <label class="apply-control" style="width: 200px; font-size: 17px; text-align: left"><%=stu.getBranch()%></label>
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label">专业</label>
+                    <label class="apply-control"style="width: 200px; font-size: 17px; text-align: left"><%=stu.getMajor()%></label>
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label">班级</label>
+                    <label class="apply-control"style="width: 200px; font-size: 17px; text-align: left"><%=stu.getStuclass()%></label>
+                </div>
+                <%
+                    }
+                %>
+                <div class="apply-submit"style="margin-left: 29%;" >
+                    <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
+                </div>
+
+<%--                <div class="apply1">--%>
+<%--                    <label class="apply-control-label">分院</label>--%>
+<%--                    <input type="text" class="apply-control" list="list1" name="BranchName">--%>
+<%--                    <datalist id="list1">--%>
 <%--                        <%--%>
 <%--                            request.setCharacterEncoding("utf-8");--%>
 <%--                            stuDao = new StuDao();--%>
@@ -194,19 +234,19 @@
 <%--                        <option><%=BranchName%>--%>
 <%--                        </option>--%>
 <%--                        <%}%>--%>
-                    </datalist>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">专业</label>
-                    <input type="text" class="apply-control" list="list2" name="majorName" >
-                    <datalist id="list2">
+<%--                    </datalist>--%>
+<%--                </div>--%>
+<%--                <div class="apply1">--%>
+<%--                    <label class="apply-control-label">专业</label>--%>
+<%--                    <input type="text" class="apply-control" list="list2" name="majorName" >--%>
+<%--                    <datalist id="list2">--%>
 
-                    </datalist>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">班级</label>
-                    <input type="text" class="apply-control" list="list3" name="class">
-                    <datalist id="list3">
+<%--                    </datalist>--%>
+<%--                </div>--%>
+<%--                <div class="apply1">--%>
+<%--                    <label class="apply-control-label">班级</label>--%>
+<%--                    <input type="text" class="apply-control" list="list3" name="class">--%>
+<%--                    <datalist id="list3">--%>
 <%--                        <%--%>
 <%--                            request.setCharacterEncoding("utf-8");--%>
 <%--                            result = stuDao.classInMajor(request.getParameter("majorName"));--%>
@@ -216,12 +256,12 @@
 <%--                        <option><%=classname%>--%>
 <%--                        </option>--%>
 <%--                        <%}%>--%>
-                    </datalist>
-                </div>
-                <div class="apply1">
-                    <label class="apply-control-label">姓名</label>
-                    <input type="text" class="apply-control" list="list4">
-                    <datalist id="list4">
+<%--                    </datalist>--%>
+<%--                </div>--%>
+<%--                <div class="apply1">--%>
+<%--                    <label class="apply-control-label">姓名</label>--%>
+<%--                    <input type="text" class="apply-control" list="list4">--%>
+<%--                    <datalist id="list4">--%>
 <%--                        <%--%>
 <%--                            request.setCharacterEncoding("utf-8");--%>
 <%--                            result = stuDao.stuInClass(request.getParameter("majorName"), request.getParameter("class"));--%>
@@ -231,11 +271,8 @@
 <%--                        <option><%=stuname%>--%>
 <%--                        </option>--%>
 <%--                        <%}%>--%>
-                    </datalist>
-                </div>
-                <div class="apply-submit" >
-                    <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
-                </div>
+<%--                    </datalist>--%>
+<%--                </div>--%>
             </form>
         </div>
 

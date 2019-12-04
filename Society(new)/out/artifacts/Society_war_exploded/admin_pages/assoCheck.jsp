@@ -192,7 +192,6 @@
                 <%
                     AssoDao assoDao = new AssoDao();
                     List<Association> assoList = assoDao.assoList();
-                    List<Association> delAssoList = new ArrayList<>();
                     for(int i=0;i<assoList.size();i++){
                 %>
                 <a href="introductionAdmin.jsp?id=<%=assoList.get(i).getAssociationId()%>" class="message d-flex align-items-center">

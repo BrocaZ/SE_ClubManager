@@ -5,13 +5,12 @@
   Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.PlaceDao" %>
-<%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dao.AssoDao" %>
 <%@ page import="entity.Place" %>
-<%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="dao.*" %>
+<%@ page import="entity.Activity" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -110,8 +109,7 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
@@ -150,10 +148,10 @@
                         <a href="post-leader.jsp">发布公告</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -171,27 +169,52 @@
             </div>
         </div>
         <div class="apply">
-            <form action="${pageContext.request.contextPath}/doAddact" method="post" name="f" onsubmit="return check()">
+            <form action="${pageContext.request.contextPath}/doAddact?actid=<%=request.getParameter("actid")%>" method="post" name="f" onsubmit="return check()">
+                <%
+                    int actid=Integer.parseInt(request.getParameter("actid"));
+                    String acttheme="";
+                    String content="";
+                    String actstarttime="";
+                    String actendtime="";
+                    String actplace="";
+                    String actleader="";
+                    if(actid!=0){
+                        ActDao actDao=new ActDao();
+                        Activity act=actDao.getActById(actid);
+                        acttheme=act.getActtheme();
+                        content=act.getActivityContent();
+                        PlaceDao placeDao=new PlaceDao();
+                        actplace=placeDao.searchPlaceById(act.getPalceId()).getPlaceName();
+                        actleader=act.getLeaderSno();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        actstarttime = formatter.format(act.getStartTime());
+                        actendtime = formatter.format(act.getEndTime());
+                        actstarttime=actstarttime.replace(" ", "T");
+                        actendtime=actendtime.replace(" ", "T");
+                    }
+
+
+                %>
                 <div class="form-group" style="font-size:13px; color: #9f3741;">
                     <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label">活动主题</label>
-                    <input type="text" class="apply-control" id="apply-control1" style="width: 450px" name="acttheme">
+                    <input type="text" class="apply-control" id="apply-control1" style="width: 450px" name="acttheme" value=<%=acttheme%>>
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label" id="apply-control2">活动内容</label>
-                    <textarea name="content" cols="49" rows="15" style="vertical-align:top"></textarea>
+                    <textarea name="content" cols="49" rows="15" style="vertical-align:top"><%=content%></textarea>
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label">活动时间</label>
-                    <input type="datetime-local" class="apply-control" name="actstarttime">
+                    <input type="datetime-local" class="apply-control" name="actstarttime" value="<%=actstarttime%>">
                     <label class="">~</label>
-                    <input type="datetime-local" class="apply-control" name="actendtime">
+                    <input type="datetime-local" class="apply-control" name="actendtime" value="<%=actendtime%>">
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label">场地</label>
-                    <input type="text" class="apply-control" list="placelist" name="actplace">
+                    <input type="text" class="apply-control" list="placelist" name="actplace" value=<%=actplace%>>
                     <datalist id="placelist">
                         <%
                             PlaceDao placeDao = new PlaceDao();
@@ -206,7 +229,7 @@
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label">负责人</label>
-                    <input type="text" class="apply-control" name="actleader">
+                    <input type="text" class="apply-control" name="actleader" value="<%=actleader%>" placeholder="----请输入学号----">
                 </div>
                 <div class="apply-submit"style="margin-left: 44%;" >
                     <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>

@@ -98,8 +98,7 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
@@ -134,10 +133,10 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -156,7 +155,7 @@
         </div>
         <div class="messages-block block" style="margin-top: 70px; margin-left: 100px;margin-right: 100px;">
             <div id="apply" style="margin-left: 86.5%; background-color: white;">
-                <a href="addact.jsp" style="font-size: 20px; font-weight: 600;">申请活动</a >
+                <a href="addact.jsp?actid=0" style="font-size: 18px; font-weight: 600;">申请活动</a >
             </div>
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
                 <%
@@ -169,14 +168,22 @@
                         int assoId=acts.get(i).getAssociationId();
                         asso=assoDao.searchAssoById(assoId);
                         String assoName=asso.getAssociationName();
-                        String context=acts.get(i).getActivityContent();
-                        String time=acts.get(i).getStatus();
+                        String theme=acts.get(i).getActtheme();
+                        String status="待审核";
+                        if(acts.get(i).getStatus().equals("ok"))
+                            status="审核通过";
+                        else if(acts.get(i).getStatus().equals("del"))
+                            status="审核未通过";
+                        String time=acts.get(i).getRemarks();
                 %>
-                <a href="#" class="message d-flex align-items-center ">
-                    <div class="content" style="width: 90%"> <strong class="d-block"><%=assoName%></strong><span class="d-block"><%=context%></span><small class="date d-block"><%=time%></small></div>
+                <a href="addact.jsp?actid=<%=id%>" class="message d-flex align-items-center " title="点击可修改活动信息">
+                    <div class="content" style="width: 62%"> <strong class="d-block"><%=theme%></strong><span class="d-block"><%=assoName%></span></div>
+                    <div style="width: 10%"><span class="d-block"><%=status%></span></div>
+                    <div  style="width: 13%"><span class="d-block"><%=time%></span></div>
                     <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post">
-                        <object><a href="post-leader.jsp?id=<%=id%>" style="color: gray"><i class="icon ion-plus-round" style="font-size: 26px;"></i></a></object>
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray"></i></button>
+                        <object><a href="post-leader.jsp?id=<%=id%>" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray;"></i></a></object>
+                        <object><a href="actperson-leader.jsp?id=<%=id%>" title="查看报名活动的学生"><i class="icon ion-navicon-round" style="font-size: 28px;margin-left: 18px ;color: gray;"></i></a></object>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
                     </form>
                 </a>
                <%}%>

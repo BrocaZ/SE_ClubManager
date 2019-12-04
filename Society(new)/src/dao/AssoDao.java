@@ -27,7 +27,7 @@ public class AssoDao extends BaseDao {
             String sql = "select * from asso_p where sno = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,sno);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 assoId.add(rs.getInt(2));
             }
@@ -61,7 +61,7 @@ public class AssoDao extends BaseDao {
             conn = this.getConnection();
             String sql = "select MAX(AssociationId) from asso";
             PreparedStatement pst = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 assoid = rs.getInt(1);
             }
@@ -108,7 +108,7 @@ public class AssoDao extends BaseDao {
             conn = this.getConnection();
             String sql = "select MAX(AssociationId) from asso";
             PreparedStatement pst = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 assoid = rs.getInt(1);
             }
@@ -173,6 +173,10 @@ public class AssoDao extends BaseDao {
             pst = conn.prepareStatement(sql);
             pst.setInt(1, assoid);
             pst.execute();
+            sql = "delete from asso where state = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, assoid+"");
+            pst.execute();
             sql = "delete from asso where associationId = ?";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, assoid);
@@ -199,15 +203,15 @@ public class AssoDao extends BaseDao {
         }
     }
 
-    //返回所有的社团
+    //返回所有成立的社团
     public List<Association> assoList(){
         List<Association> res = new ArrayList<Association>();
         Connection conn = null;
         try {
             conn = this.getConnection();
-            String sql = "select AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks from asso";
+            String sql = "select AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks from asso where state='ok'";
             PreparedStatement pst = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Association a = new Association();
                 a.setAssociationId(rs.getInt(1));
@@ -248,7 +252,7 @@ public class AssoDao extends BaseDao {
             String sql = "select AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks from asso where associationId = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, assoid);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 a.setAssociationId(rs.getInt(1));
                 a.setPlacId(rs.getInt(2));
@@ -284,7 +288,7 @@ public class AssoDao extends BaseDao {
             String sql = "select AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks from asso where associationName LIKE ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, "%"+name+"%");
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Association a = new Association();
                 a.setAssociationId(rs.getInt(1));
@@ -315,19 +319,42 @@ public class AssoDao extends BaseDao {
     // method need student and asso
     //判断表中有没有之后 再增加
     //社长调用的 线下面试之后由社长直接将社员加入
-    public void joinAsso(String sno, int assoid) throws DbException, BusinessException {
+    public boolean isInAsso(String sno, int assoid) throws DbException, BusinessException {
+        boolean res=false;
         Connection conn = null;
         try {
             //判断社员在不在这个社团
             conn = this.getConnection();
             String sql = "select * from asso_p where sno = ? and associationId = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pst.executeQuery();
+            pst.setString(1, sno);
+            pst.setInt(2, assoid);
+            ResultSet rs = pst.executeQuery();
             if(rs.next()) {
-                throw new BusinessException("该成员已在该社");
+                res=true;
             }
-            sql = "INSERT into asso_p(sno,associationId,role) VALUES (?,?,'社员')";
-            pst = conn.prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+    public void joinAsso(String sno, int assoid) throws DbException, BusinessException {
+        Connection conn = null;
+        try {
+            //判断社员在不在这个社团
+            conn = this.getConnection();
+            String sql = "INSERT into asso_p(sno,associationId,role) VALUES (?,?,'社员')";
+            PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, sno);
             pst.setInt(2, assoid);
             pst.execute();
@@ -388,7 +415,7 @@ public class AssoDao extends BaseDao {
             String sql = "select sno,name,sex,tel,affiliated_branch,major,class from stu WHERE sno in (select sno from asso_p WHERE associationId = ? and role != '社长')";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, assoid);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Student stu = new Student();
                 stu.setSno(rs.getString(1));
@@ -426,7 +453,7 @@ public class AssoDao extends BaseDao {
             String sql = "select sno,name,sex,tel,affiliated_branch,major,class from stu WHERE sno in (select chiefsno from asso WHERE associationId = ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, assoid);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 stu.setSno(rs.getString(1));
                 stu.setName(rs.getString(2));
@@ -459,7 +486,7 @@ public class AssoDao extends BaseDao {
             String sql = "select * from asso WHERE chiefSno = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,sno);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             res = rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -508,7 +535,7 @@ public class AssoDao extends BaseDao {
 //			java.sql.Statement st = conn.createStatement();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, assoid);
-            java.sql.ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 java.sql.Blob b = rs.getBlob(1);
                 File f = new File(filepath);
@@ -549,7 +576,29 @@ public class AssoDao extends BaseDao {
         }
         return associationId;
     }
-
+    public void checkJoinAct(int actid, String sno, boolean accept){
+        Connection conn=null;
+        int associationId = 0;
+        try {
+            conn = this.getConnection();
+            if(accept){
+                String sql = "update act_p set state = '审核通过' WHERE activityid = ? and sno = ?";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setInt(1,actid);
+                pst.setString(2,sno);
+                pst.execute();
+            }else{
+                String sql = "delete from act_p WHERE activityid = ? and sno = ?";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setInt(1,actid);
+                pst.setString(2,sno);
+                pst.execute();
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     public void modLeader(String leaderSno,Association asso) {
         // TODO: implement
         Connection conn=null;
@@ -583,6 +632,7 @@ public class AssoDao extends BaseDao {
 
 //    public static void main(String[] args) {
 //        AssoDao ad = new AssoDao();
+//        ad.checkJoinAct(3,"31701005",false);
 ////        List<Student> l = ad.assoMemberList(2);
 ////        for(Student s : l){
 ////            System.out.println(s.getName());

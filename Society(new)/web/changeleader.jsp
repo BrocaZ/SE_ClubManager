@@ -116,8 +116,7 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
@@ -152,10 +151,10 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li class="active">
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>

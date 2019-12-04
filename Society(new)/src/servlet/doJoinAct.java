@@ -33,14 +33,14 @@ public class doJoinAct extends HttpServlet{
         StuDao stuDao = new StuDao();
         String sno=stuDao.getCurID();
         AnnoDao annoDao = new AnnoDao();
-        Integer id= Integer.valueOf(request.getParameter("id"));
+        int id= Integer.valueOf(request.getParameter("id"));
         ActDao actDao=new ActDao();
         try {
             actDao.joinAct(id);
-            response.sendRedirect("joinAct.jsp?id="+id);
+            response.sendRedirect("actAnno.jsp");
         } catch (BaseException e) {
             e.printStackTrace();
-            response.sendRedirect("joinAct.jsp?id="+id);
+            response.sendRedirect("actAnno.jsp");
         }
     }
 }

@@ -1,8 +1,7 @@
 package servlet;
-import dao.ActDao;
-import dao.AnnoDao;
-import entity.Announcement;
-import exception.BaseException;
+
+import dao.AssoDao;
+import exception.DbException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet("/doDelAnno")
-public class doDelAnno extends HttpServlet{
+import java.net.URLEncoder;
+
+@WebServlet("/DelStuInAsso")
+public class DelStuInAsso extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public doDelAnno() {
+    public DelStuInAsso() {
         super();
     }
 
@@ -29,18 +30,23 @@ public class doDelAnno extends HttpServlet{
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AnnoDao annoDao=new AnnoDao();
-        Integer id= Integer.valueOf(request.getParameter("annoid"));
-        System.out.println(id);
-        Announcement anno=new Announcement();
-        anno.setAnnoucementId(id);
+        request.setCharacterEncoding("utf-8");
+        String assoid = request.getParameter("assoid");
+        String sno = request.getParameter("sno");
+        String assoname = request.getParameter("assoname");
+        System.out.println(assoname);
+        AssoDao assoDao=new AssoDao();
         try {
-            annoDao.delAnno(anno);
-            response.sendRedirect("societyanno-leader.jsp");
-        } catch (BaseException e) {
+            assoDao.exitAsso(sno,Integer.parseInt(assoid));
+        } catch (DbException e) {
             e.printStackTrace();
-            response.sendRedirect("societyanno-leader.jsp");
         }
+        String encoder = "utf-8";
+        String s = URLEncoder.encode(assoname,encoder);
+        response.sendRedirect("society.jsp?assoName="+s);
+    }
+
+    public void init() throws ServletException {
+        // Put your code here
     }
 }
-

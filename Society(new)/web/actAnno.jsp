@@ -4,7 +4,8 @@
 <%@ page import="entity.Association" %>
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
-<%@ page import="exception.BaseException" %><%--
+<%@ page import="exception.BaseException" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/24
@@ -136,7 +137,7 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %></h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
@@ -160,7 +161,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -169,10 +170,10 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -205,16 +206,21 @@
                         e.printStackTrace();
                     }
                     for(int i=0;i<annolist.size();i++){
-                        int id=annolist.get(i).getActivityId();
+                        int annoid=annolist.get(i).getAnnoucementId();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        String creattime = formatter.format(annolist.get(i).getCreatetime());
                 %>
-                <a href="joinAct.jsp?id=<%=id%>" class="message d-flex align-items-center">
+                <a href="joinAct.jsp?annoid=<%=annoid%>&in=yes" class="message d-flex align-items-center">
                     <div class="profile">
                         <img src="img/logo1.jpg" alt="..." class="img-fluid">
                     </div>
-                    <div class="content">
-                        <strong class="d-block"><%=annolist.get(i).getAssociationName()%></strong>
-                        <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>
-                        <small class="date d-block"><%=annolist.get(i).getCreatetime()%></small>
+                    <div class="content" style="width: 85%">
+                        <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>
+                        <span class="d-block"><%=annolist.get(i).getAnnobrief()%></span>
+
+                    </div>
+                    <div>
+                        <span class="date d-block"><%=creattime%></span>
                     </div>
                 </a>
                 <%}%>

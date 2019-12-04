@@ -5,17 +5,14 @@
   Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.PlaceDao" %>
-<%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dao.AssoDao" %>
 <%@ page import="entity.Place" %>
-<%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="entity.Activity" %>
+<%@ page import="dao.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,6 +38,29 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <%
+        StuDao stuDao=new StuDao();
+        ActDao actDao=new ActDao();
+        AnnoDao annDao = new AnnoDao();
+
+        int annoid = Integer.valueOf(request.getParameter("annoid"));
+        int actid = annDao.searchAnnoById(annoid).getActivityId();
+        String in=request.getParameter("in");
+        String sno=stuDao.getCurID();
+    %>
+    <script>
+        function check() {
+            <%
+             boolean bool=actDao.isJoinedAct(actid,sno);
+             if(bool==true){
+            %>
+                alert("已报名当前活动");
+                return false;
+            <%}%>
+            return true;
+
+        }
+    </script>
     <style type="text/css">
         .apply {
             margin-left: 80px;
@@ -64,8 +84,8 @@
 
         .apply-submit {
             padding-top: 30px;
-        }</style>
-
+        }
+    </style>
 </head>
 
 <body>
@@ -114,7 +134,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                StuDao stuDao = new StuDao();
+                stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if (name != null) {
             %>
@@ -122,15 +142,24 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
         <ul class="list-unstyled">
+            <%
+                if(in.equals("yes")){
+            %>
             <li class="active">
                 <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
             </li>
+            <%
+                }else{
+            %>
+            <li>
+                <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
+            </li>
+            <%}%>
             <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
@@ -158,14 +187,24 @@
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
+                    <%
+                        if(in.equals("yes")){
+                    %>
                     <li>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
+                    <%
+                        }else{
+                    %>
+                    <li class="active">
+                        <a href="societyanno-leader.jsp">公告列表</a>
+                    </li>
+                    <%}%>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -183,22 +222,27 @@
                 <h2 class="h5 no-margin-bottom">报名活动</h2>
             </div>
         </div>
-        <% Integer id=Integer.valueOf(request.getParameter("id"));
-            System.out.println(id);
+        <%
+//            System.out.println(id);
+            Announcement anno = annDao.searchAnnoById(annoid);
+            if(anno!=null){
         %>
         <div  class="messages-block block"style="height: 90%;">
             <div class="messages"  style="width: 85%;padding-top: 50px">
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;">第十八届学生社团联盟第一次全体大会暨干训动员大会
-                </strong></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;">2019年11月29日，由学生社团联盟举办的第十八届学生社团联盟第一次全体大会暨干训动员大会于文一109顺利举行。参加本次会议的有学生社团联盟指导老师叶敏、主席朱林俊、副主席王琪、许昀萱、苏礼荣、兰艺鑫以及各部门部长、干事。</small></div>
-                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=id%>" method="post">
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;"><%=anno.gettitle()%></strong></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;"><%=anno.getAnnoContent()%></small></div>
+                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=actid%>" method="post" onsubmit="return check()">
+                <%
+                    if(in.equals("yes")){
+                %>
                 <div class="col-sm-9 ml-auto" style="float: right; width:20%;" >
                     <button type="submit" class="btn btn-primary" >报名活动</button>
                 </div>
+                <%}%>
                 </form>
             </div>
         </div>
-
+        <%}%>
     </div>
 </div>
 <!-- JavaScript files-->

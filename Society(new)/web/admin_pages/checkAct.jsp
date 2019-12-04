@@ -139,7 +139,6 @@
             <div class="avatar"><img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
                 <h1 class="h5"><%=name%></h1>
-                <!--            <p>社员</p>-->
             </div>
             <%}%>
         </div>
@@ -188,8 +187,8 @@
             </div>
         </div>
         <div class="col-sm-9 ml-auto" style="float: right; width:20%;">
-            <form action="${pageContext.request.contextPath}/checkAct?res=yes" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
-            <form action="${pageContext.request.contextPath}/checkAct?res=no" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
+            <form action="${pageContext.request.contextPath}/checkAct?res=yes&actid=<%=actid%>" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
+            <form action="${pageContext.request.contextPath}/checkAct?res=no&actid=<%=actid%>" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
         </div>
     </div>
 </div>

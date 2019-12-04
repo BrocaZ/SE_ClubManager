@@ -35,6 +35,7 @@ public class doAddact extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        int actid=Integer.parseInt(request.getParameter("actid"));
         String acttheme = request.getParameter("acttheme");
         String actcontent = request.getParameter("content");
         String actstarttime = request.getParameter("actstarttime");
@@ -74,8 +75,17 @@ public class doAddact extends HttpServlet {
 
         ActDao actDao = new ActDao();
         try {
-            actDao.addAct(act);
-            response.sendRedirect("societyact-leader.jsp");
+            if(actid==0){
+                actDao.addAct(act);
+                System.out.println("1+!+!+1+!");
+                response.sendRedirect("societyact-leader.jsp");
+            }else{
+                act.setActivityId(actid);
+                actDao.modAct(act);
+                System.out.println("2+!+!+1+!");
+                response.sendRedirect("societyact-leader.jsp");
+            }
+
         } catch (BaseException e) {
             e.printStackTrace();
         }
