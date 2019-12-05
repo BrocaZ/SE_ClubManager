@@ -13,6 +13,8 @@
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
 <%@ page import="entity.Student" %>
+<%@ page import="dao.PlaceDao" %>
+<%@ page import="entity.Place" %>
 <!DOCTYPE html>
 <html>
 
@@ -116,7 +118,8 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a>
+                </h1>
             </div>
             <%} %>
         </div>
@@ -151,9 +154,9 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp?check=0">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
@@ -176,22 +179,62 @@
             <%
                 int assoid=assoDao.getCurAssoId();
             %>
-            <form  action="${pageContext.request.contextPath}/doChaLea?assoid=<%=assoid%>" method="post">
-                <div class="apply1" style="text-align: center">
-                    <label class="apply-control-label">社团人员</label>
-                    <input type="text" class="apply-control" list="placelist" name="stuname">
+            <form  action="${pageContext.request.contextPath}/doChaLea?" method="post" style="text-align: center">
+                <div class="apply1">
+                    <label class="apply-control-label">社团logo</label>
+                    <img src="img/t7.jpg" alt="..." style="width:100px;height:100px;">
+                </div>
+                <%
+                    PlaceDao placeDao=new PlaceDao();
+                   Association asso=assoDao.searchAssoById(assoid);
+                   String assoname=asso.getAssociationName();
+                   int plaid=asso.getPlacId();
+                   String planame=placeDao.searchPlaceById(plaid).getPlaceName();
+                   String brief=asso.getIntro();
+                   String chief=asso.getChiefSno();
+                   String chiefname=chief+stuDao.getName(chief);
+
+
+                %>
+                <div class="apply1">
+                    <label class="apply-control-label" id="apply-control2">社团名称</label>
+                    <input type="text" class="apply-control" value="<%=assoname%>" name="assoname">
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label" id="apply-control3">社团场地</label>
+                    <input type="text" class="apply-control" list="placelist1"  name="assopla" value="<%=planame%>">
+                    <datalist id="placelist1">
+                        <%
+                            List<Place> places=placeDao.placeList();
+                            for(int i=0;i<places.size();i++)
+                            {
+                                String planame1=places.get(i).getPlaceName();
+
+
+                        %>
+                        <option><%=planame1%>
+                        </option>
+                        <%}%>
+                    </datalist>
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label" id="apply-control4">社团简介</label>
+                    <input type="text" class="apply-control" value="<%=brief%>" name="assobrief">
+                </div>
+                <div class="apply1">
+                    <label class="apply-control-label">社长</label>
+                    <input type="text" class="apply-control" list="placelist" name="assochief" value="<%=chiefname%>">
                     <datalist id="placelist">
                         <%
                             List<Student> result = assoDao.assoMemberList(assoid);
                             for (int i = 0; i < result.size(); i++) {
                                 String stu = result.get(i).getSno()+" "+result.get(i).getName();
                         %>
-                        <option><%=stu%>
-                        </option>
+                        <option><%=stu%></option>
                         <%}%>
                     </datalist>
                 </div>
-                <div class="apply-submit" style="text-align: center" >
+                <div class="apply-submit" >
                     <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
                 </div>
             </form>

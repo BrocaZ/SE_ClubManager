@@ -203,6 +203,35 @@ public class AssoDao extends BaseDao {
         }
     }
 
+    //返回所有成立的社团Id，按社员数量排列，用于社团浏览处
+    public List<Integer> assoListDESC(){
+        List<Integer> res = new ArrayList<Integer>();
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            String sql = "select COUNT(sno) c,associationId from asso_p GROUP BY associationId ORDER BY c DESC";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int a = rs.getInt(2);
+                res.add(a);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+//			throw new util.DbException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+
     //返回所有成立的社团
     public List<Association> assoList(){
         List<Association> res = new ArrayList<Association>();
@@ -383,6 +412,7 @@ public class AssoDao extends BaseDao {
             pst.setString(1, sno);
             pst.setInt(2, assoid);
             pst.execute();
+            sendMessage(new StuDao().getCurID(),sno,"您已退出"+searchAssoById(assoid).getAssociationName());
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DbException(e);
@@ -576,6 +606,30 @@ public class AssoDao extends BaseDao {
         }
         return associationId;
     }
+    public void sendMessage(String sendsno,String recsno,String content){
+        Connection conn=null;
+        int mesid = 0;
+        try {
+            conn = this.getConnection();
+            String sql = "SELECT MAX(mesid) from message";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()){
+                mesid = rs.getInt(1)+1;
+            }
+
+            sql = "INSERT into message(mesId,sendsno,recsno,content,senddate) VALUES(?,?,?,?,NOW())";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1,mesid);
+            pst.setString(2,sendsno);
+            pst.setString(3,recsno);
+            pst.setString(4,content);
+            pst.execute();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     public void checkJoinAct(int actid, String sno, boolean accept){
         Connection conn=null;
         int associationId = 0;
@@ -594,6 +648,12 @@ public class AssoDao extends BaseDao {
                 pst.setString(2,sno);
                 pst.execute();
             }
+            String content = new ActDao().getActById(actid).getActtheme();
+            String str = "未通过";
+            if(accept){
+                str = "通过";
+            }
+            sendMessage(new StuDao().getCurID(),sno,content+" 审核"+str);
         }catch(Exception e)
         {
             e.printStackTrace();
@@ -632,11 +692,23 @@ public class AssoDao extends BaseDao {
 
 //    public static void main(String[] args) {
 //        AssoDao ad = new AssoDao();
+//        new StuDao().setCurID("31701006");
+//        try {
+//            ad.exitAsso("31903281",2);
+//        } catch (DbException e) {
+//            e.printStackTrace();
+//        }
+//        ad.checkJoinAct(2,"31701005",true);
+//        ad.sendMessage("admin","31701005","hello");
+//        List<Integer> l = ad.assoList();
+//        for (int i : l){
+//            System.out.println(i);
+//        }
 //        ad.checkJoinAct(3,"31701005",false);
-////        List<Student> l = ad.assoMemberList(2);
-////        for(Student s : l){
-////            System.out.println(s.getName());
-////        }
+//        List<Student> l = ad.assoMemberList(2);
+//        for(Student s : l){
+//            System.out.println(s.getName());
+//        }
 //        Association a = new Association();
 //        a.setAssociationName("test");
 //        a.setChiefSno("31601005");

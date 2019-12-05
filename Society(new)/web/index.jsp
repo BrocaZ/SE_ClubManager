@@ -52,9 +52,18 @@
         <div class="col-lg-6">
           <div class="form d-flex align-items-center">
             <div class="content">
-              <div class="form-group">
-                <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
-              </div>
+<%--              <div class="form-group">--%>
+<%--                <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>--%>
+<%--              </div>--%>
+              <%
+                Object message = request.getAttribute("message");
+                if(message!=null && !"".equals(message)){
+              %>
+                <script type="text/javascript">
+                  alert("<%=message%>");
+                </script>
+              <%} %>
+
               <form action="${pageContext.request.contextPath}/doLogin" method="post" class="form-validate mb-4">
                 <div class="form-group">
                   <input id="login-username" type="text" name="loginUsername" required data-msg="请输入用户名" class="input-material">

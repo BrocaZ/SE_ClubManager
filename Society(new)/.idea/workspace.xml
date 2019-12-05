@@ -46,7 +46,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/servlet" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -70,8 +70,8 @@
       <recent name="servlet" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web" />
       <recent name="$PROJECT_DIR$/src/servlet" />
+      <recent name="$PROJECT_DIR$/web" />
       <recent name="$PROJECT_DIR$/src/dao" />
       <recent name="$PROJECT_DIR$/web/css" />
       <recent name="$PROJECT_DIR$/web/admin_pages" />
@@ -237,7 +237,7 @@
       <workItem from="1575367978829" duration="175000" />
       <workItem from="1575383239660" duration="4599000" />
       <workItem from="1575423738109" duration="8568000" />
-      <workItem from="1575447040883" duration="1880000" />
+      <workItem from="1575447040883" duration="12307000" />
     </task>
     <servers />
   </component>

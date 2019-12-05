@@ -97,6 +97,17 @@
     </style>
 </head>
 <body>
+
+<%
+    Object accept = session.getAttribute("accept");
+    if(accept!=null && !"".equals(accept)){
+%>
+    <script type="text/javascript">
+        alert("<%=accept%>");
+    </script>
+<%      session.setAttribute("accept",null);
+    } %>
+
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">

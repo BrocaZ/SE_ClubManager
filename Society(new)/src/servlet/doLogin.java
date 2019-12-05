@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/doLogin")
@@ -41,6 +42,8 @@ public class doLogin extends HttpServlet {
                 if((stuDao.findStu(sno)!=null)&&(stuDao.findStu(sno).getPassword().equals(password))){
                     //存在这个用户，可以正常访问学生信息
 //                  request.getSession().setAttribute("user", stu);
+                    HttpSession session=request.getSession();
+                    session.setAttribute("sucess", "登陆成功！");
                     if(stuDao.findStu(sno).getStatus()!=null&&stuDao.findStu(sno).getStatus().equals("管理员")){
                         response.sendRedirect("admin_pages/approve.jsp");
                     }
@@ -48,9 +51,9 @@ public class doLogin extends HttpServlet {
                         response.sendRedirect("actAnno.jsp");
                     }
                 }else{//不存在这个用户，给出提示，转回登录页面
-                    String message = "用户名或密码错误";
-                    request.getSession().setAttribute("msg", message);
-                    response.sendRedirect("index.jsp");
+                    request.setAttribute("message", "用户名或密码错误");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+//                    response.sendRedirect("index.jsp");
                 }
             } catch (BaseException e) {
                 e.printStackTrace();

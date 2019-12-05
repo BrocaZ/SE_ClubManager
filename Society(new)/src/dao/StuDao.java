@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Message;
 import entity.Student;
 import exception.BaseException;
 
@@ -22,7 +23,58 @@ public class StuDao extends BaseDao {
     public void setCurID(String curID) {
         this.curID = curID;
     }
+    public void initAct(){
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            String sql="UPDATE pla set state = 'available' WHERE placeid in (select placeid from act where state = 'ok' and end_time < NOW())";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
 
+            sql = "UPDATE act set state = 'over' where state = 'ok' and end_time < NOW()";
+            pst = conn.prepareStatement(sql);
+            pst.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Message> messageInStu(String sno){
+        Connection conn = null;
+        List<Message> res = new ArrayList<Message>();
+        try {
+            conn = this.getConnection();
+            String sql="select mesId,sendsno,recsno,content,senddate from message where recsno = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,sno);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+                Message m = new Message();
+                m.setMesid(rs.getInt(1));
+                m.setSendsno(rs.getString(2));
+                m.setRecsno(rs.getString(3));
+                m.setContent(rs.getString(4));
+                m.setSenddate(new java.util.Date(rs.getTimestamp(5).getTime()));
+                res.add(m);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public void delMes(int mesid){
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            String sql="DELETE FROM message where mesid = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1,mesid);
+            pst.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public Student findStu(String sno) throws BaseException {
         Connection conn = null;
         Student stu = null;
@@ -31,7 +83,7 @@ public class StuDao extends BaseDao {
             String sql="select * from stu where sno = ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,sno);
-            java.sql.ResultSet res = pst.executeQuery();
+            ResultSet res = pst.executeQuery();
             if(res.next()){
                 //存在，可登录
                 stu = new Student();
@@ -62,7 +114,7 @@ public class StuDao extends BaseDao {
             String sql="select name from stu where sno = ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,sno);
-            java.sql.ResultSet res = pst.executeQuery();
+            ResultSet res = pst.executeQuery();
             if(res.next()){
                 name = res.getString(1);
                 System.out.println("getName连接数据库成功");
@@ -224,4 +276,15 @@ public class StuDao extends BaseDao {
         }
         return res;
     }
+
+//    public static void main(String[] args) {
+//        StuDao sd = new StuDao();
+//        sd.initAct();
+//        List<Message> l = sd.messageInStu("admin");
+//        for (Message m : l){
+//            System.out.println(m.getSenddate());
+//        }
+//        sd.delMes(2);
+//    }
+
 }

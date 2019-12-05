@@ -13,6 +13,31 @@ import java.util.List;
 
 public class Admin extends BaseDao {
 
+    public void sendMessage(String sendsno,String recsno,String content){
+        Connection conn=null;
+        int mesid = 0;
+        try {
+            conn = this.getConnection();
+            String sql = "SELECT MAX(mesid) from message";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()){
+                mesid = rs.getInt(1)+1;
+            }
+
+            sql = "INSERT into message(mesId,sendsno,recsno,content,senddate) VALUES(?,?,?,?,NOW())";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1,mesid);
+            pst.setString(2,sendsno);
+            pst.setString(3,recsno);
+            pst.setString(4,content);
+            pst.execute();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     //管理员按审批按钮,可以是管理员收到邮件，点击后显示信息，然后有一个审批按钮
     public void checkAddAct(Activity act,boolean accept) throws BaseException {
         // TODO: implement
@@ -38,6 +63,9 @@ public class Admin extends BaseDao {
                 pst.setInt(1,act.getActivityId());
                 pst.execute();
             }
+            String str = "未通过";
+            if(accept) str = "已通过";
+            sendMessage("admin",act.getLeaderSno(),"添加"+act.getActtheme()+"的审核"+str);
         }
         catch(Exception e)
         {
@@ -74,6 +102,9 @@ public class Admin extends BaseDao {
                 pst.setInt(1,act.getActivityId());
                 pst.execute();
             }
+            String str = "未通过";
+            if(accept) str = "已通过";
+            sendMessage("admin",act.getLeaderSno(),"修改"+act.getActtheme()+"的审核"+str);
         }
         catch(Exception e)
         {
@@ -106,6 +137,9 @@ public class Admin extends BaseDao {
                 PlaceDao pm=new PlaceDao();
                 pm.modPstatus(p);
             }
+            String str = "未通过";
+            if(accept) str = "已通过";
+            sendMessage("admin",act.getLeaderSno(),"删除"+act.getActtheme()+"的审核"+str);
         }
         catch(Exception e)
         {
@@ -163,6 +197,9 @@ public class Admin extends BaseDao {
                pst.setInt(1,asso.getAssociationId());
                pst.execute();
            }
+           String str = "未通过";
+           if(accept) str = "已通过";
+           sendMessage("admin",asso.getChiefSno(),asso.getAssociationName()+"信息修改审核"+str);
        }
        catch(Exception e)
        {
@@ -229,39 +266,6 @@ public class Admin extends BaseDao {
 //            e.printStackTrace();
 //        }
 //    }
-
-    //修改社长，选择社长的时候，可采用下拉框的形式，选择社员
-    public void modLeader(String leaderSno,Association asso) {
-        // TODO: implement
-        Connection conn=null;
-        try
-        {
-            conn=this.getConnection();
-            String sql="update asso_p set state=? where sno=? and associationId=?";
-            PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1, "离职");
-            pst.setString(2,asso.getChiefSno());
-            pst.setInt(3,asso.getAssociationId());
-            pst.execute();
-
-            sql="update asso_p set role=? where sno=? and associationId=?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, "社长");
-            pst.setString(2,leaderSno);
-            pst.setInt(3,asso.getAssociationId());
-            pst.execute();
-
-            sql="update asso set chiefSno=? where associationId=?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, leaderSno);
-            pst.setInt(2,asso.getAssociationId());
-            pst.execute();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     public List<Activity> listActCheck() {
         List<Activity> result = new ArrayList<>();
