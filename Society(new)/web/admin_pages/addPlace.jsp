@@ -106,6 +106,14 @@
     </style>
 </head>
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%session.setAttribute("message",null);} %>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -191,9 +199,6 @@
                 <div class="apply1" style="text-align: center">
                     <label class="apply-control-label">容量</label>
                     <input type="text" class="apply-control" name="capacity">
-                </div>
-                <div class="apply1" style="text-align: center">
-                    <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
                 </div>
                 <div class="apply-submit" style="text-align: center">
                     <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>

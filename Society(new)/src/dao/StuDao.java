@@ -87,7 +87,6 @@ public class StuDao extends BaseDao {
             if(res.next()){
                 //存在，可登录
                 stu = new Student();
-                System.out.println("findStu连接数据库成功");
                 stu.setSno(res.getString(1));
                 stu.setHead_image(res.getBytes(2));
                 stu.setName(res.getString(3));

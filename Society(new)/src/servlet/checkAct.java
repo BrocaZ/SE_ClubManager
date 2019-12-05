@@ -39,7 +39,6 @@ public class checkAct extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("checkAct连接数据库成功");
         boolean accept = false;
         String choose = request.getParameter("res");
         int actid = Integer.valueOf(request.getParameter("actid"));

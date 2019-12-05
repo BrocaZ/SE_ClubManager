@@ -199,10 +199,11 @@
         <div class="messages-block block">
             <div class="messages">
                 <%
+                    String keyword=request.getParameter("keyword");
                     AnnoDao annoDao = new AnnoDao();
                     List<Announcement> annolist = null;
                     try {
-                        annolist = annoDao.publicannoList();
+                        annolist = annoDao.publicannoList(keyword);
                     } catch (BaseException e) {
                         e.printStackTrace();
                     }

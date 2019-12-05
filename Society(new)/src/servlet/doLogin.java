@@ -42,8 +42,6 @@ public class doLogin extends HttpServlet {
                 if((stuDao.findStu(sno)!=null)&&(stuDao.findStu(sno).getPassword().equals(password))){
                     //存在这个用户，可以正常访问学生信息
 //                  request.getSession().setAttribute("user", stu);
-                    HttpSession session=request.getSession();
-                    session.setAttribute("sucess", "登陆成功！");
                     if(stuDao.findStu(sno).getStatus()!=null&&stuDao.findStu(sno).getStatus().equals("管理员")){
                         response.sendRedirect("admin_pages/approve.jsp");
                     }

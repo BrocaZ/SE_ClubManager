@@ -1,6 +1,7 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.AssoDao" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="entity.Association" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/26
@@ -185,7 +186,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a> <i class="icon-settings"></i>社团管理 </a>
+                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -194,7 +195,7 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp?check=0">添加社员</a>
+                        <a href="addstu-leader.jsp">添加社员</a>
                     </li>
                     <li>
                         <a href="changeleader.jsp">修改社团信息</a>
@@ -216,25 +217,39 @@
         </div>
         <!-- Breadcrumb-->
         <div class="row">
-            <form action="" id="research">
-                <input type="text" name="keyword" autocomplete="off" placeholder="请输入社团名称" />
+            <form action="${pageContext.request.contextPath}/introduction.jsp" method="post" id="research">
+                <input type="text" name="keyword1" list="assolist" autocomplete="off" placeholder="请输入社团名称" />
+                <datalist id="assolist">
+                    <%
+                        List<Integer> associations=assoDao.assoListDESC();
+                        for(int i=0;i<associations.size();i++)
+                        {
+                            Integer associationId=associations.get(i);
+                            String associationName=assoDao.searchAssoById(associationId).getAssociationName();
+                    %>
+                    <option><%=associationName%>
+                    </option>
+                    <%}%>
+                </datalist>
+
                 <button></button>
             </form>
         </div>
         <div id="myblock">
             <div class="d-block" style="margin-left: 11%; margin-top: 20px; margin-bottom: 50px;">
                 <!--      <div class="row" style="margin: auto">-->
+
                 <div class="s-img">
-                    <a href="introduction.jsp"><img src="img/leya.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="#"><img src="img/ziyou.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="#"><img src="img/tennis.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="#"><img src="img/gggl.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=1%>"><img src="img/leya.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=3%>"><img src="img/ziyou.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=5%>"><img src="img/tennis.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=4%>"><img src="img/gggl.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
                 </div>
                 <div class="s-img">
-                    <a href="#"><img src="img/gx.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px; margin-top: 50px;" /></a>
-                    <a href="#"><img src="img/ymbl.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="#"><img src="img/yx.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="#"><img src="img/fxyjh.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=5%>"><img src="img/gx.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px; margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=6%>"><img src="img/ymbl.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=7%>"><img src="img/yx.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=8%>"><img src="img/fxyjh.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
                 </div>
             </div>
         </div>

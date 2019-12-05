@@ -95,112 +95,88 @@ public class AssoDao extends BaseDao {
         }
     }
 
-    public Association addAsso(Association asso) throws DbException, BusinessException {
+    public Association addAsso(Association asso) throws BusinessException, SQLException {
         Connection conn = null;
         int assoid = 0;
-        if(asso.getAssociationName() == null || asso.getAssociationName().equals("")) {
-            throw new BusinessException("名字不能为空");
+        conn = this.getConnection();
+        String sql = "select MAX(AssociationId) from asso";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            assoid = rs.getInt(1);
         }
-        if(asso.getChiefSno() == null || asso.getChiefSno().equals("")) {
-            throw new BusinessException("社长学号不能为空");
+        assoid += 1;
+        asso.setAssociationId(assoid);
+
+        sql = "select * from stu where sno=?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1,asso.getChiefSno());
+        rs = pst.executeQuery();
+        if(!rs.next()){
+            //不存在该学生
+            throw new BusinessException("社长学号不存在");
         }
-        try {
-            conn = this.getConnection();
-            String sql = "select MAX(AssociationId) from asso";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                assoid = rs.getInt(1);
-            }
-            assoid += 1;
-            asso.setAssociationId(assoid);
-            sql = "INSERT into asso(AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks) VALUES(?,?,?,?,?,?,?,?)";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, assoid);
-            pst.setInt(2, asso.getPlacId());
-            pst.setString(3, asso.getAssociationName());
-            pst.setBytes(4, asso.getLogo());
-            pst.setString(5, asso.getChiefSno());
-            pst.setString(6, asso.getIntro());
-            pst.setString(7, "ok");
-            pst.setString(8, asso.getRemarks());
 
-            pst.execute();
+        sql = "INSERT into asso(AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks) VALUES(?,?,?,?,?,?,?,?)";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, assoid);
+        pst.setInt(2, asso.getPlacId());
+        pst.setString(3, asso.getAssociationName());
+        pst.setBytes(4, asso.getLogo());
+        pst.setString(5, asso.getChiefSno());
+        pst.setString(6, asso.getIntro());
+        pst.setString(7, "ok");
+        pst.setString(8, asso.getRemarks());
 
-            //将社长加入社团人员表
-            sql = "INSERT into asso_p(sno,associationId,role) VALUES (?,?,'社长')";
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, asso.getChiefSno());
-            pst.setInt(2, assoid);
-            pst.execute();
+        pst.execute();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
+        //将社长加入社团人员表
+        sql = "INSERT into asso_p(sno,associationId,role) VALUES (?,?,'社长')";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, asso.getChiefSno());
+        pst.setInt(2, assoid);
+        pst.execute();
+
         return asso;
     }
     /*
     * 没测试过的delasso*/
-    public void delAsso(int assoid) throws DbException {
+    public void delAsso(int assoid) throws SQLException {
         Connection conn = null;
-        try {
-            conn = this.getConnection();
+        conn = this.getConnection();
 
-            //删除社团人员表的相关信息
-            String sql = "delete from act_p where activityid in(select activityid from act where act.associationId = ?)";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, assoid);
-            pst.execute();
-            sql = "delete from anno where assoId = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, assoid);
-            pst.execute();
-            sql = "delete from act where associationId = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, assoid);
-            pst.execute();
-            sql = "delete from asso_p where associationId = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, assoid);
-            pst.execute();
-            sql = "delete from asso where state = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, assoid+"");
-            pst.execute();
-            sql = "delete from asso where associationId = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, assoid);
-            pst.execute();
-
+        //删除社团人员表的相关信息
+        String sql = "delete from act_p where activityid in(select activityid from act where act.associationId = ?)";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, assoid);
+        pst.execute();
+        sql = "delete from anno where assoId = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, assoid);
+        pst.execute();
+        sql = "delete from act where associationId = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, assoid);
+        pst.execute();
+        sql = "delete from asso_p where associationId = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, assoid);
+        pst.execute();
+        sql = "delete from asso where state = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, assoid+"");
+        pst.execute();
+        sql = "delete from asso where associationId = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, assoid);
+        pst.execute();
 
 //            //删除社团表中的信息
 //            sql = "DELETE from asso where associationId = ?";
 //            pst = conn.prepareStatement(sql);
 //            pst.setInt(1, assoid);
 //            pst.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
+
     }
 
     //返回所有成立的社团Id，按社员数量排列，用于社团浏览处

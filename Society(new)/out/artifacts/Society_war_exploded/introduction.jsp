@@ -1,6 +1,8 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.AssoDao" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="entity.Association" %>
+<%@ page import="exception.DbException" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/26
@@ -118,46 +120,77 @@
                     <%}%>
                 </ul>
             </li>
-            <!--          <li><a href="forms.html"> <i class="icon-padnote"></i>活动公告 </a></li>-->
             <li class="active">
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览 </a>
             </li>
-            <!--          <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>-->
-            <!--          <li><a href="login.html"> <i class="icon-logout"></i>登陆界面 </a></li>-->
+            <!--社长-->
+            <%
+                if (assoDao.isLeader(stuDao.getCurID())) {
+            %>
+            <li>
+                <a> <i class="icon-settings"></i>社团管理 </a>
+                <ul class="collapse1 list-unstyled ">
+                    <li>
+                        <a href="societyact-leader.jsp">活动列表</a>
+                    </li>
+                    <li>
+                        <a href="societyanno-leader.jsp">公告列表</a>
+                    </li>
+                    <li>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
+                    </li>
+                    <li>
+                        <a href="changeleader.jsp">修改社团信息</a>
+                    </li>
+                </ul>
+            </li>
+            <%}%>
+            <!--社长-->
         </ul>
-        <!--        <span class="heading">Extras</span>-->
-        <!--        <ul class="list-unstyled">-->
-        <!--          <li> <a href="#"> <i class="icon-settings"></i>Demo </a></li>-->
-        <!--          <li> <a href="#"> <i class="icon-writing-whiteboard"></i>Demo </a></li>-->
-        <!--          <li> <a href="#"> <i class="icon-chart"></i>Demo </a></li>-->
-        <!--        </ul>-->
+
     </nav>
     <!-- Sidebar Navigation end-->
+    <%
+        request.setCharacterEncoding("utf-8");
+        String id=request.getParameter("assoid");
+        String assoname=null;
+        String brief=null;
+        if(id==null)
+        {
+            assoname=request.getParameter("keyword1");
+            Association association = null;
+            association=assoDao.searchAssoByName(assoname).get(0);
+            brief=association.getIntro();
+
+        }
+        else {
+            Association association = null;
+            association = assoDao.searchAssoById((Integer.parseInt(id)));
+
+            assoname = association.getAssociationName();
+            brief = association.getIntro();
+        }
+    %>
     <div class="page-content">
-        <div class="page-header no-margin-bottom">
+        <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">乐雅歌唱协会</h2>
+                <h2 class="h5 no-margin-bottom"><%=assoname%>></h2>
             </div>
         </div>
         <!-- Breadcrumb-->
+
+        <div  class="messages-block block"style="">
         <div class="d-block" style="margin-left: 100px; margin-top: 70px; width: 100%;">
             <img src="img/logo2.jpg" style=" border-radius: 30px; float: left; width: 20%;">
-            <div style="font-family:'agency fb';color:#db6574;float: right; margin-top: 8%;margin-right: 25%; " class="test"><b>乐雅歌唱协会</b></div>
-
+            <div style="font-family:'agency fb';color:#db6574;float: right; margin-top: 8%;margin-right: 25%; " class="test"><b><%=assoname%></b></div>
         </div>
-        <div class="d-block" style="margin-top: 350px; margin-left: 100px;">
+        <span></span>
+        <div class="d-block" style="margin-top: 250px; margin-left: 100px;">
             <strong style="font-size:38px ; font-family: '微软雅黑';">简介</strong>
-            <p style="font-family: '微软雅黑'; font-size: 20px; margin-right: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乐雅歌唱协会是一个为了接纳更多热爱音乐，接近音乐并能和我们一起发展音乐的更多可能性的人的五星级音乐社团，我们没有太多意义上的偏向性，鼓励各种音乐风格的发展与传播，同时也希望吸收更多新风格。假如你在唱歌方面没有太大优势，有着强势的乐器天赋也可以成为我们很重要的一份子，乐雅，在保持音乐自由性的同时，却有着极强的对音乐更多的执念，每一个活动每一次表演我们都真诚对待，我们希望，让更多人去唱，去登台，去得到观众，去征服观众，最后，去找到自己，追求自己，动人的音乐应该让更多人听到，我们也在等待每一个吸引人的你，从第一人称出发，找到自己，勿忘初心。</p>
+            <p style="font-family: '微软雅黑'; font-size: 20px; margin-right: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=brief%></p>
         </div>
-        <!--		<footer class="footer">-->
-        <!--			<div class="footer__block block no-margin-bottom">-->
-        <!--				<div class="container-fluid text-center">-->
-        <!--					 Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-        <!--					              <p class="no-margin-bottom">Copyright &copy; 2019.Company name All rights reserved.</p>-->
-        <!--				</div>-->
-        <!--			</div>-->
-        <!--		</footer>-->
     </div>
+</div>
 </div>
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>

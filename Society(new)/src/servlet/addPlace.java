@@ -15,7 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,9 +45,9 @@ public class addPlace extends HttpServlet {
         String name = request.getParameter("name");
         Pattern pattern = Pattern.compile("[0-9]*");
         Matcher isNum = pattern.matcher(request.getParameter("capacity"));
+        HttpSession session=request.getSession();
         if (!isNum.matches()) {
-            String message = "容量只能填写数字";
-            request.getSession().setAttribute("msg", message);
+            session.setAttribute("message", "容量只能填写数字");
             response.sendRedirect("admin_pages/addPlace.jsp");
             return;
         }
@@ -60,10 +62,13 @@ public class addPlace extends HttpServlet {
         p.setAvailable(capacity);
         try {
             placeDao.addPlace(p);
-        } catch (BaseException e) {
+            session.setAttribute("message", "添加成功！");
+            response.sendRedirect("admin_pages/place.jsp");
+        } catch (BaseException | SQLException e) {
             e.printStackTrace();
+            session.setAttribute("message", "添加失败！（详情参见控制台）");
+            response.sendRedirect("admin_pages/place.jsp");
         }
-        response.sendRedirect("admin_pages/place.jsp");
     }
 
     public void init() throws ServletException {

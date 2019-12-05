@@ -90,32 +90,58 @@ public class AnnoDao extends BaseDao {
         return result;
     }
 
-    public List<Announcement> publicannoList() throws BaseException {
+    public List<Announcement> publicannoList(String keyword) throws BaseException {
         List<Announcement> result=new ArrayList<Announcement>();
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
-                    + "anno.createtime,anno.annobrief,asso.associationName " +
-                    "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' ";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                Announcement a=new Announcement();
-                a.setAnnoucementId(rs.getInt(1));
-                a.setAssociationId(rs.getInt(2));
-                a.setActivityId(rs.getInt(3));
-                a.settitle(rs.getString(4));
-                a.setAnnoContent(rs.getString(5));
-                a.setCreatetime(rs.getTimestamp(6));
-                a.setAnnobrief(rs.getString(7));
-                a.setAssociationName(rs.getString(8));
-                result.add(a);
+        if(keyword==null) {
+            try {
+                conn = this.getConnection();
+                String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
+                        + "anno.createtime,anno.annobrief,asso.associationName " +
+                        "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public'";
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                java.sql.ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Announcement a = new Announcement();
+                    a.setAnnoucementId(rs.getInt(1));
+                    a.setAssociationId(rs.getInt(2));
+                    a.setActivityId(rs.getInt(3));
+                    a.settitle(rs.getString(4));
+                    a.setAnnoContent(rs.getString(5));
+                    a.setCreatetime(rs.getTimestamp(6));
+                    a.setAnnobrief(rs.getString(7));
+                    a.setAssociationName(rs.getString(8));
+                    result.add(a);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
+        else {
+            try {
+                conn = this.getConnection();
+                String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
+                        + "anno.createtime,anno.annobrief,asso.associationName " +
+                        "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' AND asso.associationName like ?";
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, "%" + keyword + "%");
+                java.sql.ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Announcement a = new Announcement();
+                    a.setAnnoucementId(rs.getInt(1));
+                    a.setAssociationId(rs.getInt(2));
+                    a.setActivityId(rs.getInt(3));
+                    a.settitle(rs.getString(4));
+                    a.setAnnoContent(rs.getString(5));
+                    a.setCreatetime(rs.getTimestamp(6));
+                    a.setAnnobrief(rs.getString(7));
+                    a.setAssociationName(rs.getString(8));
+                    result.add(a);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return result;
     }
 

@@ -14,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/delPlace")
 public class delPlace extends HttpServlet {
@@ -35,16 +37,17 @@ public class delPlace extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("delPlace连接数据库成功");
         int id = Integer.valueOf(request.getParameter("id"));
         PlaceDao placeDao = new PlaceDao();
+        HttpSession session=request.getSession();
         try {
             Place p = placeDao.searchPlaceById(id);
             placeDao.delPlace(p);
+            session.setAttribute("message", "删除成功！");
             response.sendRedirect("admin_pages/place.jsp");
-        } catch (DbException e) {
-            e.printStackTrace();
-        } catch (BaseException e) {
+        } catch (BaseException | SQLException e) {
+            session.setAttribute("message", "删除失败，可能被占用！（详情参见控制台）");
+            response.sendRedirect("admin_pages/place.jsp");
             e.printStackTrace();
         }
     }
