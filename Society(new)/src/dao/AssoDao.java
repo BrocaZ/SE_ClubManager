@@ -245,6 +245,64 @@ public class AssoDao extends BaseDao {
         return res;
     }
 
+    //模糊查找已成立社团
+    public List<Association> assoLikeList(String keyword){
+        List<Association> res = new ArrayList<Association>();
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            if(keyword==null){
+                String sql = "select AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks from asso where state='ok'";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Association a = new Association();
+                    a.setAssociationId(rs.getInt(1));
+                    a.setPlacId(rs.getInt(2));
+                    a.setAssociationName(rs.getString(3));
+                    a.setLogo(rs.getBytes(4));
+                    a.setChiefSno(rs.getString(5));
+                    a.setIntro(rs.getString(6));
+                    a.setStatus(rs.getString(7));
+                    a.setRemarks(rs.getString(8));
+                    res.add(a);
+                }
+            }
+            else{
+                String sql = "select AssociationId,placeId,associationName,logo,chiefSno,brief_introduction,state,remarks from asso where state='ok' and associationName like ?";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1,"%"+keyword+"%");
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Association a = new Association();
+                    a.setAssociationId(rs.getInt(1));
+                    a.setPlacId(rs.getInt(2));
+                    a.setAssociationName(rs.getString(3));
+                    a.setLogo(rs.getBytes(4));
+                    a.setChiefSno(rs.getString(5));
+                    a.setIntro(rs.getString(6));
+                    a.setStatus(rs.getString(7));
+                    a.setRemarks(rs.getString(8));
+                    res.add(a);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+//			throw new util.DbException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+
     //untest
     //在社团人员表查找学生所在社团获得id之后调用这个方法获取社团
     //先写着也不知道有用没用

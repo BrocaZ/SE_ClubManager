@@ -184,18 +184,19 @@
             <!-- <div class="title"><strong>New Messages</strong></div> -->
             <div class="messages">
                 <%
+                    String keyword=request.getParameter("keyword");
                     PlaceDao placeDao = new PlaceDao();
-                    List<Place> placeList = placeDao.placeList();
+                    List<Place> placeList = placeDao.placeLikeList(keyword);
                     for(int i=0;i<placeList.size();i++){
                 %>
                 <a class="message d-flex align-items-center">
 <%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-                    <div class="message d-flex align-items-center" style="width: 97%;">
+                    <div class="message d-flex align-items-center" style="width: 92%;">
                         <strong class="d-block" style="padding-left: 3%; padding-right: 5%; width: 45%;"><%=placeList.get(i).getPlaceName()%></strong>
                         <span class="d-block" style="width: 55%;">容量：<%=placeList.get(i).getAvailable()%></span>
                     </div>
                     <form action="${pageContext.request.contextPath }/delPlace?id=<%=placeList.get(i).getPlaceId()%>" onclick="return check()" method="post">
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="padding-right: 5px;"></i></button>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="margin-left: 15px; color: gray;"></i></button>
                     </form>
                 </a>
                 <%}%>

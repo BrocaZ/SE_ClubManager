@@ -197,7 +197,7 @@ CREATE TABLE `message` (
   `sendsno` varchar(20) NOT NULL,
   `recsno` varchar(20) NOT NULL,
   `content` varchar(500) DEFAULT NULL,
-  `senddate` varchar(40) DEFAULT NULL,
+  `senddate` datetime DEFAULT NULL,
   `state` varchar(40) DEFAULT NULL,
   `remarks` varchar(4000) DEFAULT NULL,
   PRIMARY KEY (`mesID`)

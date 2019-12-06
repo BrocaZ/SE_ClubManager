@@ -108,6 +108,46 @@ public class PlaceDao extends BaseDao {
         return result;
     }
 
+    public List<Place> placeLikeList(String keyword) throws BaseException {
+        List<Place> result = new ArrayList<Place>();
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            if(keyword!=null){
+                String sql = "select `placeId`, `placeName`, `available`, `state`, `remarks` from pla where placeName like ?";
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1,"%"+keyword+"%");
+                java.sql.ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Place p = new Place();
+                    p.setPlaceId(rs.getInt(1));
+                    p.setPlaceName(rs.getString(2));
+                    p.setAvailable(rs.getInt(3));
+                    p.setStatus(rs.getString(4));
+                    p.setRemarks(rs.getString(5));
+                    result.add(p);
+                }
+            }
+            else{
+                String sql = "select `placeId`, `placeName`, `available`, `state`, `remarks` from pla";
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                java.sql.ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Place p = new Place();
+                    p.setPlaceId(rs.getInt(1));
+                    p.setPlaceName(rs.getString(2));
+                    p.setAvailable(rs.getInt(3));
+                    p.setStatus(rs.getString(4));
+                    p.setRemarks(rs.getString(5));
+                    result.add(p);
+                }
+            }
+        } catch (Exception e) {
+            throw new BaseException("加载失败");
+        }
+        return result;
+    }
+
     public List<Place> avaplaceList() throws BaseException {
         List<Place> result = new ArrayList<Place>();
         Connection conn = null;

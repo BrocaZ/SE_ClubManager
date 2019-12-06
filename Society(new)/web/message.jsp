@@ -1,26 +1,31 @@
-<%@ page import="dao.StuDao" %>
-<%@ page import="java.util.List" %>
-<%@ page import="dao.AssoDao" %>
-<%@ page import="entity.Association" %>
-<%@ page import="dao.AnnoDao" %>
-<%@ page import="entity.Announcement" %>
-<%@ page import="exception.BaseException" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="entity.Message" %><%--
+<%--
   Created by IntelliJ IDEA.
-  User: zky
-  Date: 2019/11/24
-  Time: 1:40 下午
+  User: ANARKHWQH
+  Date: 2019/11/30
+  Time: 15:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="dao.StuDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.AssoDao" %>
+<%@ page import="dao.AnnoDao" %>
+<%@ page import="dao.ActDao" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="entity.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<!DOCTYPE html>
 <html>
+
 <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>消息列表</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -35,67 +40,15 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <style type="text/css">
-        #research {
-            width: 405px;
-            height: 50px;
-            display: flex;
-            float: left;
-            margin: auto;
-            /*margin-left: 300px;*/
-            background-color: #FFFFFF;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            /*border-color: #2d3035;*/
-            font-family: 'Microsoft YaHei';
-            font-size: 25px;
-            /*margin-top: 30px;*/
-        }
-
-        #research input {
-            width: 355px;
-            height: 50px;
-            float: left;
-            font-size: 14px;
-            line-height: 63px;
-            border: solid 2px;
-            background-color: #FFFFFF;
-            text-align: left;
-            color: #b0b0b0;
-            text-indent: 6px;
-            /*border-color: #2d3035;*/
-            border-top-left-radius: 15px;
-            border-bottom-left-radius: 15px;
-            border-right: 0px;
-        }
-
-        #research button {
-            border: solid 2px;
-            width: 50px;
-            height: 50px;
-            float: left;
-            line-height: 50px;
-            background-color: #FFFFFF;
-            text-align: center;
-            color: #b0b0b0;
-            /*border-color: #2d3035;*/
-            background-image: url(img/sousuo.png);
-            background-size: 25px 25px;
-            background-position: 11px 13px;
-            background-repeat: no-repeat;
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
-            border-left: 0px;
-        }
-        .message :hover{
-            color: white;
-        }
 
     </style>
 </head>
+
 <body>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
@@ -128,6 +81,7 @@
                         <%
                             }
                         %>
+
                         <a href="message.jsp" class="dropdown-item text-center message">
                             <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
                     </div>
@@ -144,9 +98,8 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
-                if(name!=null){
+                if (name != null) {
             %>
             <div class="avatar">
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
@@ -157,13 +110,14 @@
             <%} %>
         </div>
         <ul class="list-unstyled">
-            <li class="active"><a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
+            <li><a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a></li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        List<Integer> list= assoDao.assoPersonList(stuDao.getCurID());
-                        for(int i=0;i<list.size();i++){
+                        List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
+                        for (int i = 0; i < list.size(); i++) {
                             String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
                     %>
                     <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%></a></li>
@@ -176,7 +130,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a> <i class="icon-settings"></i>社团管理 </a>
+                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
                 <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -192,7 +146,9 @@
                     </li>
                 </ul>
             </li>
-            <%}%>
+            <%
+                }
+            %>
             <!--社长-->
         </ul>
     </nav>
@@ -200,58 +156,67 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">活动公告</h2>
+                <h2 class="h5 no-margin-bottom">消息列表</h2>
             </div>
         </div>
-        <div class="row">
-            <form action="" id="research" style="text-align: center">
-                <input type="text" name="keyword" autocomplete="off" placeholder="请输入社团名称" />
+        <div class="block">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>发送者</th>
+                        <th >内容</th>
+                        <th>时间</th>
+                        <th style="width: 20px;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <button></button>
-            </form>
-        </div>
-        <div class="messages-block block">
-            <div class="messages">
-                <%
-                    String keyword=request.getParameter("keyword");
-                    AnnoDao annoDao = new AnnoDao();
-                    List<Announcement> annolist = null;
-                    try {
-                        annolist = annoDao.publicannoList(keyword);
-                    } catch (BaseException e) {
-                        e.printStackTrace();
-                    }
-                    for(int i=0;i<annolist.size();i++){
-                        int annoid=annolist.get(i).getAnnoucementId();
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                        String creattime = formatter.format(annolist.get(i).getCreatetime());
-                %>
-                <a href="joinAct.jsp?annoid=<%=annoid%>&in=yes" class="message d-flex align-items-center">
-                    <div class="profile">
-                        <img src="img/logo1.jpg" alt="..." class="img-fluid">
-                    </div>
-                    <div class="content" style="width: 85%">
-                        <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>
-                        <span class="d-block"><%=annolist.get(i).getAnnobrief()%></span>
+                    <%
+                        List<Message> r=stuDao.messageInStu(sno);
+                        for (int i=0;i<r.size() && i<=4;i++){
+                            Message m=r.get(i);
+                            String sendsno=m.getSendsno();
+                            String sendname=stuDao.findStu(sendsno).getName();
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                            String date = formatter.format(m.getSenddate());
 
-                    </div>
-                    <div>
-                        <span class="date d-block"><%=creattime%></span>
-                    </div>
-                </a>
-                <%}%>
+                    %>
+                    <tr>
+                        <th scope="row"><%=i+1%></th>
+                        <td><%=sendname%></td>
+                        <td><%=m.getContent()%></td>
+                        <td><%=date%></td>
+                        <td >
+                            <form action="${pageContext.request.contextPath}/DelMes?mesid=<%=m.getMesid()%>" method="post">
+                                <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i
+                                        class="icon ion-close" style="color: gray; font-size: 18px;"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <%}%>
+
+                    </tbody>
+                </table>
             </div>
+
         </div>
+
     </div>
 </div>
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="vendor/popper.js/umd/popper.min.js"> </script>
+<script src="vendor/popper.js/umd/popper.min.js">
+</script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="vendor/jquery.cookie/jquery.cookie.js">
+</script>
 <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="js/charts-home.js"></script>
 <script src="js/front.js"></script>
 </body>
+
 </html>

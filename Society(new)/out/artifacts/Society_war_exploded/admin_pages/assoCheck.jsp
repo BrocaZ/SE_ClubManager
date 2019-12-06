@@ -201,8 +201,9 @@
         <div class="messages-block block">
             <div class="messages">
                 <%
+                    String keyword=request.getParameter("keyword");
                     AssoDao assoDao = new AssoDao();
-                    List<Association> assoList = assoDao.assoList();
+                    List<Association> assoList = assoDao.assoLikeList(keyword);
                     for(int i=0;i<assoList.size();i++){
                 %>
                 <a href="introductionAdmin.jsp?id=<%=assoList.get(i).getAssociationId()%>" class="message d-flex align-items-center">
@@ -216,7 +217,7 @@
                     </div>
                     <form action="${pageContext.request.contextPath }/delAsso?id=<%=assoList.get(i).getAssociationId()%>" onclick="return check()" method="post">
 <%--                        <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删除</button>--%>
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="padding-right: 5px;"></i></button>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="padding-right: 5px; color: gray;"></i></button>
                     </form>
 <%--                </form>--%>
                 </a>
