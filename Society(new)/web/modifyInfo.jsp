@@ -41,16 +41,13 @@
             <%
                String pw2=request.getParameter("stupw");
                String pw1=request.getParameter("stupw1");
-                System.out.println(pw2);
-                if(pw1==null)
-                    {
+               if(pw1==null) {
             %>
             alert("确认密码不能为空");
             return false;
-                <%}
-                else if(pw1.compareTo(pw2)!=0)
-                    {
-                    %>
+            <%}
+            else if(pw1.compareTo(pw2)!=0) {
+             %>
             alert("两次输入的密码应一致");
             return false;
             <%}%>
@@ -61,6 +58,15 @@
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -131,9 +137,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>

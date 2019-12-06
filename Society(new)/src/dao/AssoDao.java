@@ -436,30 +436,16 @@ public class AssoDao extends BaseDao {
         }
     }
     //也是社长直接操作，将社员退社
-    public void exitAsso(String sno,int assoid) throws DbException {
+    public void exitAsso(String sno,int assoid) throws DbException, SQLException {
         // TODO: implement
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql = "delete from asso_p where sno = ? and associationId = ?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, sno);
-            pst.setInt(2, assoid);
-            pst.execute();
-            sendMessage(new StuDao().getCurID(),sno,"您已退出"+searchAssoById(assoid).getAssociationName());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
+        conn = this.getConnection();
+        String sql = "delete from asso_p where sno = ? and associationId = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, sno);
+        pst.setInt(2, assoid);
+        pst.execute();
+        sendMessage(new StuDao().getCurID(),sno,"您已退出"+searchAssoById(assoid).getAssociationName());
     }
 
     //好像不用申请，所以就不审核了吧，社长直接退
@@ -664,64 +650,50 @@ public class AssoDao extends BaseDao {
             e.printStackTrace();
         }
     }
-    public void checkJoinAct(int actid, String sno, boolean accept){
+    public void checkJoinAct(int actid, String sno, boolean accept) throws SQLException {
         Connection conn=null;
-        int associationId = 0;
-        try {
-            conn = this.getConnection();
-            if(accept){
-                String sql = "update act_p set state = '审核通过' WHERE activityid = ? and sno = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setInt(1,actid);
-                pst.setString(2,sno);
-                pst.execute();
-            }else{
-                String sql = "delete from act_p WHERE activityid = ? and sno = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setInt(1,actid);
-                pst.setString(2,sno);
-                pst.execute();
-            }
-            String content = new ActDao().getActById(actid).getActtheme();
-            String str = "未通过";
-            if(accept){
-                str = "通过";
-            }
-            sendMessage(new StuDao().getCurID(),sno,content+" 审核"+str);
-        }catch(Exception e)
-        {
-            e.printStackTrace();
+        conn = this.getConnection();
+        if(accept){
+            String sql = "update act_p set state = '审核通过' WHERE activityid = ? and sno = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1,actid);
+            pst.setString(2,sno);
+            pst.execute();
+        }else{
+            String sql = "delete from act_p WHERE activityid = ? and sno = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1,actid);
+            pst.setString(2,sno);
+            pst.execute();
         }
+        String content = new ActDao().getActById(actid).getActtheme();
+        String str = "未通过";
+        if(accept){
+            str = "通过";
+        }
+        sendMessage(new StuDao().getCurID(),sno,content+" 审核"+str);
     }
-    public void modLeader(String leaderSno,Association asso) {
-        // TODO: implement
+    public void modLeader(String leaderSno,Association asso) throws SQLException {
         Connection conn=null;
-        try
-        {
-            conn=this.getConnection();
-            String sql="delete from asso_p where sno=? and associationId=?";
-            PreparedStatement pst=conn.prepareStatement(sql);
-            pst.setString(1,asso.getChiefSno());
-            pst.setInt(2,asso.getAssociationId());
-            pst.execute();
+        conn=this.getConnection();
+        String sql="delete from asso_p where sno=? and associationId=?";
+        PreparedStatement pst=conn.prepareStatement(sql);
+        pst.setString(1,asso.getChiefSno());
+        pst.setInt(2,asso.getAssociationId());
+        pst.execute();
 
-            sql="update asso_p set role=? where sno=? and associationId=?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, "社长");
-            pst.setString(2,leaderSno);
-            pst.setInt(3,asso.getAssociationId());
-            pst.execute();
+        sql="update asso_p set role=? where sno=? and associationId=?";
+        pst=conn.prepareStatement(sql);
+        pst.setString(1, "社长");
+        pst.setString(2,leaderSno);
+        pst.setInt(3,asso.getAssociationId());
+        pst.execute();
 
-            sql="update asso set chiefSno=? where associationId=?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, leaderSno);
-            pst.setInt(2,asso.getAssociationId());
-            pst.execute();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        sql="update asso set chiefSno=? where associationId=?";
+        pst=conn.prepareStatement(sql);
+        pst.setString(1, leaderSno);
+        pst.setInt(2,asso.getAssociationId());
+        pst.execute();
     }
 
 //    public static void main(String[] args) {

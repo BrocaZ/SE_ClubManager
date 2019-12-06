@@ -5,60 +5,53 @@ import entity.Association;
 import exception.BaseException;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class AnnoDao extends BaseDao {
 
-    public int addAnno(Announcement anno) throws BaseException {
+    public int addAnno(Announcement anno) throws BaseException, SQLException {
         if(anno.gettitle().equals(""))
             throw new BaseException("标题不能为空");
         if(anno.getAnnoContent().equals(""))
             throw new BaseException("内容不能为空");
         //公告类型做成 勾选框   A.公开(public)  B.仅社团内成员可见(secret) 默认选项设置为私密
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql = "select max(annoId) from anno";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pst.executeQuery();
-            int id = 1;
-            if (rs.next())
-                id = rs.getInt(1) + 1;
-            sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.setInt(2, anno.getAssociationId());
-            pst.setInt(3, anno.getActivityId());
-            pst.setString(4, anno.gettitle());
-            pst.setString(5, anno.getAnnoContent());
-            pst.setTimestamp(6, new java.sql.Timestamp(new Date().getTime()));
-            pst.setString(7, anno.getAnnoType());
-            pst.setString(8, anno.getAnnobrief());
-            pst.setString(9, anno.getStatus());
-            pst.setString(10, anno.getRemarks());
-            pst.execute();
-        } catch (Exception e) {
-//			throw new BaseException(e.getMessage());
-            throw new BaseException("创建失败");
-        }
+        conn = this.getConnection();
+        String sql = "select max(annoId) from anno";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        java.sql.ResultSet rs = pst.executeQuery();
+        int id = 1;
+        if (rs.next())
+            id = rs.getInt(1) + 1;
+        sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, id);
+        pst.setInt(2, anno.getAssociationId());
+        pst.setInt(3, anno.getActivityId());
+        pst.setString(4, anno.gettitle());
+        pst.setString(5, anno.getAnnoContent());
+        pst.setTimestamp(6, new java.sql.Timestamp(new Date().getTime()));
+        pst.setString(7, anno.getAnnoType());
+        pst.setString(8, anno.getAnnobrief());
+        pst.setString(9, anno.getStatus());
+        pst.setString(10, anno.getRemarks());
+        pst.execute();
         return 0;
     }
 
-    public void delAnno(Announcement anno) throws BaseException {
+    public void delAnno(Announcement anno) throws SQLException {
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql="delete from anno where annoId=?";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, anno.getAnnoucementId());
-            pst.execute();
-        } catch (Exception e) {
-            throw new BaseException(e.getMessage());
-//			throw new BaseException("删除失败");
-        }
+
+        conn = this.getConnection();
+        String sql="delete from anno where annoId=?";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, anno.getAnnoucementId());
+        pst.execute();
+
     }
 
     //社团内部的活动公告，如例会通知等
@@ -98,7 +91,7 @@ public class AnnoDao extends BaseDao {
                 conn = this.getConnection();
                 String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
                         + "anno.createtime,anno.annobrief,asso.associationName " +
-                        "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public'";
+                        "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' order by createtime desc";
                 java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                 java.sql.ResultSet rs = pst.executeQuery();
                 while (rs.next()) {

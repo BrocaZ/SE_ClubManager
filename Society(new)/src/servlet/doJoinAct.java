@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/doJoinAct")
 public class doJoinAct extends HttpServlet{
@@ -30,16 +32,16 @@ public class doJoinAct extends HttpServlet{
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StuDao stuDao = new StuDao();
-        String sno=stuDao.getCurID();
-        AnnoDao annoDao = new AnnoDao();
         int id= Integer.valueOf(request.getParameter("id"));
         ActDao actDao=new ActDao();
+        HttpSession session=request.getSession();
         try {
             actDao.joinAct(id);
+            session.setAttribute("message", "报名成功！");
             response.sendRedirect("actAnno.jsp");
-        } catch (BaseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            session.setAttribute("message", "报名失败！（详情参见控制台）");
             response.sendRedirect("actAnno.jsp");
         }
     }

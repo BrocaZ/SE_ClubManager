@@ -21,9 +21,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <%
         request.setCharacterEncoding("utf-8");
-        String assooname = request.getParameter("assoName");%>
-    <title><%=assooname%>
-    </title>
+        AssoDao assoDao = new AssoDao();
+        int assoid = Integer.valueOf(request.getParameter("assoid"));
+        String assooname = assoDao.searchAssoById(assoid).getAssociationName();
+    %>
+    <title><%=assooname%></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -47,8 +49,28 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script type="text/javascript">
+        function check(){
+            var mymessage=confirm("确定要删除吗？");
+            if(mymessage==true){
+                return true;
+            }
+            else if(mymessage==false){
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -115,12 +137,11 @@
                         class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
-                        AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -224,10 +245,8 @@
                                     </div>
                                     <%
                                         if (asso.getChiefSno().equals(stuDao.getCurID())) {
-
-
                                     %>
-                                    <form action="${pageContext.request.contextPath}/DelStuInAsso?sno=<%=stulist.get(i).getSno()%>&assoname=<%=assooname%>&assoid=<%=id%>" method="post">
+                                    <form action="${pageContext.request.contextPath}/DelStuInAsso?sno=<%=stulist.get(i).getSno()%>&assoname=<%=assooname%>&assoid=<%=id%>" method="post" onclick="return check()">
                                         <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round" style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
                                     </form>
 
@@ -248,14 +267,13 @@
                                         AnnoDao annoDao = new AnnoDao();
                                         List<Announcement> annolist = annoDao.clubannoList(assoDao.searchAssoById(id));
                                         for (int i = 0; i < annolist.size(); i++) {
+                                            int annoid = annolist.get(i).getAnnoucementId();
                                     %>
-                                    <a href="#" class="message d-flex align-items-center">
+                                    <a href="joinAct.jsp?annoid=<%=annoid%>&in=no&special=yes" class="message d-flex align-items-center">
                                         <div class="content">
-                                            <strong class="d-block"><%=annolist.get(i).gettitle()%>
-                                            </strong>
+                                            <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>
                                             <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>
-                                            <small class="date d-block"><%=annolist.get(i).getCreatetime()%>
-                                            </small>
+                                            <small class="date d-block"><%=annolist.get(i).getCreatetime()%></small>
                                         </div>
                                     </a>
                                     <%}%>

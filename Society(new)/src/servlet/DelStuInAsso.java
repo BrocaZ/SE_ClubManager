@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 
 @WebServlet("/DelStuInAsso")
 public class DelStuInAsso extends HttpServlet {
@@ -34,16 +36,19 @@ public class DelStuInAsso extends HttpServlet {
         String assoid = request.getParameter("assoid");
         String sno = request.getParameter("sno");
         String assoname = request.getParameter("assoname");
-        System.out.println(assoname);
         AssoDao assoDao=new AssoDao();
-        try {
-            assoDao.exitAsso(sno,Integer.parseInt(assoid));
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
+        HttpSession session=request.getSession();
         String encoder = "utf-8";
         String s = URLEncoder.encode(assoname,encoder);
-        response.sendRedirect("society.jsp?assoName="+s);
+        try {
+            assoDao.exitAsso(sno,Integer.parseInt(assoid));
+            session.setAttribute("message", "删除成功！");
+            response.sendRedirect("society.jsp?assoName="+s);
+        } catch (DbException | SQLException e) {
+            e.printStackTrace();
+            session.setAttribute("message", "删除失败！（详情参见控制台）");
+            response.sendRedirect("society.jsp?assoName="+s);
+        }
     }
 
     public void init() throws ServletException {

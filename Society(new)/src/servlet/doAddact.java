@@ -10,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,46 +50,39 @@ public class doAddact extends HttpServlet {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date starttime = null;
         Date endtime=null;
+
+        HttpSession session=request.getSession();
         try {
             starttime = formatter.parse(actstarttime);
             endtime = formatter.parse(actendtime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date date = new Date();
-        String dateString = formatter.format(date);
-        PlaceDao pla=new PlaceDao();
-        int plaid=0;
-        try {
+            Date date = new Date();
+            String dateString = formatter.format(date);
+            PlaceDao pla=new PlaceDao();
+            int plaid=0;
             plaid = pla.getPlaceByName(actplace);
-        } catch (BaseException e) {
-            e.printStackTrace();
-        }
-        Activity act = new Activity();
-        act.setPalceId(plaid);
-        act.setActtheme(acttheme);
-        act.setActivityContent(actcontent);
-        act.setLeaderSno(actleader);
-        act.setStartTime(starttime);
-        act.setEndTime(endtime);
-        act.setAttendNumber(AttendNumber);
-        act.setRemarks(dateString);
+            Activity act = new Activity();
+            act.setPalceId(plaid);
+            act.setActtheme(acttheme);
+            act.setActivityContent(actcontent);
+            act.setLeaderSno(actleader);
+            act.setStartTime(starttime);
+            act.setEndTime(endtime);
+            act.setAttendNumber(AttendNumber);
+            act.setRemarks(dateString);
 
-        ActDao actDao = new ActDao();
-        try {
+            ActDao actDao = new ActDao();
             if(actid==0){
                 actDao.addAct(act);
-                System.out.println("1+!+!+1+!");
-                response.sendRedirect("societyact-leader.jsp");
             }else{
                 act.setActivityId(actid);
                 actDao.modAct(act);
-                System.out.println("2+!+!+1+!");
-                response.sendRedirect("societyact-leader.jsp");
             }
-
-        } catch (BaseException e) {
+            session.setAttribute("message", "申请已提交到管理员！");
+            response.sendRedirect("societyact-leader.jsp");
+        } catch (BaseException | ParseException | SQLException e) {
             e.printStackTrace();
+            session.setAttribute("message", "操作失败！（详情见控制台）");
+            response.sendRedirect("societyact-leader.jsp");
         }
     }
 

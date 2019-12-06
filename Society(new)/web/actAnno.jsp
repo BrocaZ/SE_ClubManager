@@ -97,6 +97,15 @@
     </style>
 </head>
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -162,11 +171,12 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        List<Integer> list= assoDao.assoPersonList(stuDao.getCurID());
-                        for(int i=0;i<list.size();i++){
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                        List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
+                        for (int i = 0; i < list.size(); i++) {
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%></a></li>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
+                    </a></li>
                     <%}%>
                 </ul>
             </li>
@@ -225,14 +235,16 @@
                         int annoid=annolist.get(i).getAnnoucementId();
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         String creattime = formatter.format(annolist.get(i).getCreatetime());
+                        int assoid=annolist.get(i).getAssociationId();
+                        String path="img/"+assoid+".jpg";
                 %>
-                <a href="joinAct.jsp?annoid=<%=annoid%>&in=yes" class="message d-flex align-items-center">
+                <a href="joinAct.jsp?annoid=<%=annoid%>&in=yes&special=no" class="message d-flex align-items-center">
                     <div class="profile">
-                        <img src="img/logo1.jpg" alt="..." class="img-fluid">
+                        <img src="<%=path%>" alt="..." class="img-fluid">
                     </div>
                     <div class="content" style="width: 85%">
                         <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>
-                        <span class="d-block"><%=annolist.get(i).getAnnobrief()%></span>
+                        <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>
 
                     </div>
                     <div>

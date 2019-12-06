@@ -194,22 +194,17 @@ public class PlaceDao extends BaseDao {
         return p;
     }
 
-    public int getPlaceByName(String name) throws BaseException {
+    public int getPlaceByName(String name) throws SQLException {
         Place result = new Place();
         int placeid = -1;
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql = "select placeId from pla where placeName = ?";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1,name);
-            java.sql.ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                placeid = rs.getInt(1);
-            }
-        } catch (Exception e) {
-            throw new BaseException("加载失败");
-        }
+        conn = this.getConnection();
+        String sql = "select placeId from pla where placeName = ?";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1,name);
+        java.sql.ResultSet rs = pst.executeQuery();
+        if (rs.next())
+            placeid = rs.getInt(1);
         return placeid;
     }
 }

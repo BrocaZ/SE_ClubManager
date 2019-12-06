@@ -48,7 +48,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <script type="text/javascript">
         function check(){
-            var mymessage=confirm("确定要删除吗？");
+            var mymessage=confirm("确定要取消该活动吗？");
             if(mymessage==true){
                 return true;
             }
@@ -60,6 +60,15 @@
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -128,9 +137,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -196,10 +205,11 @@
                     <div class="content" style="width: 62%"> <strong class="d-block"><%=theme%></strong><span class="d-block"><%=assoName%></span></div>
                     <div style="width: 10%"><span class="d-block"><%=status%></span></div>
                     <div  style="width: 13%"><span class="d-block"><%=time%></span></div>
-                    <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post">
-                        <object><a href="post-leader.jsp?id=<%=id%>" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray;"></i></a></object>
-                        <object><a href="actperson-leader.jsp?id=<%=id%>" title="查看报名活动的学生"><i class="icon ion-navicon-round" style="font-size: 28px;margin-left: 18px ;color: gray;"></i></a></object>
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
+
+                    <object><a href="post-leader.jsp?id=<%=id%>" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray;"></i></a></object>
+                    <object><a href="actperson-leader.jsp?id=<%=id%>" title="查看报名活动的学生"><i class="icon ion-navicon-round" style="font-size: 28px;margin-left: 18px ;color: gray;"></i></a></object>
+                    <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post" onclick="return check()">
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none" title="点击删除"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
                     </form>
                 </a>
                <%}%>

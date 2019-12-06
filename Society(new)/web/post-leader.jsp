@@ -187,9 +187,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>

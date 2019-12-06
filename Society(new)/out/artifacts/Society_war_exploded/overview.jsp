@@ -1,9 +1,7 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.AssoDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="entity.Association" %>
-<%@ page import="entity.Message" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="entity.Association" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/26
@@ -107,39 +105,31 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
-                <!-- Navbar Header--><a href="actAnno.jsp" class="navbar-brand">
-                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
-                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div></a>
+                <!-- Navbar Header-->
+                <a href="actAnno.jsp" class="navbar-brand">
+                    <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                    <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
+                </a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i></a>
-                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
-                        <%
-                            StuDao stuDao = new StuDao();
-                            String sno=stuDao.getCurID();
-                            List<Message> result=stuDao.messageInStu(sno);
-                            for (int i=0;i<result.size() && i<=4;i++){
-                                Message m=result.get(i);
-                                String sendsno=m.getSendsno();
-                                String sendname=stuDao.findStu(sendsno).getName();
-                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                                String date = formatter.format(m.getSenddate());
-
-                        %>
-                        <a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid"></div>
-                            <div class="content" > <strong class="d-block"><%=sendname%>></strong><span class="d-block"><%=m.getContent()%></span><small class="date d-block"><%=date%></small></div></a>
-                        <%
-                            }
-                        %>
-                        <a href="message.jsp" class="dropdown-item text-center message">
-                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
-                    </div>
+<%--                <div class="list-inline-item dropdown">--%>
+<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
+<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
+<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
+<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
+<%--                                <div class="status online"></div>--%>
+<%--                            </div>--%>
+<%--                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
+<%--                        </a>--%>
+<%--                        <a href=actAnno.jsp" class="dropdown-item text-center message">--%>
+<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+                <div class="list-inline-item logout">
+                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
                 </div>
-                <!-- Log out               -->
-                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -150,7 +140,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                stuDao = new StuDao();
+                StuDao stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if(name!=null){
             %>
@@ -172,20 +162,13 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        List<Integer> list= assoDao.assoPersonList(stuDao.getCurID());
-                        for(int i=0;i<list.size();i++){
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                        List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
+                        for (int i = 0; i < list.size(); i++) {
+                            int id = list.get(i);
                     %>
-                    <li>
-                        <a href="society.jsp?assoName=<%=assoName%>"><%=assoName%></a>
-                    </li>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
+                    </a></li>
                     <%}%>
-<%--                    <li>--%>
-<%--                        <a href="#">文学社</a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a href="#">动漫社</a>--%>
-<%--                    </li>--%>
                 </ul>
             </li>
             <li class="active">
@@ -245,22 +228,19 @@
                 <button></button>
             </form>
         </div>
-        <div id="myblock">
-            <div class="d-block" style="margin-left: 11%; margin-top: 20px; margin-bottom: 50px;">
+        <div class="messages-block block" style="width:1200px; height: 1000px">
+            <div class="messages" style="padding-left: 10%">
                 <!--      <div class="row" style="margin: auto">-->
-
-                <div class="s-img">
-                    <a href="introduction.jsp?assoid=<%=1%>"><img src="img/leya.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="introduction.jsp?assoid=<%=3%>"><img src="img/ziyou.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="introduction.jsp?assoid=<%=5%>"><img src="img/tennis.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px; margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="introduction.jsp?assoid=<%=4%>"><img src="img/gggl.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
+                <%
+                    List<Integer> assosid=assoDao.assoListDESC();
+                    for(int i=0;i<assosid.size();i++) {
+                        Integer assoid = assosid.get(i);
+                        String path="img/"+assoid+".jpg";
+                %>
+                <div class="s-img"  style="float: left;">
+                    <a href="introduction.jsp?assoid=<%=assoid%>"><img src="<%=path%>" style="width: 140px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 45px;margin-top: 50px;" /></a>
                 </div>
-                <div class="s-img">
-                    <a href="introduction.jsp?assoid=<%=5%>"><img src="img/gx.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px; margin-top: 50px;" /></a>
-                    <a href="introduction.jsp?assoid=<%=6%>"><img src="img/ymbl.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="introduction.jsp?assoid=<%=7%>"><img src="img/yx.jpg" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 40px;margin-top: 50px;" /></a>
-                    <a href="introduction.jsp?assoid=<%=8%>"><img src="img/fxyjh.png" style="width: 150px; height: 150px;margin-top: 10px; border-radius:75px;margin-top: 40px;" /></a>
-                </div>
+                <%}%>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>修改社团信息</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -141,9 +141,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -165,7 +165,7 @@
                     <li>
                         <a href="addstu-leader.jsp">添加社员</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
@@ -181,14 +181,14 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">更换社长</h2>
+                <h2 class="h5 no-margin-bottom">修改社团信息</h2>
             </div>
         </div>
         <div class="apply" style="padding-top: 100px; padding-bottom: 100px;">
             <%
                 int assoid=assoDao.getCurAssoId();
             %>
-            <form  action="${pageContext.request.contextPath}/doChaLea?" method="post" style="text-align: center">
+            <form  action="${pageContext.request.contextPath}/doChaLea" method="post" style="text-align: center">
                 <div class="apply1">
                     <label class="apply-control-label">社团logo</label>
                     <img src="img/t7.jpg" alt="..." style="width:100px;height:100px;">
@@ -202,8 +202,6 @@
                    String brief=asso.getIntro();
                    String chief=asso.getChiefSno();
                    String chiefname=chief+stuDao.getName(chief);
-
-
                 %>
                 <div class="apply1">
                     <label class="apply-control-label" id="apply-control2">社团名称</label>

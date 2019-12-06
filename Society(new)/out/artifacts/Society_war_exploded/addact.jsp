@@ -127,9 +127,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -148,7 +148,7 @@
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <li>
-                        <a href="post-leader.jsp">发布公告</a>
+                        <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
                         <a href="addstu-leader.jsp?check=0">添加社员</a>

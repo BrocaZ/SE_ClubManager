@@ -173,9 +173,11 @@
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if(name!=null){
             %>
-            <div class="avatar"><img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="avatar">
+                <img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle">
+            </div>
             <div class="title">
-                <h1 class="h5"><%=name%></h1>
+                <h1 class="h5"><a href="modPassword.jsp"><%=name %></a></h1>
             </div>
             <%}%>
         </div>

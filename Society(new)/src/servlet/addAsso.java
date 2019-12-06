@@ -68,7 +68,7 @@ public class addAsso extends HttpServlet {
         } catch (BusinessException e) {
             session.setAttribute("message", "该学生不存在，请确认学号，重新填写！");
             response.sendRedirect("admin_pages/addAsso.jsp");
-        } catch (SQLException | BaseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             session.setAttribute("message", "添加失败！（详情参见控制台）");
             response.sendRedirect("admin_pages/assoCheck.jsp");

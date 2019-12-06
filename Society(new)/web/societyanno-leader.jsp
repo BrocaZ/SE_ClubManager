@@ -43,12 +43,29 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <style type="text/css">
-
-    </style>
+    <script type="text/javascript">
+        function check(){
+            var mymessage=confirm("确定要取消该活动吗？");
+            if(mymessage==true){
+                return true;
+            }
+            else if(mymessage==false){
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -117,9 +134,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -174,11 +191,13 @@
                         time=sdf.format(anno.getCreatetime());
                         int annoid=anno.getAnnoucementId();
                 %>
-                <a href="joinAct.jsp?annoid=<%=annoid%>&in=no" class="message d-flex align-items-center ">
-                    <div class="content" style="width: 90%;"><strong class="d-block"><%=anno.gettitle()%>
-                    </strong><span class="d-block"><%=anno.getAnnoContent()%></span>
-                        <small class="date d-block"><%=time%></small></div>
-                    <form action="${pageContext.request.contextPath}/doDelAnno?annoid=<%=annoid%>" method="post">
+                <a href="joinAct.jsp?annoid=<%=annoid%>&in=no&special=no" class="message d-flex align-items-center ">
+                    <div class="content" style="width: 90%;">
+                        <strong class="d-block"><%=anno.gettitle()%></strong>
+                        <span class="d-block"><%=anno.getAnnoContent()%></span>
+                        <small class="date d-block"><%=time%></small>
+                    </div>
+                    <form action="${pageContext.request.contextPath}/doDelAnno?annoid=<%=annoid%>" method="post" onclick="return check()">
                         <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray"></i></button>
                     </form>
                 </a>

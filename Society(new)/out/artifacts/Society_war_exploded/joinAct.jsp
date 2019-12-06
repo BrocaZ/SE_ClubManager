@@ -48,6 +48,7 @@
         int annoid = Integer.valueOf(request.getParameter("annoid"));
         int actid = annDao.searchAnnoById(annoid).getActivityId();
         String in=request.getParameter("in");
+        String special = request.getParameter("special");
         String sno=stuDao.getCurID();
     %>
     <script>
@@ -150,28 +151,30 @@
         </div>
         <ul class="list-unstyled">
             <%
-                if(in.equals("yes")){
+                if(in.equals("yes")&&special.equals("no")){
             %>
             <li class="active">
+            <%}else{%>
+            <li>
+            <%}%>
                 <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
             </li>
             <%
-                }else{
+                if(special.equals("yes")){
             %>
+            <li class="active">
+            <%} else {%>
             <li>
-                <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
-            </li>
             <%}%>
-            <li>
                 <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -190,18 +193,14 @@
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
                     <%
-                        if(in.equals("yes")){
-                    %>
-                    <li>
-                        <a href="societyanno-leader.jsp">公告列表</a>
-                    </li>
-                    <%
-                        }else{
+                        if(in.equals("no")&&special.equals("no")){
                     %>
                     <li class="active">
+                    <%}else{%>
+                    <li>
+                    <%}%>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
-                    <%}%>
                     <li>
                         <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>

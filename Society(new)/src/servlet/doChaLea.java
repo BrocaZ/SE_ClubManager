@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/doChaLea")
 public class doChaLea extends HttpServlet {
@@ -39,27 +41,28 @@ public class doChaLea extends HttpServlet {
         String assobrief=request.getParameter("assobrief");
         String assochief=request.getParameter("assochief");
         String assochisno=assochief.substring(0,9);
-        System.out.println(assochisno);
+//        System.out.println(assochisno);
         AssoDao assoDao=new AssoDao();
+        HttpSession session=request.getSession();
         try {
             int plaid=placeDao.getPlaceByName(assopla);
             int assoid=assoDao.getCurAssoId();
             Association association=assoDao.searchAssoById(assoid);
-            if(association.getChiefSno().compareTo(assochisno)!=0)
-            {
+            if(association.getChiefSno().compareTo(assochisno)!=0) {
                 assoDao.modLeader(assochisno,association);
             }
-            if(association.getAssociationName().compareTo(assoname)!=0||association.getPlacId()!=plaid||association.getIntro().compareTo(assobrief)!=0)
-            {
+            if(association.getAssociationName().compareTo(assoname)!=0||association.getPlacId()!=plaid||association.getIntro().compareTo(assobrief)!=0) {
                 association.setAssociationName(assoname);
                 association.setPlacId(plaid);
                 association.setIntro(assobrief);
                 assoDao.modAsso(association);
             }
+            session.setAttribute("message", "修改成功！");
             response.sendRedirect("actAnno.jsp");
 
-        } catch (BaseException e) {
+        } catch (BaseException | SQLException e) {
             e.printStackTrace();
+            session.setAttribute("message", "修改失败！（详情见控制台）");
             response.sendRedirect("actAnno.jsp");
         }
 

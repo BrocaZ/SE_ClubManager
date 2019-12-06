@@ -68,6 +68,15 @@
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -103,7 +112,7 @@
                             <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
                     </div>
                 </div>
-                <!-- Log out               -->
+                <!-- Log out -->
                 <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
@@ -136,12 +145,11 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        stuDao = new StuDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -196,10 +204,8 @@
                     <input type="text" class="apply-control" style="width: 200px" name="sno" value="<%=snno%>">
                 </div>
                 <%
-
                     if (!check.equals("0")){
                         Student stu=stuDao.findStu(check);
-
                 %>
                 <div class="apply1">
                     <label class="apply-control-label">姓名</label>
