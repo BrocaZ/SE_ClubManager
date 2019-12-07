@@ -612,12 +612,13 @@ public class AssoDao extends BaseDao {
         int associationId = 0;
         try {
             conn = this.getConnection();
-            String sql = "select associationId from asso where chiefSno=?";
+            String sql = "select associationId from asso where chiefSno=? and state = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             StuDao stu=new StuDao();
             pst.setString(1, stu.getCurID());
+            pst.setString(2, "ok");
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 associationId = rs.getInt(1);
             }
         }catch(Exception e)

@@ -205,11 +205,12 @@
                     AssoDao assoDao = new AssoDao();
                     List<Association> assoList = assoDao.assoLikeList(keyword);
                     for(int i=0;i<assoList.size();i++){
+                        String path="img/"+assoList.get(i).getAssociationId()+".jpg";
                 %>
                 <a href="introductionAdmin.jsp?id=<%=assoList.get(i).getAssociationId()%>" class="message d-flex align-items-center">
 <%--                <form action="${pageContext.request.contextPath }/delAsso?id=<%=assoList.get(i).getAssociationId()%>" onclick="return check()" method="post">--%>
                     <div class="profile">
-                        <img src="${pageContext.request.contextPath }/img/logo2.jpg" alt="..." class="img-fluid">
+                        <img src="${pageContext.request.contextPath }/<%=path%>" alt="..." class="img-fluid">
                         <!-- <div class="status away"></div> -->
                     </div>
                     <div class="content" style="width: 95%">

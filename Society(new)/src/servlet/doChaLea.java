@@ -40,7 +40,7 @@ public class doChaLea extends HttpServlet {
         PlaceDao placeDao=new PlaceDao();
         String assobrief=request.getParameter("assobrief");
         String assochief=request.getParameter("assochief");
-        String assochisno=assochief.substring(0,9);
+        String assochisno=assochief.substring(0,8);
 //        System.out.println(assochisno);
         AssoDao assoDao=new AssoDao();
         HttpSession session=request.getSession();
@@ -57,12 +57,12 @@ public class doChaLea extends HttpServlet {
                 association.setIntro(assobrief);
                 assoDao.modAsso(association);
             }
-            session.setAttribute("message", "修改成功！");
+            session.setAttribute("message", "修改申请已提交到管理员！");
             response.sendRedirect("actAnno.jsp");
 
         } catch (BaseException | SQLException e) {
             e.printStackTrace();
-            session.setAttribute("message", "修改失败！（详情见控制台）");
+            session.setAttribute("message", "操作失败！（详情见控制台）");
             response.sendRedirect("actAnno.jsp");
         }
 

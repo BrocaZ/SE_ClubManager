@@ -212,15 +212,15 @@ public class ActDao extends BaseDao {
         try {
             //获取社团id
             conn=this.getConnection();
-            String sql="select associationId from asso where chiefSno=?";
+            String sql="select associationId from asso where chiefSno=? and state=?";
             PreparedStatement pst=conn.prepareStatement(sql);
 
             StuDao stu=new StuDao();
             pst.setString(1, stu.getCurID());
+            pst.setString(2, "ok");
             ResultSet rs=pst.executeQuery();
             int associationId=0;
-            while(rs.next())
-            {
+            if(rs.next()){
                 associationId=rs.getInt(1);
             }
             sql = "select activityId,placeId,associationId,acttheme,activityContent,leaderSno,start_time,end_time,attend_number,state,remarks from act where associationId = ?";
