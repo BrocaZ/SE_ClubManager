@@ -127,8 +127,12 @@
             %>
             <form action="${pageContext.request.contextPath}/doModPassword" method="post">
                 <div class="apply1">
+                    <label class="apply-control-label" id="apply-control5">旧密码</label>
+                    <input type="text" class="apply-control" name="oldpw">
+                </div>
+                <div class="apply1">
                     <label class="apply-control-label" id="apply-control3">密码</label>
-                    <input type="text" class="apply-control" value="<%=pw%>" name="stupw">
+                    <input type="text" class="apply-control" name="stupw">
                 </div>
                 <div class="apply1">
                     <label class="apply-control-label" id="apply-control4">密码确认</label>

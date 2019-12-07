@@ -59,22 +59,22 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/dao" />
-      <recent name="$PROJECT_DIR$/src/entity" />
-      <recent name="$PROJECT_DIR$/web/img" />
-      <recent name="$PROJECT_DIR$/web/img/flags" />
-      <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="servlet" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/servlet" />
       <recent name="$PROJECT_DIR$/web/img" />
       <recent name="$PROJECT_DIR$/web" />
       <recent name="$PROJECT_DIR$/src/dao" />
       <recent name="$PROJECT_DIR$/web/css" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="servlet" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/dao" />
+      <recent name="$PROJECT_DIR$/src/entity" />
+      <recent name="$PROJECT_DIR$/web/img" />
+      <recent name="$PROJECT_DIR$/web/img/flags" />
+      <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -243,6 +243,8 @@
       <workItem from="1575616331391" duration="16464000" />
       <workItem from="1575683698300" duration="2296000" />
       <workItem from="1575686306859" duration="1311000" />
+      <workItem from="1575704140441" duration="334000" />
+      <workItem from="1575705165319" duration="374000" />
     </task>
     <servers />
   </component>

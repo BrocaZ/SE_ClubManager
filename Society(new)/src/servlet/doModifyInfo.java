@@ -33,6 +33,7 @@ public class doModifyInfo extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tel=request.getParameter("stutel");
+        String oldpw=request.getParameter("oldpw");
         String pw=request.getParameter("stupw");
         String pw1=request.getParameter("stupw1");
         StuDao stuDao=new StuDao();
@@ -48,27 +49,32 @@ public class doModifyInfo extends HttpServlet{
             if(tel.compareTo(stu.getTel())!=0) {
                 stuDao.modTel(stu1);
             }
-
-            if(pw.compareTo(stu.getPassword())!=0) {
-                if(pw.compareTo(pw1)==0) {
-                    stu1.setPassword(pw);
-                    stuDao.setPwd(stu1);
-                }
-                else {
-                   flag=false;
+            if(oldpw.compareTo(stu.getPassword())==0) {
+                if (pw.compareTo(stu.getPassword()) != 0) {
+                    if (pw.compareTo(pw1) == 0) {
+                        stu1.setPassword(pw);
+                        stuDao.setPwd(stu1);
+                    } else {
+                        flag = false;
+                    }
+                } else {
+                    session.setAttribute("message", "原密码未做改动！");
+                    response.sendRedirect("modifyInfo.jsp");
+                    return ;
                 }
             }
             else {
-                session.setAttribute("message", "原密码未做改动！");
-                response.sendRedirect("admin_pages/modPassword.jsp");
-                return;
+                session.setAttribute("message", "旧密码错误！");
+                response.sendRedirect("modifyInfo.jsp");
+                return ;
             }
             if(flag==true) {
                 session.setAttribute("message", "修改成功！");
                 response.sendRedirect("actAnno.jsp");
             }
-            else {
-                session.setAttribute("message", "密码错误！");
+            else
+            {
+                session.setAttribute("message", "两次新密码输入不一致！");
                 response.sendRedirect("modifyInfo.jsp");
             }
         }
