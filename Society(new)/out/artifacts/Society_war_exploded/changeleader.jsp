@@ -42,33 +42,18 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-<%--    <style type="text/css">--%>
-<%--        .apply{--%>
-<%--            margin-left: 80px;--%>
-<%--            margin-right: 80px;--%>
-<%--            padding-left: 220px;--%>
-<%--            padding-right: 220px;--%>
-<%--            padding-top: 30px;--%>
-<%--            padding-bottom: 30px;--%>
-<%--            background-color: white;--%>
-<%--        }--%>
-<%--        .apply1>div{--%>
-
-<%--        }--%>
-<%--        .apply1{--%>
-<%--            padding-top: 15px;--%>
-<%--            text-align: center;--%>
-<%--        }--%>
-<%--        .apply-control-label{--%>
-<%--            width: 80px;--%>
-<%--            font-size: 16px;--%>
-<%--            font-weight: 600;--%>
-<%--        }--%>
-<%--        .apply-submit{--%>
-<%--            padding-top: 30px;--%>
-<%--            text-align: center;--%>
-<%--        }--%>
-<%--    </style>--%>
+    <script>
+        function check() {
+            for (var i = 0; i < document.f.elements.length - 1; i++) {
+                if (document.f.elements[i].value == "") {
+                    alert("当前表单不能有空项");
+                    document.f.elements[i].focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -188,7 +173,7 @@
             <%
                 int assoid=assoDao.getCurAssoId();
             %>
-            <form  action="${pageContext.request.contextPath}/doChaLea" method="post" style="text-align: center">
+            <form  action="${pageContext.request.contextPath}/doChaLea" method="post" name="f" onsubmit="return check()" style="text-align: center">
                 <div class="apply1">
                     <label class="apply-control-label">社团logo</label>
                     <img src="img/t7.jpg" alt="..." style="width:100px;height:100px;">

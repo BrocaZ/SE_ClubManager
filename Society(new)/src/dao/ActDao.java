@@ -4,7 +4,9 @@ import entity.Student;
 import exception.BaseException;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -169,10 +171,13 @@ public class ActDao extends BaseDao {
         // TODO: implement
         Connection conn=null;
         conn=this.getConnection();
-        String sql="update act set state=? where activityId=?";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String date = formatter.format(new Date());
+        String sql="update act set state=? and remarks=? where activityId=?";
         PreparedStatement pst=conn.prepareStatement(sql);
         pst.setString(1, "del");
-        pst.setInt(2,actid);
+        pst.setString(2, date);
+        pst.setInt(3,actid);
         pst.execute();
     }
     public  Activity getActById(int actid){

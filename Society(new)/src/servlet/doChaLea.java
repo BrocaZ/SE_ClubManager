@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet("/doChaLea")
 public class doChaLea extends HttpServlet {
@@ -52,9 +54,11 @@ public class doChaLea extends HttpServlet {
                 assoDao.modLeader(assochisno,association);
             }
             if(association.getAssociationName().compareTo(assoname)!=0||association.getPlacId()!=plaid||association.getIntro().compareTo(assobrief)!=0) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 association.setAssociationName(assoname);
                 association.setPlacId(plaid);
                 association.setIntro(assobrief);
+                association.setRemarks(df.format(new Date()));
                 assoDao.modAsso(association);
             }
             session.setAttribute("message", "修改申请已提交到管理员！");

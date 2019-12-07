@@ -240,7 +240,7 @@
                 %>
                 <a href="joinAct.jsp?annoid=<%=annoid%>&in=yes&special=no" class="message d-flex align-items-center">
                     <div class="profile">
-                        <img src="<%=path%>" alt="..." class="img-fluid">
+                        <img src="<%=path%>" alt="未设置" class="img-fluid">
                     </div>
                     <div class="content" style="width: 85%">
                         <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>

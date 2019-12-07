@@ -238,7 +238,7 @@
                         String path="img/"+assoid+".jpg";
                 %>
                 <div class="s-img"  style="float: left;">
-                    <a href="introduction.jsp?assoid=<%=assoid%>"><img src="<%=path%>" style="width: 140px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 45px;margin-top: 50px;" /></a>
+                    <a href="introduction.jsp?assoid=<%=assoid%>"><img src="<%=path%>" alt="未设置" style="width: 140px; height: 150px;margin-top: 10px; border-radius:75px;margin-right: 45px;margin-top: 50px;" /></a>
                 </div>
                 <%}%>
             </div>

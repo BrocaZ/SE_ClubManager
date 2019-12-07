@@ -210,7 +210,7 @@
                 <a href="introductionAdmin.jsp?id=<%=assoList.get(i).getAssociationId()%>" class="message d-flex align-items-center">
 <%--                <form action="${pageContext.request.contextPath }/delAsso?id=<%=assoList.get(i).getAssociationId()%>" onclick="return check()" method="post">--%>
                     <div class="profile">
-                        <img src="${pageContext.request.contextPath }/<%=path%>" alt="..." class="img-fluid">
+                        <img src="${pageContext.request.contextPath }/<%=path%>" alt="未设置" class="img-fluid">
                         <!-- <div class="status away"></div> -->
                     </div>
                     <div class="content" style="width: 95%">

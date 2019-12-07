@@ -44,12 +44,29 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <style type="text/css">
-
-    </style>
+    <script type="text/javascript">
+        function check(){
+            var mymessage=confirm("确定要删除吗？");
+            if(mymessage==true){
+                return true;
+            }
+            else if(mymessage==false){
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+} %>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -190,7 +207,7 @@
                         <td><%=m.getContent()%></td>
                         <td><%=date%></td>
                         <td >
-                            <form action="${pageContext.request.contextPath}/DelMes?mesid=<%=m.getMesid()%>" method="post">
+                            <form action="${pageContext.request.contextPath}/DelMes?mesid=<%=m.getMesid()%>" method="post" onclick="return check()">
                                 <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i
                                         class="icon ion-close" style="color: gray; font-size: 18px;"></i>
                                 </button>

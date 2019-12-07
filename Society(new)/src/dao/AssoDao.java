@@ -51,12 +51,6 @@ public class AssoDao extends BaseDao {
     public void modAsso(Association asso) throws DbException, BusinessException {
         Connection conn = null;
         int assoid = 0;
-        if(asso.getAssociationName() == null || asso.getAssociationName().equals("")) {
-            throw new BusinessException("名字不能为空");
-        }
-        if(asso.getChiefSno() == null || asso.getChiefSno().equals("")) {
-            throw new BusinessException("社长学号不能为空");
-        }
         try {
             conn = this.getConnection();
             String sql = "select MAX(AssociationId) from asso";

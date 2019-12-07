@@ -63,17 +63,14 @@ public class StuDao extends BaseDao {
         return res;
     }
 
-    public void delMes(int mesid){
+    public void delMes(int mesid) throws SQLException {
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql="DELETE FROM message where mesid = ?";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1,mesid);
-            pst.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        conn = this.getConnection();
+        String sql="DELETE FROM message where mesid = ?";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,mesid);
+        pst.execute();
     }
     public Student findStu(String sno) throws BaseException {
         Connection conn = null;
