@@ -32,7 +32,7 @@ public class doLogin extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sno = request.getParameter("loginUsername");
-        String password = request.getParameter("loginPassword");
+        String password = StuDao.encryptAndDencrypt(request.getParameter("loginPassword"),'6');
         if(sno!=null && !sno.equals("")){
             StuDao stuDao = new StuDao();
             Student stu = new Student();

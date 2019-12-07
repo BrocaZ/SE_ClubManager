@@ -33,7 +33,7 @@ public class doModifyInfo extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tel=request.getParameter("stutel");
-        String oldpw=request.getParameter("oldpw");
+        String oldpw=StuDao.encryptAndDencrypt(request.getParameter("oldpw"),'6');
         String pw=request.getParameter("stupw");
         String pw1=request.getParameter("stupw1");
         StuDao stuDao=new StuDao();

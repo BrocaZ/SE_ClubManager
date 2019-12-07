@@ -141,12 +141,22 @@ public class StuDao extends BaseDao {
             conn = this.getConnection();
             String sql="update stu set password=? where sno = ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, s.getPassword());
+            pst.setString(1, StuDao.encryptAndDencrypt(s.getPassword(),'6'));
             pst.setString(2, s.getSno());
             pst.execute();
         } catch (Exception e) {
             throw new BaseException("修改失败");
         }
+    }
+
+    //密码加密
+    public static String encryptAndDencrypt(String value, char secret) {
+        byte[] bt = value.getBytes(); // 将需要加密的内容转换为字节数组
+        for (int i = 0; i < bt.length; i++) {
+            bt[i] = (byte) (bt[i] ^ (int) secret); // 通过异或运算进行加密
+        }
+        String newresult = new String(bt, 0, bt.length); // 将加密后的字符串保存到 newresult 变量中
+        return newresult;
     }
 
     public void setHeadImage(Student s,String path) throws BaseException{
@@ -273,14 +283,25 @@ public class StuDao extends BaseDao {
         return res;
     }
 
+
+    //用于第一次加密数据库中的所有密码
+//    public void hahaha(){
+//        Connection conn = null;
+//        try {
+//            conn = this.getConnection();
+//            String sql="update stu set password=?";
+//            String key = encryptAndDencrypt("123456", '6');
+//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.setString(1, key);
+//            pst.execute();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 //    public static void main(String[] args) {
 //        StuDao sd = new StuDao();
-//        sd.initAct();
-//        List<Message> l = sd.messageInStu("admin");
-//        for (Message m : l){
-//            System.out.println(m.getSenddate());
-//        }
-//        sd.delMes(2);
+//        sd.hahaha();
 //    }
 
 }

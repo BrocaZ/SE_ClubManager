@@ -131,7 +131,7 @@
                     <input type="text" class="apply-control" name="oldpw">
                 </div>
                 <div class="apply1">
-                    <label class="apply-control-label" id="apply-control3">密码</label>
+                    <label class="apply-control-label" id="apply-control3">新密码</label>
                     <input type="text" class="apply-control" name="stupw">
                 </div>
                 <div class="apply1">

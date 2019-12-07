@@ -103,6 +103,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StuDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dao.StuDao" />
+      <module name="Society" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 9.0.26" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.26" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="Society:war exploded">
@@ -195,9 +208,11 @@
     <list>
       <item itemvalue="Application.BaseDao" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.26" />
+      <item itemvalue="Application.StuDao" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.StuDao" />
         <item itemvalue="Application.BaseDao" />
       </list>
     </recent_temporary>
@@ -245,6 +260,7 @@
       <workItem from="1575686306859" duration="1311000" />
       <workItem from="1575704140441" duration="334000" />
       <workItem from="1575705165319" duration="374000" />
+      <workItem from="1575708944443" duration="727000" />
     </task>
     <servers />
   </component>
