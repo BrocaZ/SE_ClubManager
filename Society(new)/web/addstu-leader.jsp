@@ -10,9 +10,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dao.AssoDao" %>
 <%@ page import="dao.StuDao" %>
-<%@ page import="entity.Association" %>
-<%@ page import="dao.AnnoDao" %>
-<%@ page import="entity.Announcement" %>
 <%@ page import="entity.Student" %>
 <%@ page import="entity.Message" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -22,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>添加社员</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -46,24 +43,19 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-<%--    <script type="text/javascript">--%>
-<%--        window.onload=function () {--%>
-<%--            var list2 = "<option>A</option>";--%>
+<%--    <script>--%>
+<%--        function check(sno) {--%>
 <%--            <%--%>
-<%--            request.setCharacterEncoding("utf-8");--%>
-<%--            String BranchName=request.getParameter("BranchName");--%>
-<%--            System.out.println(BranchName);--%>
-<%--             StuDao stuDao=new StuDao();--%>
-<%--             List<String> result = stuDao.majorInBranch("商学院");--%>
-<%--            for (int i = 0; i < result.size(); i++) {--%>
-<%--                String majorName = result.get(i);--%>
-<%--           %>--%>
-<%--            list2 = list2 + "<option>" + <%=majorName%> +"</option>";--%>
+<%--             StuDao stuDao = new StuDao();--%>
+<%--             boolean bool=stuDao.findStu(sno);--%>
+<%--             if(bool==true){--%>
+<%--            %>--%>
+<%--            alert("该学生不存在！");--%>
+<%--            return false;--%>
 <%--            <%}%>--%>
-<%--            // $("#list2").html('XXXX');--%>
-<%--            document.getElementById('list2').innerHTML = list2;--%>
-<%--        }--%>
+<%--            return true;--%>
 
+<%--        }--%>
 <%--    </script>--%>
 </head>
 
@@ -162,7 +154,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -205,7 +197,8 @@
                 </div>
                 <%
                     if (!check.equals("0")){
-                        Student stu=stuDao.findStu(check);
+                        Student stu = stuDao.findStu(check);
+                        if(stu!=null){
                 %>
                 <div class="apply1">
                     <label class="apply-control-label">姓名</label>
@@ -223,66 +216,14 @@
                     <label class="apply-control-label">班级</label>
                     <label class="apply-control"style="width: 200px; font-size: 17px; text-align: left"><%=stu.getStuclass()%></label>
                 </div>
-                <%
-                    }
-                %>
+                <%} else {%>
+                <script type="text/javascript">
+                    alert("该学生不存在！");
+                </script>
+                <%}}%>
                 <div class="apply-submit"style="margin-left: 29%;" >
                     <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
                 </div>
-
-<%--                <div class="apply1">--%>
-<%--                    <label class="apply-control-label">分院</label>--%>
-<%--                    <input type="text" class="apply-control" list="list1" name="BranchName">--%>
-<%--                    <datalist id="list1">--%>
-<%--                        <%--%>
-<%--                            request.setCharacterEncoding("utf-8");--%>
-<%--                            stuDao = new StuDao();--%>
-<%--                            result = stuDao.allBranch();--%>
-<%--                            for (int i = 0; i < result.size(); i++) {--%>
-<%--                                BranchName = result.get(i);--%>
-<%--                        %>--%>
-<%--                        <option><%=BranchName%>--%>
-<%--                        </option>--%>
-<%--                        <%}%>--%>
-<%--                    </datalist>--%>
-<%--                </div>--%>
-<%--                <div class="apply1">--%>
-<%--                    <label class="apply-control-label">专业</label>--%>
-<%--                    <input type="text" class="apply-control" list="list2" name="majorName" >--%>
-<%--                    <datalist id="list2">--%>
-
-<%--                    </datalist>--%>
-<%--                </div>--%>
-<%--                <div class="apply1">--%>
-<%--                    <label class="apply-control-label">班级</label>--%>
-<%--                    <input type="text" class="apply-control" list="list3" name="class">--%>
-<%--                    <datalist id="list3">--%>
-<%--                        <%--%>
-<%--                            request.setCharacterEncoding("utf-8");--%>
-<%--                            result = stuDao.classInMajor(request.getParameter("majorName"));--%>
-<%--                            for (int i = 0; i < result.size(); i++) {--%>
-<%--                                String classname = result.get(i);--%>
-<%--                        %>--%>
-<%--                        <option><%=classname%>--%>
-<%--                        </option>--%>
-<%--                        <%}%>--%>
-<%--                    </datalist>--%>
-<%--                </div>--%>
-<%--                <div class="apply1">--%>
-<%--                    <label class="apply-control-label">姓名</label>--%>
-<%--                    <input type="text" class="apply-control" list="list4">--%>
-<%--                    <datalist id="list4">--%>
-<%--                        <%--%>
-<%--                            request.setCharacterEncoding("utf-8");--%>
-<%--                            result = stuDao.stuInClass(request.getParameter("majorName"), request.getParameter("class"));--%>
-<%--                            for (int i = 0; i < result.size(); i++) {--%>
-<%--                                String stuname = result.get(i);--%>
-<%--                        %>--%>
-<%--                        <option><%=stuname%>--%>
-<%--                        </option>--%>
-<%--                        <%}%>--%>
-<%--                    </datalist>--%>
-<%--                </div>--%>
             </form>
         </div>
 

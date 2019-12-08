@@ -139,7 +139,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -148,7 +148,7 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li class="active">
                         <a href="changeleader.jsp">修改社团信息</a>
@@ -172,11 +172,12 @@
         <div class="apply" style="padding-top: 100px; padding-bottom: 100px;">
             <%
                 int assoid=assoDao.getCurAssoId();
+                String path="img/"+assoid+".jpg";
             %>
             <form  action="${pageContext.request.contextPath}/doChaLea" method="post" name="f" onsubmit="return check()" style="text-align: center">
                 <div class="apply1">
                     <label class="apply-control-label">社团logo</label>
-                    <img src="img/t7.jpg" alt="..." style="width:100px;height:100px;">
+                    <img src="<%=path%>" alt="..." style="width:100px;height:100px;">
                 </div>
                 <%
                     PlaceDao placeDao=new PlaceDao();

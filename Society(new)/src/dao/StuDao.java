@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Activity;
 import entity.Message;
 import entity.Student;
 import exception.BaseException;
@@ -135,18 +136,14 @@ public class StuDao extends BaseDao {
         }
     }
 
-    public void setPwd(Student s) throws BaseException{
+    public void setPwd(Student s) throws SQLException {
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql="update stu set password=? where sno = ?";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, StuDao.encryptAndDencrypt(s.getPassword(),'6'));
-            pst.setString(2, s.getSno());
-            pst.execute();
-        } catch (Exception e) {
-            throw new BaseException("修改失败");
-        }
+        conn = this.getConnection();
+        String sql="update stu set password=? where sno = ?";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, StuDao.encryptAndDencrypt(s.getPassword(),'6'));
+        pst.setString(2, s.getSno());
+        pst.execute();
     }
 
     //密码加密
@@ -175,7 +172,37 @@ public class StuDao extends BaseDao {
         }
     }
 
-    /*
+    public List<Activity> actOfStu(String sno){
+        Connection conn = null;
+        List<Activity> res = new ArrayList<Activity>();
+        try {
+            conn = this.getConnection();
+            String sql="select acttheme, p.state from act_p p,act a WHERE a.activityId = p.activityId and sno = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,sno);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Activity a = new Activity();
+                a.setActtheme(rs.getString(1));
+                a.setStatus(rs.getString(2));
+                res.add(a);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+
+            /*
      * 用在UI里的下拉框
      * */
     public List<String> allBranch(){

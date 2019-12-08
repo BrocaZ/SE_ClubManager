@@ -1,8 +1,6 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.Admin" %>
 <%@ page import="java.util.List" %>
-<%@ page import="entity.Activity" %>
-<%@ page import="dao.AssoDao" %>
 <%@ page import="entity.Association" %>
 <%@ page import="java.util.regex.Pattern" %>
 <%@ page import="java.util.regex.Matcher" %><%--
@@ -16,10 +14,11 @@
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>社团审批列表</title>
+    <title>社团审批</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -157,6 +156,7 @@
             <li><a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a></li>
             <li><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
             <li><a href="place.jsp"> <i class="icon-windows"></i>场地列表</a></li>
+            <li><a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a></li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->

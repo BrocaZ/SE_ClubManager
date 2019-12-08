@@ -36,25 +36,26 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="${pageContext.request.contextPath }/img/favicon.ico">
     <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
-    <script>
-        function check() {
-            <%
-               String pw2=request.getParameter("stupw");
-               String pw1=request.getParameter("stupw1");
-               if(pw1==null) {
-            %>
-            alert("确认密码不能为空");
-            return false;
-            <%}
-            else if(pw1.compareTo(pw2)!=0) {
-             %>
-            alert("两次输入的密码应一致");
-            return false;
-            <%}%>
-            return true;
-
-        }
-    </script>
+<%--    <script>--%>
+<%--        function check() {--%>
+<%--            <%--%>
+<%--                String oldpw=request.getParameter("oldpw");--%>
+<%--               String pw=request.getParameter("stupw");--%>
+<%--               String pw1=request.getParameter("stupw1");--%>
+<%--               if(pw1.equals("")&&!pw.equals("")||pw.equals("")&&!pw1.equals("")) {--%>
+<%--            %>--%>
+<%--            alert("确认密码或新密码不能为空");--%>
+<%--            return false;--%>
+<%--            <%} else if(!pw1.equals("")&&!pw.equals("")&&pw1.compareTo(pw)!=0) {%>--%>
+<%--            alert("两次输入的密码不一致！");--%>
+<%--            return false;--%>
+<%--            <%} else if(oldpw.equals("")&&(!pw1.equals("")||!pw.equals(""))){%>--%>
+<%--            alert("旧密码不能为空！");--%>
+<%--            return false;--%>
+<%--            <%}%>--%>
+<%--            return true;--%>
+<%--        }--%>
+<%--    </script>--%>
 </head>
 
 <body>
@@ -106,6 +107,7 @@
             <li><a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a></li>
             <li><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
             <li><a href="place.jsp"> <i class="icon-windows"></i>场地列表</a></li>
+            <li><a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a></li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -120,11 +122,6 @@
                 <label class="apply-control-label">头像</label>
                 <img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." style="width:100px;height:100px;">
             </div>
-            <%
-                String sno = stuDao.getCurID();
-                Student stu=stuDao.findStu(sno);
-                String pw=stu.getPassword();
-            %>
             <form action="${pageContext.request.contextPath}/doModPassword" method="post">
                 <div class="apply1">
                     <label class="apply-control-label" id="apply-control5">旧密码</label>

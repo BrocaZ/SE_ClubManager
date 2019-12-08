@@ -10,7 +10,6 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>增加场地</title>
-    <title>活动公告</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -179,6 +178,9 @@
             </li>
             <li class="active">
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
+            </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
             </li>
         </ul>
     </nav>

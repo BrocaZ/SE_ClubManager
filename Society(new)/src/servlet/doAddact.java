@@ -2,6 +2,7 @@ package servlet;
 
 import dao.ActDao;
 import dao.PlaceDao;
+import dao.StuDao;
 import entity.Activity;
 import exception.BaseException;
 
@@ -50,35 +51,51 @@ public class doAddact extends HttpServlet {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date starttime = null;
         Date endtime=null;
+        String now = formatter.format(new Date());
+        //res1需要<0，res2需要<0
+        int res1=now.compareTo(actstarttime);
+        int res2=actstarttime.compareTo(actendtime);
 
         HttpSession session=request.getSession();
         try {
-            starttime = formatter.parse(actstarttime);
-            endtime = formatter.parse(actendtime);
-            Date date = new Date();
-            String dateString = formatter.format(date);
-            PlaceDao pla=new PlaceDao();
-            int plaid=0;
-            plaid = pla.getPlaceByName(actplace);
-            Activity act = new Activity();
-            act.setPalceId(plaid);
-            act.setActtheme(acttheme);
-            act.setActivityContent(actcontent);
-            act.setLeaderSno(actleader);
-            act.setStartTime(starttime);
-            act.setEndTime(endtime);
-            act.setAttendNumber(AttendNumber);
-            act.setRemarks(dateString);
-
-            ActDao actDao = new ActDao();
-            if(actid==0){
-                actDao.addAct(act);
-            }else{
-                act.setActivityId(actid);
-                actDao.modAct(act);
+            StuDao stuDao = new StuDao();
+            if(stuDao.findStu(actleader)==null){
+                session.setAttribute("message", "该学生不存在，请重新填写！");
+                response.sendRedirect("addact.jsp?actid=0");
+                return;
             }
-            session.setAttribute("message", "申请已提交到管理员！");
-            response.sendRedirect("societyact-leader.jsp");
+            if(res1<0&&res2<0){
+                starttime = formatter.parse(actstarttime);
+                endtime = formatter.parse(actendtime);
+                Date date = new Date();
+                String dateString = formatter.format(date);
+                PlaceDao pla=new PlaceDao();
+                int plaid=0;
+                plaid = pla.getPlaceByName(actplace);
+                Activity act = new Activity();
+                act.setPalceId(plaid);
+                act.setActtheme(acttheme);
+                act.setActivityContent(actcontent);
+                act.setLeaderSno(actleader);
+                act.setStartTime(starttime);
+                act.setEndTime(endtime);
+                act.setAttendNumber(AttendNumber);
+                act.setRemarks(dateString);
+
+                ActDao actDao = new ActDao();
+                if(actid==0){
+                    actDao.addAct(act);
+                }else{
+                    act.setActivityId(actid);
+                    actDao.modAct(act);
+                }
+                session.setAttribute("message", "申请已提交到管理员！");
+                response.sendRedirect("societyact-leader.jsp");
+            }
+            else {
+                session.setAttribute("message", "时间填写有误，请重新填写！");
+                response.sendRedirect("addact.jsp?actid=0");
+            }
         } catch (BaseException | ParseException | SQLException e) {
             e.printStackTrace();
             session.setAttribute("message", "操作失败！（详情见控制台）");

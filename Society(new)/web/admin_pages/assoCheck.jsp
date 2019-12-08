@@ -175,6 +175,9 @@
             <li>
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
             </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
+            </li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -199,7 +202,12 @@
             </form>
         </div>
         <div class="messages-block block">
-            <div class="messages">
+            <div id="apply" style="margin-left: 86.5%; background-color: white;">
+                <a href="addAsso.jsp" style="font-size: 18px; font-weight: 600;"><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</a >
+            </div>
+            <div class="messages" style="margin-left: 3%;margin-right: 3%;padding-top: 15px;">
+
+
                 <%
                     String keyword=request.getParameter("keyword");
                     AssoDao assoDao = new AssoDao();
@@ -213,21 +221,19 @@
                         <img src="${pageContext.request.contextPath }/<%=path%>" alt="未设置" class="img-fluid">
                         <!-- <div class="status away"></div> -->
                     </div>
-                    <div class="content" style="width: 95%">
+                    <div class="content" style="width: 86%">
                         <strong class="d-block"><%=assoList.get(i).getAssociationName()%></strong>
                     </div>
                     <form action="${pageContext.request.contextPath }/delAsso?id=<%=assoList.get(i).getAssociationId()%>" onclick="return check()" method="post">
 <%--                        <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删除</button>--%>
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="padding-right: 5px; color: gray;"></i></button>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="margin-left: 15px; color: gray;"></i></button>
                     </form>
 <%--                </form>--%>
                 </a>
                 <%}%>
             </div>
         </div>
-        <div class="col-sm-9 ml-auto" style="float: right; width:15%;">
-            <a href="addAsso.jsp"><button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</button></a>
-        </div>
+
     </div>
 </div>
 <!-- JavaScript files-->

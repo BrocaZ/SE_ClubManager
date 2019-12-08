@@ -148,7 +148,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>

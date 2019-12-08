@@ -141,21 +141,6 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <!--            <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
-<%--                <div class="list-inline-item dropdown">--%>
-<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                                <div class="status online"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-<%--                        </a>--%>
-<%--                        <a href="index.html" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-                <!-- Log out               -->
                 <div class="list-inline-item logout">
                     <a id="logout" href="${pageContext.request.contextPath }/index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
                 </div>
@@ -195,6 +180,9 @@
             </li>
             <li>
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
+            </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
             </li>
         </ul>
     </nav>

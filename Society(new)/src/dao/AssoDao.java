@@ -503,9 +503,9 @@ public class AssoDao extends BaseDao {
                 stu.setName(rs.getString(2));
                 stu.setSex(rs.getString(3));
                 stu.setTel(rs.getString(4));
-                stu.setBranch(rs.getString(4));
-                stu.setMajor(rs.getString(5));
-                stu.setStuclass(rs.getString(5));
+                stu.setBranch(rs.getString(5));
+                stu.setMajor(rs.getString(6));
+                stu.setStuclass(rs.getString(7));
             }
         } catch (SQLException e) {
             e.printStackTrace();

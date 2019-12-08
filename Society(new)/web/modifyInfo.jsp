@@ -17,7 +17,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>个人信息修改</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -36,25 +36,26 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
-    <script>
-        function check() {
-            <%
-               String pw2=request.getParameter("stupw");
-               String pw1=request.getParameter("stupw1");
-               if(pw1==null) {
-            %>
-            alert("确认密码不能为空");
-            return false;
-            <%}
-            else if(pw1.compareTo(pw2)!=0) {
-             %>
-            alert("两次输入的密码应一致");
-            return false;
-            <%}%>
-            return true;
-
-        }
-    </script>
+<%--    <script>--%>
+<%--        function check() {--%>
+<%--            <%--%>
+<%--               String oldpw=request.getParameter("oldpw");--%>
+<%--               String pw=request.getParameter("stupw");--%>
+<%--               String pw1=request.getParameter("stupw1");--%>
+<%--               if(oldpw!=null&&pw1==null&&pw!=null||oldpw!=null&&pw==null&&pw1!=null) {--%>
+<%--            %>--%>
+<%--            alert("确认密码或新密码不能为空");--%>
+<%--            return false;--%>
+<%--            <%} else if(pw1!=null&&pw!=null&&pw1.compareTo(pw)!=0) {%>--%>
+<%--            alert("两次输入的密码不一致！");--%>
+<%--            return false;--%>
+<%--            <%} else if(oldpw==null&&(pw1!=null||pw!=null)){%>--%>
+<%--            alert("旧密码不能为空！");--%>
+<%--            return false;--%>
+<%--            <%}%>--%>
+<%--            return true;--%>
+<%--        }--%>
+<%--    </script>--%>
 </head>
 
 <body>
@@ -152,7 +153,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -161,7 +162,7 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
                         <a href="changeleader.jsp">修改社团信息</a>
@@ -189,7 +190,6 @@
                 <%
                     Student stu=stuDao.findStu(sno);
                     String tel=stu.getTel();
-                    String pw=stu.getPassword();
                 %>
             <form action="${pageContext.request.contextPath}/doModifyInfo" method="post">
                 <div class="apply1">

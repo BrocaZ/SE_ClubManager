@@ -10,24 +10,17 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dao.AssoDao" %>
 <%@ page import="entity.Association" %>
-<%@ page import="dao.AnnoDao" %>
-<%@ page import="entity.Announcement" %>
 <%@ page import="dao.ActDao" %>
 <%@ page import="entity.Activity" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="entity.Message" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>活动列表</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
-    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -42,8 +35,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <script type="text/javascript">
@@ -150,8 +142,8 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
-                <ul  class="collapse1 list-unstyled ">
+                <a> <i class="icon-settings"></i>社团管理 </a>
+                <ul class="collapse1 list-unstyled ">
                     <li class="active">
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
@@ -215,20 +207,16 @@
                <%}%>
             </div>
         </div>
-
     </div>
 </div>
     <!-- JavaScript files-->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js">
-    </script>
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js">
-    </script>
-    <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="js/charts-home.js"></script>
-    <script src="js/front.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="vendor/popper.js/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="js/charts-home.js"></script>
+<script src="js/front.js"></script>
 </body>
-
 </html>

@@ -162,6 +162,9 @@
             <li class="active">
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
             </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
+            </li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -179,10 +182,14 @@
                 <button></button>
             </form>
         </div>
-        <!--    <div class="row">-->
+
         <div class="messages-block block">
             <!-- <div class="title"><strong>New Messages</strong></div> -->
-            <div class="messages">
+            <div id="apply" style="margin-left: 86.5%; background-color: white;">
+                <a href="addPlace.jsp" style="font-size: 18px; font-weight: 600;"><i class="icon-new-file" style="padding-right: 5px;"></i>增加场地</a>
+            </div>
+
+            <div class="messages" style="margin-left: 3%;margin-right: 3%;padding-top: 15px;">
                 <%
                     String keyword=request.getParameter("keyword");
                     PlaceDao placeDao = new PlaceDao();
@@ -202,10 +209,7 @@
                 <%}%>
             </div>
         </div>
-        <div class="col-sm-9 ml-auto" style="float: right; width:15%;">
-            <a href="addPlace.jsp"><button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加场地</button></a>
-<%--            <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删减社团</button>--%>
-        </div>
+
     </div>
 </div>
 <!-- JavaScript files-->

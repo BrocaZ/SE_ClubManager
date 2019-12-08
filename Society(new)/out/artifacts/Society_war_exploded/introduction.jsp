@@ -164,20 +164,21 @@
         String id=request.getParameter("assoid");
         String assoname=null;
         String brief=null;
+        String path=null;
         if(id==null)
         {
             assoname=request.getParameter("keyword1");
             Association association = null;
             association=assoDao.searchAssoByName(assoname).get(0);
             brief=association.getIntro();
-
+            path="img/"+association.getAssociationId()+".jpg";
         }
         else {
             Association association = null;
             association = assoDao.searchAssoById((Integer.parseInt(id)));
-
             assoname = association.getAssociationName();
             brief = association.getIntro();
+            path="img/"+Integer.parseInt(id)+".jpg";
         }
     %>
     <div class="page-content">
@@ -190,7 +191,7 @@
 
         <div  class="messages-block block"style="">
         <div class="d-block" style="margin-left: 100px; margin-top: 70px; width: 100%;">
-            <img src="img/logo2.jpg" style=" border-radius: 30px; float: left; width: 20%;">
+            <img src="<%=path%>" style=" border-radius: 30px; float: left; width: 20%;">
             <div style="font-family:'agency fb';color:#db6574;float: right; margin-top: 8%;margin-right: 25%; " class="test"><b><%=assoname%></b></div>
         </div>
         <span></span>

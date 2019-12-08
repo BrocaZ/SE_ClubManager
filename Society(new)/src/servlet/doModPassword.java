@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
+
 @WebServlet("/doModPassword")
 public class doModPassword extends HttpServlet{
     private static final long serialVersionUID = 1L;
@@ -44,6 +46,16 @@ public class doModPassword extends HttpServlet{
         HttpSession session=request.getSession();
         try {
             Student stu=stuDao.findStu(sno);
+            if(pw1.equals("")&&!pw.equals("")||pw.equals("")&&!pw1.equals("")){
+                session.setAttribute("message", "密码未填写完整！");
+                response.sendRedirect("admin_pages/modPassword.jsp");
+                return ;
+            }
+            else if(oldpw.equals("")&&(!pw1.equals("")||!pw.equals(""))){
+                session.setAttribute("message", "密码未填写完整！");
+                response.sendRedirect("admin_pages/modPassword.jsp");
+                return ;
+            }
             if(oldpw.compareTo(stu.getPassword())==0) {
                 if (pw.compareTo(stu.getPassword()) != 0) {
                     if (pw.compareTo(pw1) == 0) {
@@ -52,10 +64,6 @@ public class doModPassword extends HttpServlet{
                     } else {
                         flag = false;
                     }
-                } else {
-                    session.setAttribute("message", "原密码未做改动！");
-                    response.sendRedirect("admin_pages/modPassword.jsp");
-                    return ;
                 }
             }
             else {
@@ -73,7 +81,7 @@ public class doModPassword extends HttpServlet{
                 response.sendRedirect("admin_pages/modPassword.jsp");
             }
         }
-        catch (BaseException e) {
+        catch (BaseException | SQLException e) {
             e.printStackTrace();
             session.setAttribute("message", "操作失败！（详情见控制台）");
             response.sendRedirect("admin_pages/modPassword.jsp");

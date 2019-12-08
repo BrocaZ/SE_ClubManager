@@ -157,6 +157,9 @@
             <li>
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
             </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
+            </li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -167,8 +170,8 @@
                 <!--        <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
             </div>
         </div>
-        <div class="messages-block block"style="height: 90%;">
-            <div class="messages" >
+        <div class="messages-block block"style="padding-top: 40px;padding-bottom: 40px">
+            <div class="messages" style="padding-left: 20px; padding-right: 155px">
                 <%
                     int actid = Integer.valueOf(request.getParameter("actid"));
                     PlaceDao placeDao = new PlaceDao();
@@ -177,19 +180,20 @@
                     //获取该id的Activity
                     if(act!=null){
                 %>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 25px;">活动名称:</strong><small style="font-size: 20px; padding-left: 20px;"><%=act.getActivityContent()%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"> <strong style="font-size: 25px;">场地:</strong><small style="font-size: 20px; padding-left: 20px;"><%=placeDao.searchPlaceById(act.getPalceId()).getPlaceName()%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"> <strong style="font-size: 25px;">负责人学号:</strong><small style="font-size: 20px; padding-left: 20px;"><%=act.getLeaderSno()%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%;"> <strong style="font-size: 25px;">开始时间:</strong><small style="font-size: 20px; padding-left: 20px;"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(act.getStartTime())%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%; "> <strong style="font-size: 25px;">结束时间:</strong><small style="font-size: 20px; padding-left: 20px;"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(act.getEndTime())%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%; "> <strong style="font-size: 25px; padding-bottom: 20px;">可参加人数:</strong><small style="font-size: 20px; padding-left: 20px;"><%=act.getAttendNumber()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 20px;">活动主题：</strong><small style="font-size: 18px; "><%=act.getActtheme()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 20px;">活动内容：</strong><small style="font-size: 18px; "><%=act.getActivityContent()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%;"> <strong style="font-size: 20px;">开始时间：</strong><small style="font-size: 18px; "><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(act.getStartTime())%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%; "> <strong style="font-size: 20px;">结束时间：</strong><small style="font-size: 18px; "><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(act.getEndTime())%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"> <strong style="font-size: 20px;">场地：</strong><small style="font-size: 18px; "><%=placeDao.searchPlaceById(act.getPalceId()).getPlaceName()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"> <strong style="font-size: 20px;">负责人学号：</strong><small style="font-size: 18px; "><%=act.getLeaderSno()%></small></div>
                 <%}%>
+                <div class="col-sm-9 " style="width:20%; margin-left: 88%">
+                    <form action="${pageContext.request.contextPath}/checkAct?res=yes&actid=<%=actid%>" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
+                    <form action="${pageContext.request.contextPath}/checkAct?res=no&actid=<%=actid%>" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
+                </div>
             </div>
         </div>
-        <div class="col-sm-9 ml-auto" style="float: right; width:20%;">
-            <form action="${pageContext.request.contextPath}/checkAct?res=yes&actid=<%=actid%>" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
-            <form action="${pageContext.request.contextPath}/checkAct?res=no&actid=<%=actid%>" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
-        </div>
+
     </div>
 </div>
 <!-- JavaScript files-->

@@ -148,6 +148,7 @@
             <li><a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a></li>
             <li><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
             <li><a href="place.jsp"> <i class="icon-windows"></i>场地列表</a></li>
+            <li><a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a></li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -158,7 +159,7 @@
                 <!--        <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
             </div>
         </div>
-        <div class="messages-block block"style="height: 90%;">
+        <div class="messages-block block"style="height: 100%;">
             <div class="messages" >
                 <%
                     int assoid = Integer.valueOf(request.getParameter("assoid"));
@@ -167,17 +168,18 @@
                     Association asso = assoDao.searchAssoById(assoid);
                     if(asso!=null){
                 %>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 25px;">社团名称:</strong><small style="font-size: 20px; padding-left: 20px;"><%=asso.getAssociationName()%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 25px;">场地:</strong><small style="font-size: 20px; padding-left: 20px;"><%=placeDao.searchPlaceById(asso.getPlacId()).getPlaceName()%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 25px;">社长学号:</strong><small style="font-size: 20px; padding-left: 20px;"><%=asso.getChiefSno()%></small></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%; padding-bottom: 20px;"><strong style="font-size: 25px;">社团简介:</strong><small style="font-size: 20px; padding-left: 20px;"><%=asso.getIntro()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 20px;">社团名称:</strong><small style="font-size: 18px; padding-left: 20px;"><%=asso.getAssociationName()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 20px;">场地:</strong><small style="font-size: 18px; padding-left: 20px;"><%=placeDao.searchPlaceById(asso.getPlacId()).getPlaceName()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 20px;">社长学号:</strong><small style="font-size: 18px; padding-left: 20px;"><%=asso.getChiefSno()%></small></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-right: 10%; padding-bottom: 20px;"><strong style="font-size: 20px;">社团简介:</strong><small style="font-size: 18px; padding-left: 20px;"><%=asso.getIntro()%></small></div>
                 <%}%>
-            </div>
+                <div class="col-sm-9 ml-auto" style=" width:20%;">
+                    <form action="${pageContext.request.contextPath}/checkAsso?res=yes&assoid=<%=assoid%>" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
+                    <form action="${pageContext.request.contextPath}/checkAsso?res=no&assoid=<%=assoid%>" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
+                </div></div>
+
         </div>
-        <div class="col-sm-9 ml-auto" style="float: right; width:20%;">
-            <form action="${pageContext.request.contextPath}/checkAsso?res=yes&assoid=<%=assoid%>" method="post"><button type="submit" class="btn btn-primary">&nbsp;&nbsp;通过&nbsp;&nbsp;</button></form>
-            <form action="${pageContext.request.contextPath}/checkAsso?res=no&assoid=<%=assoid%>" method="post"><button type="submit" class="btn btn-secondary">不通过</button></form>
-        </div>
+
     </div>
 </div>
 <!-- JavaScript files-->

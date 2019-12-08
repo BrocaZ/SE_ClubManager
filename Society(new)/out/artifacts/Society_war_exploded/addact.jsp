@@ -19,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>添加活动</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -57,6 +57,15 @@
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -142,7 +151,7 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
                     <li class="active">
                         <a href="societyact-leader.jsp">活动列表</a>

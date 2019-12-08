@@ -16,11 +16,10 @@
 <%@ page import="entity.Message" %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>公告列表</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -147,8 +146,8 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
-                <ul  class="collapse1 list-unstyled ">
+                <a> <i class="icon-settings"></i>社团管理 </a>
+                <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
