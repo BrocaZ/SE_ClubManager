@@ -6,7 +6,242 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2218a453-ebe8-4c42-99d1-21002b563eef" name="Default Changelist" comment="" />
+    <list default="true" id="2218a453-ebe8-4c42-99d1-21002b563eef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doModifyInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Society_war_exploded/WEB-INF/classes/servlet/doModifyInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doModifyInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/servlet/doModifyInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/addact.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/addact.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/demo1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/charts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/font.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.blue.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.green.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.pink.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.red.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.sea.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.violet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/data/addresses.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/data/countries.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/forms.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/icons-reference.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-5.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-6.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/CN.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/DE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/FR.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/GB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/fxyjh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/gggl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/gx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/leya.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-pink.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-sea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-violet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/multiselect-switch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/sousuo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/sy.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/t9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/template-mac.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/tennis.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/ymbl.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/yx.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/ziyou.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/img/书画协会图标.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/jquery插件库.url" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/js/charts-custom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/js/charts-home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/js/front.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/music.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/overview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/society1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery-validation/jquery.validate.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery.cookie/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery.cookie/cookie.jquery.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery.cookie/jquery.cookie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/esm/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/popper-utils.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/umd/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原白/www.jq22.com.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/demo1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/charts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/font.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.blue.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.green.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.pink.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.red.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.sea.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/css/style.violet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/data/addresses.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/data/countries.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/fonts/dark-dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/fonts/dark-dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/fonts/dark-dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/fonts/dark-dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/forms.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/icons-reference/fonts/dark-dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/icons-reference/fonts/dark-dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/icons-reference/fonts/dark-dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/icons-reference/fonts/dark-dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/icons-reference/icons-reference.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/icons-reference/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/Thumbs.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/avatar-9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/brand/brand-1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/brand/brand-2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/brand/brand-3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/brand/brand-4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/brand/brand-5.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/brand/brand-6.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/flags/16/CN.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/flags/16/DE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/flags/16/FR.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/flags/16/GB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/fxyjh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/gggl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/gx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/leya.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/logo1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/logo2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/logo3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/logo4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-pink.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-sea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker-violet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/map-marker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/mockup7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/multiselect-switch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/sousuo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/sy.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/t9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/template-mac.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/tennis.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/ymbl.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/yx.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/ziyou.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/img/书画协会图标.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/jquery插件库.url" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/js/charts-custom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/js/charts-home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/js/front.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/music.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/overview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/society1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/jquery-validation/jquery.validate.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/jquery.cookie/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/jquery.cookie/cookie.jquery.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/jquery.cookie/jquery.cookie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/jquery/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/popper.js/esm/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/popper.js/popper-utils.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/popper.js/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/vendor/popper.js/umd/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo原黑/www.jq22.com.txt" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +270,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -43,10 +281,11 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1U38iQTPRduBlx4v82j2jXhAATC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/servlet" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -59,22 +298,22 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/servlet" />
-      <recent name="$PROJECT_DIR$/web/img" />
-      <recent name="$PROJECT_DIR$/web" />
-      <recent name="$PROJECT_DIR$/src/dao" />
-      <recent name="$PROJECT_DIR$/web/css" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="servlet" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/dao" />
       <recent name="$PROJECT_DIR$/src/entity" />
       <recent name="$PROJECT_DIR$/web/img" />
       <recent name="$PROJECT_DIR$/web/img/flags" />
       <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="servlet" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/src/servlet" />
+      <recent name="$PROJECT_DIR$/web/img" />
+      <recent name="$PROJECT_DIR$/src/dao" />
+      <recent name="$PROJECT_DIR$/web/css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -207,8 +446,8 @@
     </configuration>
     <list>
       <item itemvalue="Application.BaseDao" />
-      <item itemvalue="Tomcat Server.Tomcat 9.0.26" />
       <item itemvalue="Application.StuDao" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.26" />
     </list>
     <recent_temporary>
       <list>
@@ -261,11 +500,23 @@
       <workItem from="1575704140441" duration="334000" />
       <workItem from="1575705165319" duration="374000" />
       <workItem from="1575708944443" duration="727000" />
+      <workItem from="1575792219026" duration="139000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
