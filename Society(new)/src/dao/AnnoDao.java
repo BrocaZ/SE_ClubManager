@@ -26,7 +26,8 @@ public class AnnoDao extends BaseDao {
         int id = 1;
         if (rs.next())
             id = rs.getInt(1) + 1;
-        sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
+        if(anno.getActivityId()!=0)
+        {sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
         pst = conn.prepareStatement(sql);
         pst.setInt(1, id);
@@ -39,7 +40,23 @@ public class AnnoDao extends BaseDao {
         pst.setString(8, anno.getAnnobrief());
         pst.setString(9, anno.getStatus());
         pst.setString(10, anno.getRemarks());
-        pst.execute();
+            pst.execute();}
+        else{
+            sql = "INSERT INTO `anno` (`annoId`, `assoId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.setInt(2, anno.getAssociationId());
+            pst.setString(3, anno.gettitle());
+            pst.setString(4, anno.getAnnoContent());
+            pst.setTimestamp(5, new java.sql.Timestamp(new Date().getTime()));
+            pst.setString(6, anno.getAnnoType());
+            pst.setString(7, anno.getAnnobrief());
+            pst.setString(8, anno.getStatus());
+            pst.setString(9, anno.getRemarks());
+            pst.execute();
+        }
+
         return 0;
     }
 

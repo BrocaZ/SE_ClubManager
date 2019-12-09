@@ -58,9 +58,11 @@ public class StuDao extends BaseDao {
                 m.setSenddate(new java.util.Date(rs.getTimestamp(5).getTime()));
                 res.add(m);
             }
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return res;
     }
 

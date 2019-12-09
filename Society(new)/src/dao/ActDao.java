@@ -82,13 +82,13 @@ public class ActDao extends BaseDao {
     public void modAct(Activity act) throws BaseException, SQLException {
         // TODO: implement   在修改活动的界面中，会在每一个属性后面显示已有信息，社长可选择改或者不改
         Connection conn=null;
-        Student stu=new Student();
+        StuDao stu=new StuDao();
 
         //获取社团id
         conn=this.getConnection();
         String sql="select associationId from asso where chiefSno=?";
         PreparedStatement pst=conn.prepareStatement(sql);
-        pst.setString(1, stu.getCurStu().getSno());
+        pst.setString(1, stu.getCurID());
         ResultSet rs=pst.executeQuery();
         int associationId=0;
         while(rs.next())
