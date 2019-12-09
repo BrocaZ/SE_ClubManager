@@ -99,6 +99,15 @@ public class StuDao extends BaseDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
         return stu;
     }
