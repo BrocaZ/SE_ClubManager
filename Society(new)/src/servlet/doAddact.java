@@ -94,7 +94,7 @@ public class doAddact extends HttpServlet {
             }
             else {
                 session.setAttribute("message", "时间填写有误，请重新填写！");
-                response.sendRedirect("addact.jsp?actid="+actid);
+                response.sendRedirect("addact.jsp?actid"+actid);
             }
         } catch (BaseException | ParseException | SQLException e) {
             e.printStackTrace();

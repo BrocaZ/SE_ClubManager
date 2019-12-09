@@ -304,42 +304,6 @@
                 </div>
             </div>
         </div>
-
-
-        <%--        <div class="messages-block block">--%>
-        <%--            <div class="messages">--%>
-        <%--                <%--%>
-        <%--                    String keyword=request.getParameter("keyword");--%>
-        <%--                    AnnoDao annoDao = new AnnoDao();--%>
-        <%--                    List<Announcement> annolist = null;--%>
-        <%--                    try {--%>
-        <%--                        annolist = annoDao.publicannoList(keyword);--%>
-        <%--                    } catch (BaseException e) {--%>
-        <%--                        e.printStackTrace();--%>
-        <%--                    }--%>
-        <%--                    for(int i=0;i<annolist.size();i++){--%>
-        <%--                        int annoid=annolist.get(i).getAnnoucementId();--%>
-        <%--                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");--%>
-        <%--                        String creattime = formatter.format(annolist.get(i).getCreatetime());--%>
-        <%--                        int assoid=annolist.get(i).getAssociationId();--%>
-        <%--                        String path="img/"+assoid+".jpg";--%>
-        <%--                %>--%>
-        <%--                <a href="joinAct.jsp?annoid=<%=annoid%>&in=yes&special=no" class="message d-flex align-items-center">--%>
-        <%--                    <div class="profile">--%>
-        <%--                        <img src="<%=path%>" alt="未设置" class="img-fluid">--%>
-        <%--                    </div>--%>
-        <%--                    <div class="content" style="width: 85%">--%>
-        <%--                        <strong class="d-block"><%=annolist.get(i).gettitle()%></strong>--%>
-        <%--                        <span class="d-block"><%=annolist.get(i).getAnnoContent()%></span>--%>
-
-        <%--                    </div>--%>
-        <%--                    <div>--%>
-        <%--                        <span class="date d-block"><%=creattime%></span>--%>
-        <%--                    </div>--%>
-        <%--                </a>--%>
-        <%--                <%}%>--%>
-        <%--            </div>--%>
-        <%--        </div>--%>
     </div>
 </div>
 <!-- JavaScript files-->

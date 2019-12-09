@@ -247,7 +247,7 @@
                                         if (asso.getChiefSno().equals(stuDao.getCurID())) {
                                     %>
                                     <form action="${pageContext.request.contextPath}/DelStuInAsso?sno=<%=stulist.get(i).getSno()%>&assoname=<%=assooname%>&assoid=<%=id%>" method="post" onclick="return check()">
-                                        <button type="submit" style="background-color: rgba(0,0,0,0);outline:none;border: none"><i class="icon ion-close-round" style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
+                                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round" style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
                                     </form>
 
                                     <%

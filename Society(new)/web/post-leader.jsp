@@ -13,6 +13,7 @@
 <%@ page import="entity.Announcement" %>
 <%@ page import="entity.Message" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="dao.ActDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -119,6 +120,17 @@
 </head>
 
 <body>
+<%
+    int actid = Integer.valueOf(request.getParameter("id"));
+    ActDao actDao =new ActDao();
+    if(actid!=0){
+        if(!actDao.getActById(actid).getStatus().equals("ok")){
+%>
+<%--<script type="text/javascript">--%>
+<%--    alert("审批未通过，不能发布公告！");--%>
+<%--</script>--%>
+<%  response.sendRedirect("societyact-leader.jsp");
+}}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -247,10 +259,14 @@
                     <label class="apply-control-label">公告内容</label>
                     <textarea name="content" cols="40" rows="10" style="vertical-align:top"></textarea>
                 </div>
+                <%
+                    if(request.getParameter("flat").equals("yes")){
+                %>
                 <div class="apply1" style="padding-left: 30px;">
                     <label style="padding-left: 50px; font-size: 16px; font-weight: 600;"><input name="type" type="radio" value="1" />&nbsp;公开</label>
                     <label style="padding-left: 50px; font-size: 16px; font-weight: 600;"><input name="type" type="radio" value="2" checked="checked"/>&nbsp;私密</label>
                 </div>
+                <%}%>
                 <div class="apply-submit" style="margin-left: 44%;">
                     <button type="submit" style="background-color: #ff6574;border-radius:5px; border: none; width: 100px;"><i class="icon ion-checkmark-round" style="font-size: 25px; color: #F5F5F5;"></i></button>
                 </div>

@@ -239,7 +239,7 @@
             </form>
         </div>
         <div class="row">
-        <div class="messages-block block" style="width:90%; height: 500px">
+        <div class="messages-block block" style="width:90%; height: 700px">
             <div class="messages" style="padding-left: 10%">
                 <!--      <div class="row" style="margin: auto">-->
                 <%

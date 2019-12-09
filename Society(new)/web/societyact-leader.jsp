@@ -177,10 +177,10 @@
                 <a href="addact.jsp?actid=0" style="font-size: 18px; font-weight: 600;">申请活动</a >
             </div>
             <div class="messages" style="padding-left: 20px; padding-top: 15px;padding-right: 20px;padding-bottom: 15px;">
-                <a href="" class="message d-flex align-items-center " >
-                    <div class="content" style="width: 62%"> <strong class="d-block">社内例会、通知</strong><strong class="d-block">&nbsp;</strong></div>
-                    <object><a href="post-leader.jsp?id=0" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray; padding-left: 214px"></i></a></object>
-                </a>
+                <a class="message d-flex align-items-center " >
+                    <div class="content" style="width: 64%"> <strong class="d-block">内部公告</strong><span class="d-block">社内例会、通知</span></div>
+                    <object><a href="post-leader.jsp?id=0&flat=no" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray; padding-left: 214px"></i></a ></object>
+                </a >
                 <%
                     ActDao actDao=new ActDao();
                     List<Activity> acts=actDao.listActInAsso();
@@ -202,11 +202,12 @@
                     <div class="content" style="width: 62%"> <strong class="d-block"><%=theme%></strong><span class="d-block"><%=assoName%></span></div>
                     <div style="width: 10%"><span class="d-block"><%=status%></span></div>
                     <div  style="width: 13%"><span class="d-block"><%=time%></span></div>
-
-                    <object><a href="post-leader.jsp?id=<%=id%>" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray;"></i></a></object>
-                    <object><a href="actperson-leader.jsp?id=<%=id%>" title="查看报名活动的学生"><i class="icon ion-navicon-round" style="font-size: 28px;margin-left: 18px ;color: gray;"></i></a></object>
+                    <form>
+                        <object><a href="post-leader.jsp?id=<%=id%>&flat=yes" title="添加公告"><i class="icon ion-plus-round" style="font-size: 25px; color: gray;"></i></a></object>
+                        <object><a href="actperson-leader.jsp?id=<%=id%>" title="查看报名活动的学生"><i class="icon ion-navicon-round" style="font-size: 28px;margin-left: 18px ;color: gray;"></i></a></object>
+                    </form>
                     <form action="${pageContext.request.contextPath}/doDelAct?id=<%=id%>" method="post" onclick="return check()">
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none; outline:none;padding-top: 18px" title="点击删除"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none" title="点击删除"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray;"></i></button>
                     </form>
                 </a>
                <%}%>

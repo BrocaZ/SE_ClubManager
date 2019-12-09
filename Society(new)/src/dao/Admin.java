@@ -4,171 +4,146 @@ import entity.Activity;
 import entity.Association;
 import entity.Place;
 import exception.BaseException;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Admin extends BaseDao {
 
-    public void sendMessage(String sendsno, String recsno, String content) {
-        Connection conn = null;
+    public void sendMessage(String sendsno,String recsno,String content){
+        Connection conn=null;
         int mesid = 0;
         try {
             conn = this.getConnection();
             String sql = "SELECT MAX(mesid) from message";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                mesid = rs.getInt(1) + 1;
+            if (rs.next()){
+                mesid = rs.getInt(1)+1;
             }
 
             sql = "INSERT into message(mesId,sendsno,recsno,content,senddate) VALUES(?,?,?,?,NOW())";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, mesid);
-            pst.setString(2, sendsno);
-            pst.setString(3, recsno);
-            pst.setString(4, content);
+            pst.setInt(1,mesid);
+            pst.setString(2,sendsno);
+            pst.setString(3,recsno);
+            pst.setString(4,content);
             pst.execute();
-        } catch (Exception e) {
+        }catch(Exception e)
+        {
             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     //管理员按审批按钮,可以是管理员收到邮件，点击后显示信息，然后有一个审批按钮
-    public void checkAddAct(Activity act, boolean accept) throws BaseException {
+    public void checkAddAct(Activity act,boolean accept) throws BaseException {
         // TODO: implement
-        Connection conn = null;
-        try {
-            conn = this.getConnection();
-            if (accept) {
-                String sql = "UPDATE act set state = 'ok' where activityId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
+        Connection conn=null;
+        try
+        {
+            conn=this.getConnection();
+            if(accept){
+                String sql="UPDATE act set state = 'ok' where activityId = ?";
+                PreparedStatement pst=conn.prepareStatement(sql);
 //                pst.setString(1, "待举办");
-                pst.setInt(1, act.getActivityId());
+                pst.setInt(1,act.getActivityId());
                 pst.execute();
-                Place p = new Place();
+                Place p=new Place();
                 p.setPlaceId(act.getPalceId());
                 p.setStatus("unavailable");
-                PlaceDao pm = new PlaceDao();
+                PlaceDao pm=new PlaceDao();
                 pm.modPstatus(p);
-            } else {
-                String sql = "DELETE from act where activityId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
+            }else{
+                String sql="DELETE from act where activityId = ?";
+                PreparedStatement pst=conn.prepareStatement(sql);
 //                pst.setString(1, "待举办");
-                pst.setInt(1, act.getActivityId());
+                pst.setInt(1,act.getActivityId());
                 pst.execute();
             }
             String str = "未通过";
-            if (accept) str = "已通过";
-            sendMessage("admin", act.getLeaderSno(), "添加" + act.getActtheme() + "的审核" + str);
-        } catch (Exception e) {
+            if(accept) str = "已通过";
+            sendMessage("admin",act.getLeaderSno(),"添加"+act.getActtheme()+"的审核"+str);
+        }
+        catch(Exception e)
+        {
             throw new BaseException("审批失败");
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
         }
     }
-
-    public void checkModAct(Activity act, boolean accept) throws BaseException {
+    public void checkModAct(Activity act,boolean accept) throws BaseException {
         // TODO: implement
-        Connection conn = null;
-        try {
-            conn = this.getConnection();
-            if (accept) {
+        Connection conn=null;
+        try
+        {
+            conn=this.getConnection();
+            if(accept){
                 int id = Integer.parseInt(act.getStatus());
-                String sql = "UPDATE act set placeId = ?,acttheme = ?,activityContent = ?,leaderSno = ?,start_time = ?,end_time = ?,attend_number = ? where activityId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setInt(1, act.getPalceId());
-                pst.setString(2, act.getActtheme());
-                pst.setString(3, act.getActivityContent());
-                pst.setString(4, act.getLeaderSno());
-                pst.setTimestamp(5, new java.sql.Timestamp(act.getStartTime().getTime()));
-                pst.setTimestamp(6, new java.sql.Timestamp(act.getStartTime().getTime()));
-                pst.setInt(7, act.getAttendNumber());
-                pst.setInt(8, id);
+                String sql="UPDATE act set placeId = ?,acttheme = ?,activityContent = ?,leaderSno = ?,start_time = ?,end_time = ?,attend_number = ? where activityId = ?";
+                PreparedStatement pst=conn.prepareStatement(sql);
+                pst.setInt(1,act.getPalceId());
+                pst.setString(2,act.getActtheme());
+                pst.setString(3,act.getActivityContent());
+                pst.setString(4,act.getLeaderSno());
+                pst.setTimestamp(5,new java.sql.Timestamp(act.getStartTime().getTime()));
+                pst.setTimestamp(6,new java.sql.Timestamp(act.getStartTime().getTime()));
+                pst.setInt(7,act.getAttendNumber());
+                pst.setInt(8,id);
                 pst.execute();
 
-                sql = "DELETE from act where activityId = ?";
-                pst = conn.prepareStatement(sql);
-                pst.setInt(1, act.getActivityId());
+                sql="DELETE from act where activityId = ?";
+                pst=conn.prepareStatement(sql);
+                pst.setInt(1,act.getActivityId());
                 pst.execute();
-            } else {
-                String sql = "DELETE from act where activityId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setInt(1, act.getActivityId());
+            }else{
+                String sql="DELETE from act where activityId = ?";
+                PreparedStatement pst=conn.prepareStatement(sql);
+                pst.setInt(1,act.getActivityId());
                 pst.execute();
             }
             String str = "未通过";
-            if (accept) str = "已通过";
-            sendMessage("admin", act.getLeaderSno(), "修改" + act.getActtheme() + "的审核" + str);
-        } catch (Exception e) {
+            if(accept) str = "已通过";
+            sendMessage("admin",act.getLeaderSno(),"修改"+act.getActtheme()+"的审核"+str);
+        }
+        catch(Exception e)
+        {
             throw new BaseException("审批失败");
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     //管理员按审批按钮，可以是管理员收到邮件，点击后显示信息，然后有一个审批按钮
-    public void checkDelAct(Activity act, boolean accept) throws BaseException {
-        Connection conn = null;
-        try {
-            conn = this.getConnection();
-            if (!accept) {
-                String sql = "UPDATE act set state = 'ok' where activityId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
+    public void checkDelAct(Activity act,boolean accept) throws BaseException {
+        Connection conn=null;
+        try
+        {
+            conn=this.getConnection();
+            if(!accept){
+                String sql="UPDATE act set state = 'ok' where activityId = ?";
+                PreparedStatement pst=conn.prepareStatement(sql);
 //                pst.setString(1, "待举办");
-                pst.setInt(1, act.getActivityId());
+                pst.setInt(1,act.getActivityId());
                 pst.execute();
-            } else {
-                String sql = "DELETE from act where activityId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
+            }else{
+                String sql="DELETE from act where activityId = ?";
+                PreparedStatement pst=conn.prepareStatement(sql);
 //                pst.setString(1, "待举办");
-                pst.setInt(1, act.getActivityId());
+                pst.setInt(1,act.getActivityId());
                 pst.execute();
 
-                Place p = new Place();
+                Place p=new Place();
                 p.setPlaceId(act.getPalceId());
                 p.setStatus("available");
-                PlaceDao pm = new PlaceDao();
+                PlaceDao pm=new PlaceDao();
                 pm.modPstatus(p);
             }
             String str = "未通过";
-            if (accept) str = "已通过";
-            sendMessage("admin", act.getLeaderSno(), "删除" + act.getActtheme() + "的审核" + str);
-        } catch (Exception e) {
+            if(accept) str = "已通过";
+            sendMessage("admin",act.getLeaderSno(),"删除"+act.getActtheme()+"的审核"+str);
+        }
+        catch(Exception e)
+        {
             throw new BaseException("审批失败");
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -196,47 +171,41 @@ public class Admin extends BaseDao {
 //        }
 //    }
 
-    public void checkModAsso(Association asso, boolean accept) throws BaseException {
-        Connection conn = null;
-        try {
-            conn = this.getConnection();
-            if (accept) {
-                int id = Integer.parseInt(asso.getStatus());
-                String sql = "UPDATE asso set placeId = ?,associationName = ?,chiefSno = ?,brief_introduction = ? where associationId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setInt(1, asso.getPlacId());
-                pst.setString(2, asso.getAssociationName());
-                pst.setString(3, asso.getChiefSno());
-                pst.setString(4, asso.getIntro());
-                pst.setInt(5, id);
-                pst.execute();
+   public void checkModAsso(Association asso,boolean accept) throws BaseException {
+       Connection conn=null;
+       try
+       {
+           conn=this.getConnection();
+           if(accept){
+               int id = Integer.parseInt(asso.getStatus());
+               String sql="UPDATE asso set placeId = ?,associationName = ?,chiefSno = ?,brief_introduction = ? where associationId = ?";
+               PreparedStatement pst=conn.prepareStatement(sql);
+               pst.setInt(1,asso.getPlacId());
+               pst.setString(2,asso.getAssociationName());
+               pst.setString(3,asso.getChiefSno());
+               pst.setString(4,asso.getIntro());
+               pst.setInt(5,id);
+               pst.execute();
 
-                sql = "DELETE from asso where associationId = ?";
-                pst = conn.prepareStatement(sql);
-                pst.setInt(1, asso.getAssociationId());
-                pst.execute();
-            } else {
-                String sql = "DELETE from asso where associationId = ?";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setInt(1, asso.getAssociationId());
-                pst.execute();
-            }
-            String str = "未通过";
-            if (accept) str = "已通过";
-            sendMessage("admin", asso.getChiefSno(), asso.getAssociationName() + "信息修改审核" + str);
-        } catch (Exception e) {
-            throw new BaseException("审批失败");
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+               sql="DELETE from asso where associationId = ?";
+               pst=conn.prepareStatement(sql);
+               pst.setInt(1,asso.getAssociationId());
+               pst.execute();
+           }else{
+               String sql="DELETE from asso where associationId = ?";
+               PreparedStatement pst=conn.prepareStatement(sql);
+               pst.setInt(1,asso.getAssociationId());
+               pst.execute();
+           }
+           String str = "未通过";
+           if(accept) str = "已通过";
+           sendMessage("admin",asso.getChiefSno(),asso.getAssociationName()+"信息修改审核"+str);
+       }
+       catch(Exception e)
+       {
+           throw new BaseException("审批失败");
+       }
+   }
 //      // TODO: implement
 //	   Connection conn=null;
 //	   try

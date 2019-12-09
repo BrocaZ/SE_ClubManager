@@ -44,25 +44,27 @@ public class doPostAnno extends HttpServlet {
         String content = request.getParameter("content");
         String actid = request.getParameter("id");
         String type = request.getParameter("type");
+        if(type==null){
+            type="0";
+        }
 //        System.out.println(actid);
 //        System.out.println(title);
 //        System.out.println(brief);
 //        System.out.println(content);
-//        System.out.println(type);
+        System.out.println(type);
         int assoid=0;
         AssoDao assoDao=new AssoDao();
         HttpSession session=request.getSession();
         try {
             assoid=assoDao.getCurAssoId();
+
             AnnoDao annoDao = new AnnoDao();
             Announcement anno=new Announcement();
             anno.settitle(title);
             anno.setAnnoContent(content);
             anno.setAnnobrief(brief);
             anno.setAssociationId(assoid);
-
             anno.setActivityId(Integer.parseInt(actid));
-
             if(type.equals("1"))
                 anno.setAnnoType("public");
             else
