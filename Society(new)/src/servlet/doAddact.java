@@ -61,7 +61,7 @@ public class doAddact extends HttpServlet {
             StuDao stuDao = new StuDao();
             if(stuDao.findStu(actleader)==null){
                 session.setAttribute("message", "该学生不存在，请重新填写！");
-                response.sendRedirect("addact.jsp?actid=0");
+                response.sendRedirect("addact.jsp?actid="+actid);
                 return;
             }
             if(res1<0&&res2<0){
@@ -94,7 +94,7 @@ public class doAddact extends HttpServlet {
             }
             else {
                 session.setAttribute("message", "时间填写有误，请重新填写！");
-                response.sendRedirect("addact.jsp?actid=0");
+                response.sendRedirect("addact.jsp?actid="+actid);
             }
         } catch (BaseException | ParseException | SQLException e) {
             e.printStackTrace();
