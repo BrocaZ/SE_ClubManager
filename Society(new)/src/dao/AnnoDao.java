@@ -13,67 +13,92 @@ import java.util.List;
 public class AnnoDao extends BaseDao {
 
     public int addAnno(Announcement anno) throws BaseException, SQLException {
-        if(anno.gettitle().equals(""))
+        if (anno.gettitle().equals(""))
             throw new BaseException("标题不能为空");
-        if(anno.getAnnoContent().equals(""))
+        if (anno.getAnnoContent().equals(""))
             throw new BaseException("内容不能为空");
         //公告类型做成 勾选框   A.公开(public)  B.仅社团内成员可见(secret) 默认选项设置为私密
         Connection conn = null;
-        conn = this.getConnection();
-        String sql = "select max(annoId) from anno";
-        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-        java.sql.ResultSet rs = pst.executeQuery();
-        int id = 1;
-        if (rs.next())
-            id = rs.getInt(1) + 1;
-        if(anno.getActivityId()!=0)
-        {sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
-                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1, id);
-        pst.setInt(2, anno.getAssociationId());
-        pst.setInt(3, anno.getActivityId());
-        pst.setString(4, anno.gettitle());
-        pst.setString(5, anno.getAnnoContent());
-        pst.setTimestamp(6, new java.sql.Timestamp(new Date().getTime()));
-        pst.setString(7, anno.getAnnoType());
-        pst.setString(8, anno.getAnnobrief());
-        pst.setString(9, anno.getStatus());
-        pst.setString(10, anno.getRemarks());
-            pst.execute();}
-        else{
-            sql = "INSERT INTO `anno` (`annoId`, `assoId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.setInt(2, anno.getAssociationId());
-            pst.setString(3, anno.gettitle());
-            pst.setString(4, anno.getAnnoContent());
-            pst.setTimestamp(5, new java.sql.Timestamp(new Date().getTime()));
-            pst.setString(6, anno.getAnnoType());
-            pst.setString(7, anno.getAnnobrief());
-            pst.setString(8, anno.getStatus());
-            pst.setString(9, anno.getRemarks());
-            pst.execute();
+        try {
+            conn = this.getConnection();
+            String sql = "select max(annoId) from anno";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rs = pst.executeQuery();
+            int id = 1;
+            if (rs.next())
+                id = rs.getInt(1) + 1;
+            if (anno.getActivityId() != 0) {
+                sql = "INSERT INTO `anno` (`annoId`, `assoId`, `activityId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+                pst = conn.prepareStatement(sql);
+                pst.setInt(1, id);
+                pst.setInt(2, anno.getAssociationId());
+                pst.setInt(3, anno.getActivityId());
+                pst.setString(4, anno.gettitle());
+                pst.setString(5, anno.getAnnoContent());
+                pst.setTimestamp(6, new java.sql.Timestamp(new Date().getTime()));
+                pst.setString(7, anno.getAnnoType());
+                pst.setString(8, anno.getAnnobrief());
+                pst.setString(9, anno.getStatus());
+                pst.setString(10, anno.getRemarks());
+                pst.execute();
+            } else {
+                sql = "INSERT INTO `anno` (`annoId`, `assoId`, `title`, `annoContent`, `createtime`, `annomentType`, `annobrief`, `state`, `remarks`) "
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
+                pst = conn.prepareStatement(sql);
+                pst.setInt(1, id);
+                pst.setInt(2, anno.getAssociationId());
+                pst.setString(3, anno.gettitle());
+                pst.setString(4, anno.getAnnoContent());
+                pst.setTimestamp(5, new java.sql.Timestamp(new Date().getTime()));
+                pst.setString(6, anno.getAnnoType());
+                pst.setString(7, anno.getAnnobrief());
+                pst.setString(8, anno.getStatus());
+                pst.setString(9, anno.getRemarks());
+                pst.execute();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+//			throw new util.DbException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
-
         return 0;
     }
 
     public void delAnno(Announcement anno) throws SQLException {
         Connection conn = null;
-
-        conn = this.getConnection();
-        String sql="delete from anno where annoId=?";
-        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, anno.getAnnoucementId());
-        pst.execute();
-
+        try {
+            conn = this.getConnection();
+            String sql = "delete from anno where annoId=?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, anno.getAnnoucementId());
+            pst.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+//			throw new util.DbException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     //社团内部的活动公告，如例会通知等
     public List<Announcement> clubannoList(Association asso) throws BaseException {
-        List<Announcement> result=new ArrayList<Announcement>();
+        List<Announcement> result = new ArrayList<Announcement>();
         Connection conn = null;
         try {
             conn = this.getConnection();
@@ -82,8 +107,8 @@ public class AnnoDao extends BaseDao {
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, asso.getAssociationId());
             java.sql.ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                Announcement a=new Announcement();
+            while (rs.next()) {
+                Announcement a = new Announcement();
                 a.setAnnoucementId(rs.getInt(1));
                 a.setAssociationId(rs.getInt(2));
                 a.setActivityId(rs.getInt(3));
@@ -95,15 +120,24 @@ public class AnnoDao extends BaseDao {
             }
         } catch (Exception e) {
             throw new BaseException("加载失败");
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
 
         return result;
     }
 
     public List<Announcement> publicannoList(String keyword) throws BaseException {
-        List<Announcement> result=new ArrayList<Announcement>();
+        List<Announcement> result = new ArrayList<Announcement>();
         Connection conn = null;
-        if(keyword==null) {
+        if (keyword == null) {
             try {
                 conn = this.getConnection();
                 String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
@@ -125,9 +159,17 @@ public class AnnoDao extends BaseDao {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
             }
-        }
-        else {
+        } else {
             try {
                 conn = this.getConnection();
                 String sql = "SELECT anno.annoId,anno.assoId,anno.activityId,anno.title,anno.annoContent,"
@@ -150,13 +192,23 @@ public class AnnoDao extends BaseDao {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
             }
+
         }
         return result;
     }
 
     public List<Announcement> annoList(int assoid) throws BaseException {
-        List<Announcement> result=new ArrayList<Announcement>();
+        List<Announcement> result = new ArrayList<Announcement>();
         Connection conn = null;
         try {
             conn = this.getConnection();
@@ -164,10 +216,10 @@ public class AnnoDao extends BaseDao {
                     + "anno.createtime,anno.annobrief,asso.associationName " +
                     "FROM anno ,asso WHERE anno.assoId = asso.associationId and assoId=?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1,assoid);
+            pst.setInt(1, assoid);
             java.sql.ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                Announcement a=new Announcement();
+            while (rs.next()) {
+                Announcement a = new Announcement();
                 a.setAnnoucementId(rs.getInt(1));
                 a.setAssociationId(rs.getInt(2));
                 a.setActivityId(rs.getInt(3));
@@ -180,12 +232,21 @@ public class AnnoDao extends BaseDao {
             }
         } catch (Exception e) {
             throw new BaseException("加载失败");
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
         return result;
     }
 
     public List<Announcement> searchAnno(String text) throws BaseException {
-        List<Announcement> result=new ArrayList<Announcement>();
+        List<Announcement> result = new ArrayList<Announcement>();
         Connection conn = null;
         try {
             conn = this.getConnection();
@@ -194,10 +255,10 @@ public class AnnoDao extends BaseDao {
                     "FROM anno ,asso WHERE anno.assoId = asso.associationId AND anno.annomentType = 'public' "
                     + "and anno.title like ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, "%"+text+"%");
+            pst.setString(1, "%" + text + "%");
             java.sql.ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                Announcement a=new Announcement();
+            while (rs.next()) {
+                Announcement a = new Announcement();
                 a.setAnnoucementId(rs.getInt(1));
                 a.setAssociationId(rs.getInt(2));
                 a.setActivityId(rs.getInt(3));
@@ -217,7 +278,7 @@ public class AnnoDao extends BaseDao {
     }
 
     public Announcement searchAnnoById(int id) throws BaseException {
-        Announcement result=new Announcement();
+        Announcement result = new Announcement();
         Connection conn = null;
         try {
             conn = this.getConnection();
@@ -225,7 +286,7 @@ public class AnnoDao extends BaseDao {
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, id);
             java.sql.ResultSet rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 result.setAnnoucementId(rs.getInt(1));
                 result.setAssociationId(rs.getInt(2));
                 result.setActivityId(rs.getInt(3));
@@ -240,6 +301,15 @@ public class AnnoDao extends BaseDao {
         } catch (Exception e) {
 //			throw new BaseException(e.getMessage());
             throw new BaseException("加载失败");
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
         return result;
     }

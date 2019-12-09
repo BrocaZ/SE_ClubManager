@@ -72,6 +72,10 @@ public class addAsso extends HttpServlet {
             e.printStackTrace();
             session.setAttribute("message", "添加失败！（详情参见控制台）");
             response.sendRedirect("admin_pages/assoCheck.jsp");
+        } catch (DbException e) {
+            e.printStackTrace();
+        } catch (BaseException e) {
+            e.printStackTrace();
         }
 //        response.sendRedirect("admin_pages/assoCheck.jsp");
     }

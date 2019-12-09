@@ -291,7 +291,7 @@
                                     Activity act=re.get(i);
                             %>
                             <a href="" class="message d-flex align-items-center">
-                                <div class="content" style="width: 80%; margin-right: 3%">
+                                <div class="content" style="width: 75%; margin-right: 3%">
                                     <strong class="d-block"><%=act.getActtheme()%></strong>
                                 </div>
                                 <div class="content" >

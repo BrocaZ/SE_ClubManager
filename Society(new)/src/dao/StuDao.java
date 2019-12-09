@@ -37,6 +37,15 @@ public class StuDao extends BaseDao {
             pst.execute();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -61,6 +70,15 @@ public class StuDao extends BaseDao {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
 
         return res;
@@ -68,12 +86,24 @@ public class StuDao extends BaseDao {
 
     public void delMes(int mesid) throws SQLException {
         Connection conn = null;
-
+    try{
         conn = this.getConnection();
         String sql="DELETE FROM message where mesid = ?";
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1,mesid);
         pst.execute();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
     }
     public Student findStu(String sno) throws BaseException {
         Connection conn = null;
@@ -101,7 +131,16 @@ public class StuDao extends BaseDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+    }
         return stu;
     }
 
@@ -120,7 +159,16 @@ public class StuDao extends BaseDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+    }
         return name;
     }
 
@@ -135,17 +183,39 @@ public class StuDao extends BaseDao {
             pst.execute();
         } catch (Exception e) {
             throw new BaseException("修改失败");
+        }finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    public void setPwd(Student s) throws SQLException {
+    public void setPwd(Student s) throws SQLException, BaseException {
         Connection conn = null;
+        try{
         conn = this.getConnection();
         String sql="update stu set password=? where sno = ?";
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1, StuDao.encryptAndDencrypt(s.getPassword(),'6'));
         pst.setString(2, s.getSno());
         pst.execute();
+    } catch (Exception e) {
+        throw new BaseException("修改失败");
+    }finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
     }
 
     //密码加密
@@ -171,7 +241,16 @@ public class StuDao extends BaseDao {
         } catch (Exception e) {
 //			throw new BaseException(e.getMessage());
             throw new BaseException("修改失败");
+        }finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+    }
     }
 
     public List<Activity> actOfStu(String sno){

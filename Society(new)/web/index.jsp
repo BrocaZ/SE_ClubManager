@@ -74,7 +74,7 @@
                   <label for="login-password" class="label-material">密码</label>
                 </div>
                 <button type="submit" class="btn btn-primary">登录</button>
-              </form><a href="#" class="forgot-pass">忘记密码?</a>
+              </form>
             </div>
           </div>
         </div>

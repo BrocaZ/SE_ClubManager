@@ -42,7 +42,7 @@ public class delAsso extends HttpServlet {
             assoDao.delAsso(id);
             session.setAttribute("message", "删除成功！");
             response.sendRedirect("admin_pages/assoCheck.jsp");
-        } catch (SQLException e) {
+        } catch (SQLException | DbException e) {
             session.setAttribute("message", "删除失败！（详情参见控制台）");
             response.sendRedirect("admin_pages/assoCheck.jsp");
             e.printStackTrace();

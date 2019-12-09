@@ -12,8 +12,8 @@ public class BaseDao {
             String name = "root";
             String password = "zky0320";
             String url = "jdbc:mysql://localhost:3306/se_clubmanager?useUnicode=true&characterEncoding=utf8";
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, name, password);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, name, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
