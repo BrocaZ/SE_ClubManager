@@ -43,11 +43,11 @@ public class DelStuInAsso extends HttpServlet {
         try {
             assoDao.exitAsso(sno,Integer.parseInt(assoid));
             session.setAttribute("message", "删除成功！");
-            response.sendRedirect("society.jsp?assoName="+s);
+            response.sendRedirect("society.jsp?assoid="+assoid);
         } catch (DbException | SQLException e) {
             e.printStackTrace();
             session.setAttribute("message", "删除失败！（详情参见控制台）");
-            response.sendRedirect("society.jsp?assoName="+s);
+            response.sendRedirect("society.jsp?assoid="+assoid);
         }
     }
 

@@ -238,7 +238,8 @@
                 <button></button>
             </form>
         </div>
-        <div class="messages-block block" style="width:1200px; height: 1000px">
+        <div class="row">
+        <div class="messages-block block" style="width:90%; height: 500px">
             <div class="messages" style="padding-left: 10%">
                 <!--      <div class="row" style="margin: auto">-->
                 <%
@@ -252,6 +253,7 @@
                 </div>
                 <%}%>
             </div>
+        </div>
         </div>
     </div>
 </div>

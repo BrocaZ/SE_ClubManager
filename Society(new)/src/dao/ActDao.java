@@ -212,6 +212,7 @@ public class ActDao extends BaseDao {
     }
 
     public List<Activity> listActInAsso() {
+        int aa[]=new int[1000];
         List<Activity> result = new ArrayList<>();
         Connection conn = null;
         try {
@@ -232,6 +233,7 @@ public class ActDao extends BaseDao {
             pst = conn.prepareStatement(sql);
             pst.setInt(1,associationId);
             rs = pst.executeQuery();
+            int i=0;
             while (rs.next()) {
                 Activity a = new Activity();
                 a.setActivityId(rs.getInt(1));
@@ -245,21 +247,17 @@ public class ActDao extends BaseDao {
                 a.setAttendNumber(rs.getInt(9));
                 a.setStatus(rs.getString(10));
                 a.setRemarks(rs.getString(11));
-                String str = a.getStatus();
+                aa[a.getActivityId()]=i;
+                if(a.getStatus().equals("ok"));
+                else if(a.getStatus().equals("add"));
+                else{
+                    int index=Integer.parseInt(a.getStatus());
+                    result.remove(aa[index]);
+                }
                 result.add(a);
             }
         } catch (Exception e) {
             e.printStackTrace();
-//			throw new util.DbException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
         }
         return result;
     }
