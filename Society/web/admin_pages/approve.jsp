@@ -1,8 +1,9 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.Admin" %>
 <%@ page import="java.util.List" %>
-<%@ page import="entity.Activity" %>
-<%@ page import="dao.AssoDao" %><%--
+<%@ page import="entity.Association" %>
+<%@ page import="java.util.regex.Pattern" %>
+<%@ page import="java.util.regex.Matcher" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/29
@@ -13,10 +14,11 @@
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>审批列表</title>
+    <title>社团审批</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
@@ -94,30 +96,38 @@
     </style>
 </head>
 <body>
+
+<%
+    Object accept = session.getAttribute("accept");
+    if(accept!=null && !"".equals(accept)){
+%>
+    <script type="text/javascript">
+        alert("<%=accept%>");
+    </script>
+<%      session.setAttribute("accept",null);
+    } %>
+
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
+
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
-                <!-- Navbar Header--><a href="approve.jsp" class="navbar-brand">
+                <!-- Navbar Header--><a href="" class="navbar-brand">
                 <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
                 <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div></a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <!--            <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
-<%--                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages"><a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                        <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                            <div class="status online"></div>--%>
-<%--                        </div>--%>
-<%--                        <div class="content">   <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div></a>--%>
-<%--                        <a href="approve.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-                <!-- Log out               -->
                 <div class="list-inline-item logout"><a id="logout" href="${pageContext.request.contextPath }/index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
@@ -135,74 +145,55 @@
             %>
             <div class="avatar"><img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h5"><%=name %></h1>
+                <h1 class="h5"><a href="modPassword.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
         <!-- Sidebar Navidation Menus-->
         <!--          <span class="heading">Main</span>-->
         <ul class="list-unstyled">
-            <li class="active"><a href="approve.jsp"> <i class="icon-home"></i>审批列表 </a></li>
+            <li class="active"><a href="approve.jsp"> <i class="icon-home"></i>社团审批列表 </a></li>
+            <li><a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a></li>
             <li><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
             <li><a href="place.jsp"> <i class="icon-windows"></i>场地列表</a></li>
+            <li><a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a></li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">审批列表</h2>
+                <h2 class="h5 no-margin-bottom">社团审批列表</h2>
                 <!--        <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
             </div>
         </div>
-        <section>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="mycol-lg-6">
-                        <div class="messages-block block">
-                            <div class="title"><strong>活动列表</strong></div>
-                            <div class="messages">
-                                <%
-                                    Admin admin = new Admin();
-                                    AssoDao assoDao = new AssoDao();
-                                    List<Activity> activityList = admin.listActApprove();
-                                    for(int i=0;i<activityList.size();i++){
-                                %>
-                                <a href="checkAct.jsp" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;">
-                                    <strong class="d-block" ><%=assoDao.searchAssoById(activityList.get(i).getAssociationId()).getAssociationName()%></strong>
-                                    <span class="d-block">修改轮滑社社团信息<p style="float: right;">2019-11-26</p></span>
-                                </div>
-                                </a>
-                                <%}%>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mycol-lg-6">
-                        <div class="messages-block block">
-                            <div class="title"><strong>其他信息列表</strong></div>
-                            <div class="messages">
-                                <%
-
-                                %>
-                                <a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAsso.html';return false">
-                                    <strong class="d-block" >自由灵魂轮滑社</strong>
-                                    <span class="d-block">修改轮滑社社团信息<p style="float: right;">2019-11-26</p></span>
-                                </div>
-                                </a>
-                                <%%>
-                                <a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAct.html';return false"><strong class="d-block">乐雅合唱团</strong><span class="d-block">修改合唱比赛信息<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'checkAsso.html';return false"><strong class="d-block">自由灵魂轮滑社</strong><span class="d-block">修改自由灵魂轮滑社社长<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'check.html';return false"><strong class="d-block">演讲与口才社</strong><span class="d-block">取消辩论新生赛<p style="float: right;">2019-11-26</p></span></div></a><a href="#" class="message d-flex align-items-center">
-                                <div class="content" style="padding-left: 50px;width: 100%;"onclick="window.location.href= 'check.html';return false"><strong class="d-block">网球协会</strong><span class="d-block">修改网球协会信息<p style="float: right;">2019-11-26</p></span></div></a>
-                            </div>
-                        </div>
-                    </div>
+        <div class="messages-block block">
+<%--                        <div class="title"><strong>其他信息列表</strong></div>--%>
+            <div class="messages">
+                <%
+                    Admin admin = new Admin();
+                    List<Association> assoList = admin.listAssoApprove();
+                    for(int i=0;i<assoList.size();i++){
+                %>
+                <a href="checkAsso.jsp?assoid=<%=assoList.get(i).getAssociationId()%>" class="message d-flex align-items-center">
+                <div class="content" style="padding-left: 50px;width: 100%;">
+                    <strong class="d-block" ><%=assoList.get(i).getAssociationName()%></strong>
+                    <%
+                        Pattern pattern = Pattern.compile("[0-9]*");
+                        Matcher isNum = pattern.matcher(assoList.get(i).getStatus());
+                        if(isNum.matches()){
+                    %>
+                    <span class="d-block">修改信息<p style="float: right;"><%=assoList.get(i).getRemarks()%></p></span>
+                    <%}
+                        else{
+                    %>
+                    <span class="d-block"><%=assoList.get(i).getStatus()%><p style="float: right;"><%=assoList.get(i).getRemarks()%></p></span>
+                    <%}%>
                 </div>
+                </a>
+                <%}%>
             </div>
-        </section>
+        </div>
     </div>
 </div>
 <!-- JavaScript files-->

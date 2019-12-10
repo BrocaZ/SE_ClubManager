@@ -1,24 +1,23 @@
 .chart {
-    padding: 20px;
-    background: #FFFFFF;/**/
-    color: #8a8d93;
-    margin-bottom: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+  padding: 20px;
+  background: #FFFFFF;/**/
+  color: #8a8d93;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .mycol-lg-4{
-    flex: 0 0 44%;
+	    flex: 0 0 44%;
     max-width: 44%;
 }
 .mycol-lg-5{
-    flex: 0 0 54%;
+	    flex: 0 0 54%;
     max-width: 54%;
 }
 .form1{
     display: flex;
     font-weight: 900;
 }
-
 .form1>a{
     background-color: white;
     margin-left:87%;
@@ -28,7 +27,6 @@
     font-weight: 900;
     font-family: "微软雅黑";
 }
-
 .apply{
     margin-left: 80px;
     margin-right: 80px;
@@ -38,7 +36,9 @@
     padding-bottom: 30px;
     background-color: white;
 }
+.apply1>div{
 
+}
 .apply1{
     padding-top: 15px;
 }

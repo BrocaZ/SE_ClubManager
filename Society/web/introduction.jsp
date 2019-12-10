@@ -1,6 +1,10 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.AssoDao" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="entity.Association" %>
+<%@ page import="exception.DbException" %>
+<%@ page import="entity.Message" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/26
@@ -51,31 +55,39 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
-                <!-- Navbar Header-->
-                <a href="actAnno.jsp" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
-                    <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
-                </a>
+                <!-- Navbar Header--><a href="actAnno.jsp" class="navbar-brand">
+                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div></a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-<%--                <div class="list-inline-item dropdown">--%>
-<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                                <div class="status online"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-<%--                        </a>--%>
-<%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-                <div class="list-inline-item logout">
-                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
+                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i></a>
+                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
+                        <%
+                            StuDao stuDao = new StuDao();
+                            String sno=stuDao.getCurID();
+                            List<Message> result=stuDao.messageInStu(sno);
+                            for (int i=0;i<result.size() && i<=4;i++){
+                                Message m=result.get(i);
+                                String sendsno=m.getSendsno();
+                                String sendname=stuDao.findStu(sendsno).getName();
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                String date = formatter.format(m.getSenddate());
+
+                        %>
+                        <a href="#" class="dropdown-item message d-flex align-items-center">
+                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid"></div>
+                            <div class="content" > <strong class="d-block"><%=sendname%>></strong><span class="d-block"><%=m.getContent()%></span><small class="date d-block"><%=date%></small></div></a>
+                        <%
+                            }
+                        %>
+                        <a href="message.jsp" class="dropdown-item text-center message">
+                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
+                    </div>
                 </div>
+                <!-- Log out               -->
+                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -86,13 +98,13 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                StuDao stuDao = new StuDao();
+                stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if(name!=null){
             %>
             <div class="avatar"><img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h5"><%=name %></h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
                 <!--            <p>Web Designer</p>-->
             </div>
             <%} %>
@@ -108,24 +120,24 @@
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
-                        List<Integer> list= assoDao.assoPersonList(stuDao.getCurID());
-                        for(int i=0;i<list.size();i++){
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                        List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
+                        for (int i = 0; i < list.size(); i++) {
+                            int id = list.get(i);
                     %>
-                    <li>
-                        <a href="society.jsp?assoName=<%=assoName%>"><%=assoName%></a>
-                    </li>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
+                    </a></li>
                     <%}%>
                 </ul>
             </li>
             <li class="active">
                 <a href="overview.jsp"> <i class="icon-grid"></i>社团总览 </a>
             </li>
+            <!--社长-->
             <%
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
@@ -133,47 +145,62 @@
                     <li>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
-                    <li class="active">
-                        <a href="addstu-leader.jsp">添加社员</a>
+                    <li>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
+            <%}%>
             <!--社长-->
-            <%
-                }
-            %>
         </ul>
 
     </nav>
     <!-- Sidebar Navigation end-->
+    <%
+        request.setCharacterEncoding("utf-8");
+        String id=request.getParameter("assoid");
+        String assoname=null;
+        String brief=null;
+        String path=null;
+        if(id==null)
+        {
+            assoname=request.getParameter("keyword1");
+            Association association = null;
+            association=assoDao.searchAssoByName(assoname).get(0);
+            brief=association.getIntro();
+            path="img/"+association.getAssociationId()+".jpg";
+        }
+        else {
+            Association association = null;
+            association = assoDao.searchAssoById((Integer.parseInt(id)));
+            assoname = association.getAssociationName();
+            brief = association.getIntro();
+            path="img/"+Integer.parseInt(id)+".jpg";
+        }
+    %>
     <div class="page-content">
-        <div class="page-header no-margin-bottom">
+        <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">乐雅歌唱协会</h2>
+                <h2 class="h5 no-margin-bottom"><%=assoname%>></h2>
             </div>
         </div>
         <!-- Breadcrumb-->
-        <div class="d-block" style="margin-left: 100px; margin-top: 70px; width: 100%;">
-            <img src="img/logo2.jpg" style=" border-radius: 30px; float: left; width: 20%;">
-            <div style="font-family:'agency fb';color:#db6574;float: right; margin-top: 8%;margin-right: 25%; " class="test"><b>乐雅歌唱协会</b></div>
 
+        <div  class="messages-block block"style="">
+        <div class="d-block" style="margin-left: 100px; margin-top: 70px; width: 100%;">
+            <img src="<%=path%>" style=" border-radius: 30px; float: left; width: 20%;">
+            <div style="font-family:'agency fb';color:#db6574;float: right; margin-top: 8%;margin-right: 25%; " class="test"><b><%=assoname%></b></div>
         </div>
-        <div class="d-block" style="margin-top: 350px; margin-left: 100px;">
+        <span></span>
+        <div class="d-block" style="margin-top: 250px; margin-left: 100px;">
             <strong style="font-size:38px ; font-family: '微软雅黑';">简介</strong>
-            <p style="font-family: '微软雅黑'; font-size: 20px; margin-right: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乐雅歌唱协会是一个为了接纳更多热爱音乐，接近音乐并能和我们一起发展音乐的更多可能性的人的五星级音乐社团，我们没有太多意义上的偏向性，鼓励各种音乐风格的发展与传播，同时也希望吸收更多新风格。假如你在唱歌方面没有太大优势，有着强势的乐器天赋也可以成为我们很重要的一份子，乐雅，在保持音乐自由性的同时，却有着极强的对音乐更多的执念，每一个活动每一次表演我们都真诚对待，我们希望，让更多人去唱，去登台，去得到观众，去征服观众，最后，去找到自己，追求自己，动人的音乐应该让更多人听到，我们也在等待每一个吸引人的你，从第一人称出发，找到自己，勿忘初心。</p>
+            <p style="font-family: '微软雅黑'; font-size: 20px; margin-right: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=brief%></p>
         </div>
-        <!--		<footer class="footer">-->
-        <!--			<div class="footer__block block no-margin-bottom">-->
-        <!--				<div class="container-fluid text-center">-->
-        <!--					 Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-        <!--					              <p class="no-margin-bottom">Copyright &copy; 2019.Company name All rights reserved.</p>-->
-        <!--				</div>-->
-        <!--			</div>-->
-        <!--		</footer>-->
     </div>
+</div>
 </div>
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>

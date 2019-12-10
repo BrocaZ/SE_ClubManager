@@ -5,8 +5,8 @@ import java.util.*;
 public class Activity {
 	private int activityId;
 	private int palceId;
+	private String acttheme;
 	private int associationId;
-	private String Acttheme;
 	private String activityContent;
 	private String leaderSno;
 	private Date startTime;
@@ -14,6 +14,12 @@ public class Activity {
 	private int attendNumber;
 	private String status;
 	private String remarks;
+	public String getActtheme() {
+		return acttheme;
+	}
+	public void setActtheme(String acttheme) {
+		this.acttheme = acttheme;
+	}
 	public int getActivityId() {
 		return activityId;
 	}
@@ -31,12 +37,6 @@ public class Activity {
 	}
 	public void setAssociationId(int associationId) {
 		this.associationId = associationId;
-	}
-	public String getActtheme() {
-		return Acttheme;
-	}
-	public void setActtheme(String Acttheme) {
-		this.Acttheme = Acttheme;
 	}
 	public String getActivityContent() {
 		return activityContent;

@@ -87,5 +87,5 @@ public class Announcement {
 	public void setAssociationName(String associationName) {
 		this.associationName = associationName;
 	}
-	
+
 }

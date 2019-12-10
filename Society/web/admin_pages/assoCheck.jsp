@@ -1,7 +1,8 @@
 <%@ page import="dao.StuDao" %>
 <%@ page import="dao.AssoDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="entity.Association" %><%--
+<%@ page import="entity.Association" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: zky
   Date: 2019/11/29
@@ -86,9 +87,32 @@
             border-bottom-right-radius: 15px;
             border-left: 0px;
         }
+
     </style>
+    <script type="text/javascript">
+        function check(){
+            var mymessage=confirm("确定要删除吗？");
+            if(mymessage==true){
+                return true;
+            }
+            else if(mymessage==false){
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
+
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+} %>
+
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -134,19 +158,25 @@
             %>
             <div class="avatar"><img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h5"><%=name%></h1>
+                <h1 class="h5"><a href="modPassword.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
         <ul class="list-unstyled">
             <li>
-                <a href="approve.jsp"> <i class="icon-home"></i>审批列表 </a>
+                <a href="approve.jsp"> <i class="icon-home"></i>社团审批列表 </a>
+            </li>
+            <li>
+                <a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a>
             </li>
             <li class="active">
                 <a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表 </a>
             </li>
             <li>
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
+            </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
             </li>
         </ul>
     </nav>
@@ -172,64 +202,45 @@
             </form>
         </div>
         <div class="messages-block block">
-            <div class="messages">
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="profile"><img src="${pageContext.request.contextPath }/img/logo1.jpg" alt="..." class="img-fluid">--%>
-<%--                        <!-- <div class="status online"></div> -->--%>
-<%--                    </div>--%>
-<%--                    <div class="content"> <strong class="d-block">自由灵魂轮滑社</strong></div>--%>
-<%--                </a>--%>
+            <div id="apply" style="margin-left: 86.5%; background-color: white;">
+                <a href="addAsso.jsp" style="font-size: 18px; font-weight: 600;"><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</a >
+            </div>
+            <div class="messages" style="margin-left: 3%;margin-right: 3%;padding-top: 15px;">
+
+
                 <%
+                    String keyword=request.getParameter("keyword");
                     AssoDao assoDao = new AssoDao();
-                    List<Association> assoList = assoDao.assoList();
+                    List<Association> assoList = assoDao.assoLikeList(keyword);
                     for(int i=0;i<assoList.size();i++){
+                        String path="img/"+assoList.get(i).getAssociationId()+".jpg";
                 %>
                 <a href="introductionAdmin.jsp?id=<%=assoList.get(i).getAssociationId()%>" class="message d-flex align-items-center">
-                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">
+<%--                <form action="${pageContext.request.contextPath }/delAsso?id=<%=assoList.get(i).getAssociationId()%>" onclick="return check()" method="post">--%>
                     <div class="profile">
-                        <img src="${pageContext.request.contextPath }/img/logo2.jpg" alt="..." class="img-fluid">
+                        <img src="${pageContext.request.contextPath }/<%=path%>" alt="未设置" class="img-fluid">
                         <!-- <div class="status away"></div> -->
                     </div>
-                    <div class="content"> <strong class="d-block"><%=assoList.get(i).getAssociationName()%></strong></div>
+                    <div class="content" style="width: 86%">
+                        <strong class="d-block"><%=assoList.get(i).getAssociationName()%></strong>
+                    </div>
+                    <form action="${pageContext.request.contextPath }/delAsso?id=<%=assoList.get(i).getAssociationId()%>" onclick="return check()" method="post">
+<%--                        <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删除</button>--%>
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="margin-left: 15px; color: gray;"></i></button>
+                    </form>
+<%--                </form>--%>
                 </a>
                 <%}%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="profile"><img src="${pageContext.request.contextPath }/img/gggl.png" alt="..." class="img-fluid">--%>
-<%--                        <!-- <div class="status busy"></div> -->--%>
-<%--                    </div>--%>
-<%--                    <div class="content"> <strong class="d-block">公共管理研究会</strong></div>--%>
-<%--                </a>--%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="profile"><img src="${pageContext.request.contextPath }/img/logo3.jpg" alt="..." class="img-fluid">--%>
-<%--                        <!-- <div class="status offline"></div> -->--%>
-<%--                    </div>--%>
-<%--                    <div class="content"> <strong class="d-block">演讲与口才社</strong></div>--%>
-<%--                </a>--%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="profile"><img src="${pageContext.request.contextPath }/img/logo4.jpg" alt="..." class="img-fluid">--%>
-<%--                        <!-- <div class="status online"></div> -->--%>
-<%--                    </div>--%>
-<%--                    <div class="content"> <strong class="d-block">网球协会</strong></div>--%>
-<%--                </a>--%>
             </div>
         </div>
-        <div class="col-sm-9 ml-auto" style="float: right; width:25%;">
-            <button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</button>
-            <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删减社团</button>
-        </div>
+
     </div>
 </div>
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath }/vendor/popper.js/umd/popper.min.js">
-</script>
+<script src="${pageContext.request.contextPath }/vendor/popper.js/umd/popper.min.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath }/vendor/jquery.cookie/jquery.cookie.js">
-</script>
+<script src="${pageContext.request.contextPath }/vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath }/vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/front.js"></script>

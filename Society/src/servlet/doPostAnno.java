@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.AnnoDao;
+import dao.AssoDao;
 import entity.Announcement;
 import entity.Place;
 import entity.Student;
@@ -11,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,27 +38,44 @@ public class doPostAnno extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         String title = request.getParameter("title");
+        String brief = request.getParameter("brief");
         String content = request.getParameter("content");
-        String url = request.getParameter("url");
-
-
-        AnnoDao annoDao = new AnnoDao();
-        Announcement anno=new Announcement();
+        String actid = request.getParameter("id");
+        String type = request.getParameter("type");
+        if(type==null){
+            type="0";
+        }
+//        System.out.println(actid);
+//        System.out.println(title);
+//        System.out.println(brief);
+//        System.out.println(content);
+        System.out.println(type);
+        int assoid=0;
+        AssoDao assoDao=new AssoDao();
+        HttpSession session=request.getSession();
         try {
-            if (title.equals("") || title == null || content.equals("") || content == null ) {
-                String message = "标题和内容不能为空";
-                request.getSession().setAttribute("msg", message);
-                response.sendRedirect("post-leader.jsp");
-            } else {
-                anno.settitle(title);
-                anno.setAnnoContent(content);
-//                anno.setHref(url);
-                annoDao.addAnno(anno);
-                response.sendRedirect("societyanno-leader.jsp");
-            }
-        } catch (BaseException e) {
+            assoid=assoDao.getCurAssoId();
+
+            AnnoDao annoDao = new AnnoDao();
+            Announcement anno=new Announcement();
+            anno.settitle(title);
+            anno.setAnnoContent(content);
+            anno.setAnnobrief(brief);
+            anno.setAssociationId(assoid);
+            anno.setActivityId(Integer.parseInt(actid));
+            if(type.equals("1"))
+                anno.setAnnoType("public");
+            else
+                anno.setAnnoType("secret");
+            annoDao.addAnno(anno);
+            session.setAttribute("message", "发布成功！");
+            response.sendRedirect("societyanno-leader.jsp");
+        } catch (BaseException | SQLException e) {
             e.printStackTrace();
+            session.setAttribute("message", "发布失败！（详情见控制台）");
+            response.sendRedirect("societyanno-leader.jsp");
         }
     }
 

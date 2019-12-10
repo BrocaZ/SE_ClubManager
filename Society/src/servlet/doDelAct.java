@@ -1,6 +1,5 @@
 package servlet;
 import dao.ActDao;
-import entity.Activity;
 import exception.BaseException;
 
 import javax.servlet.ServletException;
@@ -8,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/doDelAct")
 public class doDelAct extends HttpServlet{
@@ -30,13 +31,15 @@ public class doDelAct extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ActDao actDao=new ActDao();
-        Integer id=Integer.valueOf(request.getParameter("id"));
-        System.out.println(id);
+        Integer id= Integer.valueOf(request.getParameter("id"));
+        HttpSession session=request.getSession();
         try {
             actDao.delAct(id);
+            session.setAttribute("message", "取消活动申请已提交到管理员！");
             response.sendRedirect("societyact-leader.jsp");
-        } catch (BaseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            session.setAttribute("message", "操作失败！（详情见控制台）");
             response.sendRedirect("societyact-leader.jsp");
         }
     }

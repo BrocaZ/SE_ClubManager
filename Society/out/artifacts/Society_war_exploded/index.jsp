@@ -10,7 +10,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>登陆</title>
+  <title>登录</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
@@ -42,7 +42,7 @@
           <div class="info d-flex align-items-center">
             <div class="content">
               <div class="logo">
-                <h1>登陆界面</h1>
+                <h1>登录界面</h1>
               </div>
               <p>欢迎来到ZUCC社团管理系统。</p>
             </div>
@@ -52,9 +52,18 @@
         <div class="col-lg-6">
           <div class="form d-flex align-items-center">
             <div class="content">
-              <div class="form-group">
-                <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>
-              </div>
+<%--              <div class="form-group">--%>
+<%--                <span> <%=session.getAttribute("msg")==null?"":session.getAttribute("msg") %><% session.removeAttribute("msg"); %></span>--%>
+<%--              </div>--%>
+              <%
+                Object message = request.getAttribute("message");
+                if(message!=null && !"".equals(message)){
+              %>
+                <script type="text/javascript">
+                  alert("<%=message%>");
+                </script>
+              <%} %>
+
               <form action="${pageContext.request.contextPath}/doLogin" method="post" class="form-validate mb-4">
                 <div class="form-group">
                   <input id="login-username" type="text" name="loginUsername" required data-msg="请输入用户名" class="input-material">
@@ -64,8 +73,8 @@
                   <input id="login-password" type="password" name="loginPassword" required data-msg="请输入密码" class="input-material">
                   <label for="login-password" class="label-material">密码</label>
                 </div>
-                <button type="submit" class="btn btn-primary">登陆</button>
-              </form><a href="#" class="forgot-pass">忘记密码?</a>
+                <button type="submit" class="btn btn-primary">登录</button>
+              </form>
             </div>
           </div>
         </div>

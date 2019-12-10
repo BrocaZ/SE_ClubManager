@@ -13,13 +13,13 @@
 <%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="entity.Message" %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>公告列表</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -42,38 +42,66 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <style type="text/css">
-
-    </style>
+    <script type="text/javascript">
+        function check(){
+            var mymessage=confirm("确定要删除吗？");
+            if(mymessage==true){
+                return true;
+            }
+            else if(mymessage==false){
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%  session.setAttribute("message",null);
+}%>
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header--><a href="actAnno.jsp" class="navbar-brand">
-                <div class="brand-text brand-big visible text-uppercase"><strong
-                        class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
-                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
-            </a>
+                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div></a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <%--                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
-                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages"><a href="#" class="dropdown-item message d-flex align-items-center">--%>
-                <%--                        <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-                <%--                            <div class="status online"></div>--%>
-                <%--                        </div>--%>
-                <%--                        <div class="content" >   <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div></a>--%>
-                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
+                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i></a>
+                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
+                        <%
+                            StuDao stuDao = new StuDao();
+                            String sno=stuDao.getCurID();
+                            List<Message> result=stuDao.messageInStu(sno);
+                            for (int i=0;i<result.size() && i<=4;i++){
+                                Message m=result.get(i);
+                                String sendsno=m.getSendsno();
+                                String sendname=stuDao.findStu(sendsno).getName();
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                String date = formatter.format(m.getSenddate());
+
+                        %>
+                        <a href="#" class="dropdown-item message d-flex align-items-center">
+                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid"></div>
+                            <div class="content" > <strong class="d-block"><%=sendname%>></strong><span class="d-block"><%=m.getContent()%></span><small class="date d-block"><%=date%></small></div></a>
+                        <%
+                            }
+                        %>
+                        <a href="message.jsp" class="dropdown-item text-center message">
+                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
+                    </div>
+                </div>
                 <!-- Log out               -->
-                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span
-                        class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
+                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -84,7 +112,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                StuDao stuDao = new StuDao();
+                stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if (name != null) {
             %>
@@ -92,8 +120,7 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
@@ -106,9 +133,9 @@
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -119,8 +146,8 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
-                <ul  class="collapse1 list-unstyled ">
+                <a> <i class="icon-settings"></i>社团管理 </a>
+                <ul class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
@@ -128,10 +155,10 @@
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -156,21 +183,21 @@
                     AnnoDao annoDao = new AnnoDao();
                     String time="";
                     int assoid=assoDao.getCurAssoId();
-                    List<Announcement> result = annoDao.annoList(assoid);
-                    for (int i = 0; i < result.size(); i++) {
-                        Announcement anno = result.get(i);
+                    List<Announcement> res = annoDao.annoList(assoid);
+                    for (int i = 0; i < res.size(); i++) {
+                        Announcement anno = res.get(i);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         time=sdf.format(anno.getCreatetime());
+                        int annoid=anno.getAnnoucementId();
                 %>
-                <a href="joinAct.jsp?id=<%=anno.getActivityId()%>" class="message d-flex align-items-center ">
-                    <div class="content" style="width: 90%;"><strong class="d-block"><%=anno.gettitle()%>
-                    </strong><span class="d-block"><%=anno.getAnnoContent()%></span>
-                        <small class="date d-block"><%=time%></small></div>
-                    <form action="${pageContext.request.contextPath}/doDelAnno" method="post">
-
-                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px;"></i></button>
-
-
+                <a href="joinAct.jsp?annoid=<%=annoid%>&in=no&special=no" class="message d-flex align-items-center ">
+                    <div class="content" style="width: 90%;">
+                        <strong class="d-block"><%=anno.gettitle()%></strong>
+                        <span class="d-block"><%=anno.getAnnoContent()%></span>
+                        <small class="date d-block"><%=time%></small>
+                    </div>
+                    <form action="${pageContext.request.contextPath}/doDelAnno?annoid=<%=annoid%>" method="post" onclick="return check()">
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon ion-close-round"  style="font-size: 23px; margin-left: 15px; color: gray"></i></button>
                     </form>
                 </a>
                 <%

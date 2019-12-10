@@ -1,5 +1,7 @@
 package dao;
 
+import entity.Activity;
+import entity.Message;
 import entity.Student;
 import exception.BaseException;
 
@@ -22,7 +24,55 @@ public class StuDao extends BaseDao {
     public void setCurID(String curID) {
         this.curID = curID;
     }
+    public void initAct(){
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            String sql="UPDATE pla set state = 'available' WHERE placeid in (select placeid from act where state = 'ok' and end_time < NOW())";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
 
+            sql = "UPDATE act set state = 'over' where state = 'ok' and end_time < NOW()";
+            pst = conn.prepareStatement(sql);
+            pst.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Message> messageInStu(String sno){
+        Connection conn = null;
+        List<Message> res = new ArrayList<Message>();
+        try {
+            conn = this.getConnection();
+            String sql="select mesId,sendsno,recsno,content,senddate from message where recsno = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,sno);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+                Message m = new Message();
+                m.setMesid(rs.getInt(1));
+                m.setSendsno(rs.getString(2));
+                m.setRecsno(rs.getString(3));
+                m.setContent(rs.getString(4));
+                m.setSenddate(new java.util.Date(rs.getTimestamp(5).getTime()));
+                res.add(m);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public void delMes(int mesid) throws SQLException {
+        Connection conn = null;
+
+        conn = this.getConnection();
+        String sql="DELETE FROM message where mesid = ?";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,mesid);
+        pst.execute();
+    }
     public Student findStu(String sno) throws BaseException {
         Connection conn = null;
         Student stu = null;
@@ -31,11 +81,10 @@ public class StuDao extends BaseDao {
             String sql="select * from stu where sno = ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,sno);
-            java.sql.ResultSet res = pst.executeQuery();
+            ResultSet res = pst.executeQuery();
             if(res.next()){
                 //存在，可登录
                 stu = new Student();
-                System.out.println("findStu连接数据库成功");
                 stu.setSno(res.getString(1));
                 stu.setHead_image(res.getBytes(2));
                 stu.setName(res.getString(3));
@@ -50,6 +99,15 @@ public class StuDao extends BaseDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
         return stu;
     }
@@ -62,7 +120,7 @@ public class StuDao extends BaseDao {
             String sql="select name from stu where sno = ?";
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,sno);
-            java.sql.ResultSet res = pst.executeQuery();
+            ResultSet res = pst.executeQuery();
             if(res.next()){
                 name = res.getString(1);
                 System.out.println("getName连接数据库成功");
@@ -87,18 +145,24 @@ public class StuDao extends BaseDao {
         }
     }
 
-    public void setPwd(Student s) throws BaseException{
+    public void setPwd(Student s) throws SQLException {
         Connection conn = null;
-        try {
-            conn = this.getConnection();
-            String sql="update stu set password=? where sno = ?";
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, s.getPassword());
-            pst.setString(2, s.getSno());
-            pst.execute();
-        } catch (Exception e) {
-            throw new BaseException("修改失败");
+        conn = this.getConnection();
+        String sql="update stu set password=? where sno = ?";
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, StuDao.encryptAndDencrypt(s.getPassword(),'6'));
+        pst.setString(2, s.getSno());
+        pst.execute();
+    }
+
+    //密码加密
+    public static String encryptAndDencrypt(String value, char secret) {
+        byte[] bt = value.getBytes(); // 将需要加密的内容转换为字节数组
+        for (int i = 0; i < bt.length; i++) {
+            bt[i] = (byte) (bt[i] ^ (int) secret); // 通过异或运算进行加密
         }
+        String newresult = new String(bt, 0, bt.length); // 将加密后的字符串保存到 newresult 变量中
+        return newresult;
     }
 
     public void setHeadImage(Student s,String path) throws BaseException{
@@ -116,9 +180,40 @@ public class StuDao extends BaseDao {
             throw new BaseException("修改失败");
         }
     }
-    /*
-    * 用在UI里的下拉框
-    * */
+
+    public List<Activity> actOfStu(String sno){
+        Connection conn = null;
+        List<Activity> res = new ArrayList<Activity>();
+        try {
+            conn = this.getConnection();
+            String sql="select acttheme, p.state from act_p p,act a WHERE a.activityId = p.activityId and sno = ?";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,sno);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Activity a = new Activity();
+                a.setActtheme(rs.getString(1));
+                a.setStatus(rs.getString(2));
+                res.add(a);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+
+            /*
+     * 用在UI里的下拉框
+     * */
     public List<String> allBranch(){
         Connection conn = null;
         List<String> res = new ArrayList<String>();
@@ -224,12 +319,25 @@ public class StuDao extends BaseDao {
         return res;
     }
 
-    public static void main(String[] args) {
-        StuDao sd = new StuDao();
 
-        List<String> ls = sd.classInMajor("计算机");
-        for (String s :ls){
-            System.out.println(s);
-        }
-    }
+    //用于第一次加密数据库中的所有密码
+//    public void hahaha(){
+//        Connection conn = null;
+//        try {
+//            conn = this.getConnection();
+//            String sql="update stu set password=?";
+//            String key = encryptAndDencrypt("123456", '6');
+//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.setString(1, key);
+//            pst.execute();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public static void main(String[] args) {
+//        StuDao sd = new StuDao();
+//        sd.hahaha();
+//    }
+
 }

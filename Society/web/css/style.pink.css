@@ -220,8 +220,8 @@ pre {
 	/**/
 	color: #8a8d93;
 	margin-bottom: 30px;
-	margin-left: 100px;
-	margin-right: 100px;
+	margin-left: 120px;
+	margin-right: 120px;
 }
 
 .card {
@@ -775,6 +775,16 @@ nav#sidebar a[data-toggle="collapse"]::after {
 	top: 50%;
 	right: 20px;
 }
+nav#sidebar a[data-toggle="collapse1"]::after {
+	content: '\f104';
+	display: inline-block;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-family: 'FontAwesome';
+	position: absolute;
+	top: 50%;
+	right: 20px;
+}
 
 nav#sidebar a[aria-expanded="true"] {
 	background: #E8E6E5;
@@ -957,6 +967,14 @@ nav#sidebar.shrinked a[data-toggle="collapse"]::after {
 	top: 88%;
 	left: 50%;
 }
+nav#sidebar.shrinked a[data-toggle="collapse1"]::after {
+	content: '\f107';
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 88%;
+	left: 50%;
+}
 
 nav#sidebar.shrinked a[aria-expanded="true"]::after {
 	content: '\f106';
@@ -1013,6 +1031,14 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 		margin-left: 0;
 	}
 	nav#sidebar a[data-toggle="collapse"]::after {
+		content: '\f107';
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		position: absolute;
+		top: 88%;
+		left: 50%;
+	}
+	nav#sidebar a[data-toggle="collapse1"]::after {
 		content: '\f107';
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
@@ -1306,7 +1332,7 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 	margin-top: 20px;
 	border-radius: 50px;
 	padding: 6px 30px;
-	background: #FFFFFF;/*26292d*/
+	background:#FFFFFF;
 	display: inline-block;
 	font-size: 0.9rem;
 }
@@ -1339,6 +1365,7 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 	border-bottom: 1.5px solid #e7e7e7;
 	padding: 20px;
 	background: #FFFFFF;
+	/**/
 	color: #8a8d93;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -1363,8 +1390,8 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 }
 
 .public-user-block .avatar img {
-	/*width: 100%;*/
-	/*height: 100%;*/
+	width: 100%;
+	height: 100%;
 }
 
 .public-user-block strong {
@@ -2160,7 +2187,7 @@ input.input-material~label.is-invalid~label {
 
 .table td,
 .table th {
-	border-color: #343a40;
+	/*border-color: #343a40;*/
 }
 
 .table thead th {
@@ -2176,9 +2203,9 @@ input.input-material~label.is-invalid~label {
 	background-color: #e8e6e5;
 }
 
-.table-striped tbody tr:nth-of-type(odd):hover {
+/*.table-striped tbody tr:nth-of-type(odd):hover {
 	background-color: #26292d;
-}
+}*/
 
 .table-bordered td,
 .table-bordered th {

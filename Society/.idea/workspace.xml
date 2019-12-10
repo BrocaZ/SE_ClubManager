@@ -6,128 +6,26 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2218a453-ebe8-4c42-99d1-21002b563eef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/demo1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/charts.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/custom.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/font.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.blue.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.green.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.pink.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.red.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.sea.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/css/style.violet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/data/addresses.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/data/countries.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/fonts/dark-dashboard.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/forms.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/fonts/dark-dashboard.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/icons-reference.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/icons-reference/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/avatar-9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-5.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/brand/brand-6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/CN.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/DE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/FR.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/flags/16/GB.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/fxyjh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/gggl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/gx.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/leya.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/logo4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-default.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-green.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-pink.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-red.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-sea.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker-violet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/map-marker.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/mockup7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/multiselect-switch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/sousuo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/sy.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/t9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/template-mac.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/tennis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/ymbl.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/yx.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/ziyou.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/img/书画协会图标.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/jquery插件库.url" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/js/charts-custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/js/charts-home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/js/front.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/music.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/overview.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/society1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery-validation/jquery.validate.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery.cookie/component.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery.cookie/cookie.jquery.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery.cookie/jquery.cookie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/jquery/core.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/esm/popper.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/popper-utils.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/popper.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/vendor/popper.js/umd/popper.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo原白/www.jq22.com.txt" beforeDir="false" />
-    </list>
+    <list default="true" id="2218a453-ebe8-4c42-99d1-21002b563eef" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -137,9 +35,6 @@
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -148,38 +43,38 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1U38iQTPRduBlx4v82j2jXhAATC" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/dao" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ANARKHWQH\Desktop\SE_ClubManager\Society\web" />
-      <recent name="C:\Users\ANARKHWQH\Desktop\SE_ClubManager\Society\src\entity" />
-      <recent name="C:\Users\ANARKHWQH\Desktop\SE_ClubManager\Society\src\dao" />
-      <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
-      <recent name="$PROJECT_DIR$/src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ANARKHWQH\Desktop\SE_ClubManager\Society\src\servlet" />
-      <recent name="C:\Users\ANARKHWQH\Desktop\SE_ClubManager\Society\src\dao" />
-      <recent name="C:\Users\ANARKHWQH\Desktop\SE_ClubManager\Society\web" />
-      <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
+      <recent name="$PROJECT_DIR$/src/dao" />
       <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/web/admin_pages" />
+      <recent name="$PROJECT_DIR$/src/servlet" />
+      <recent name="$PROJECT_DIR$/web/img" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="servlet" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/img" />
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/src/dao" />
+      <recent name="$PROJECT_DIR$/src/entity" />
+      <recent name="$PROJECT_DIR$/web/img/flags" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -208,11 +103,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StuDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dao.StuDao" />
+      <module name="Society" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 9.0.26" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.26" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="Society:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/Society_qh" />
+            <option name="CONTEXT_PATH" value="/Society" />
           </settings>
         </artifact>
       </deployment>
@@ -299,10 +207,12 @@
     </configuration>
     <list>
       <item itemvalue="Application.BaseDao" />
+      <item itemvalue="Application.StuDao" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.26" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.StuDao" />
         <item itemvalue="Application.BaseDao" />
       </list>
     </recent_temporary>
@@ -327,47 +237,48 @@
       <workItem from="1574998266457" duration="67000" />
       <workItem from="1575007339746" duration="6778000" />
       <workItem from="1575015478357" duration="10930000" />
-      <workItem from="1575093756753" duration="913000" />
-      <workItem from="1575099034918" duration="5029000" />
-      <workItem from="1575122881283" duration="540000" />
-      <workItem from="1575169479031" duration="1852000" />
-      <workItem from="1575213561070" duration="4261000" />
-      <workItem from="1575217859793" duration="175000" />
-      <workItem from="1575266015171" duration="4534000" />
-      <workItem from="1575270883608" duration="26374000" />
-      <workItem from="1575304419046" duration="1352000" />
-      <workItem from="1575334401001" duration="2904000" />
-      <workItem from="1575350700436" duration="106000" />
-      <workItem from="1575350811613" duration="1627000" />
-      <workItem from="1575358361057" duration="1422000" />
+      <workItem from="1575076502398" duration="11011000" />
+      <workItem from="1575094080066" duration="658000" />
+      <workItem from="1575096886815" duration="2780000" />
+      <workItem from="1575099746706" duration="338000" />
+      <workItem from="1575100127117" duration="6314000" />
+      <workItem from="1575167357623" duration="388000" />
+      <workItem from="1575257533545" duration="4220000" />
+      <workItem from="1575283880083" duration="13299000" />
+      <workItem from="1575332963611" duration="4527000" />
+      <workItem from="1575348162501" duration="2348000" />
+      <workItem from="1575350865697" duration="7055000" />
+      <workItem from="1575358362214" duration="5151000" />
+      <workItem from="1575367978829" duration="175000" />
+      <workItem from="1575383239660" duration="4599000" />
+      <workItem from="1575423738109" duration="8568000" />
+      <workItem from="1575447040883" duration="12307000" />
+      <workItem from="1575522075100" duration="11356000" />
+      <workItem from="1575605637964" duration="6663000" />
+      <workItem from="1575616331391" duration="16464000" />
+      <workItem from="1575683698300" duration="2296000" />
+      <workItem from="1575686306859" duration="1311000" />
+      <workItem from="1575704140441" duration="334000" />
+      <workItem from="1575705165319" duration="374000" />
+      <workItem from="1575708944443" duration="727000" />
+      <workItem from="1575784623366" duration="11922000" />
+      <workItem from="1575797176696" duration="137000" />
+      <workItem from="1575807172329" duration="289000" />
+      <workItem from="1575810596067" duration="808000" />
+      <workItem from="1575872101158" duration="749000" />
+      <workItem from="1575876035920" duration="358000" />
+      <workItem from="1575893985548" duration="2716000" />
+      <workItem from="1575902757976" duration="2747000" />
+      <workItem from="1575905773916" duration="485000" />
+      <workItem from="1575906289938" duration="1195000" />
+      <workItem from="1575908053156" duration="1292000" />
+      <workItem from="1575909638967" duration="95000" />
+      <workItem from="1575943006539" duration="6757000" />
+      <workItem from="1575971537624" duration="1433000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dao/AnnoDao.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

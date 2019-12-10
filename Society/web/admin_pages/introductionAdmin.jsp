@@ -93,15 +93,17 @@
             %>
             <div class="avatar"><img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h5"><%=name %></h1>
+                <h1 class="h5"><a href="modPassword.jsp"><%=name %></a></h1>
                 <!--            <p>Web Designer</p>-->
             </div>
             <%} %>
         </div>
         <ul class="list-unstyled">
-            <li class="active"><a href="approve.jsp"> <i class="icon-home"></i>审批列表 </a></li>
-            <li><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
+            <li><a href="approve.jsp"> <i class="icon-home"></i>社团审批列表 </a></li>
+            <li><a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a></li>
+            <li class="active"><a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表</a></li>
             <li><a href="place.jsp"> <i class="icon-windows"></i>场地列表</a></li>
+            <li><a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a></li>
         </ul>
     </nav>
     <!-- Sidebar Navigation end-->
@@ -111,21 +113,25 @@
             AssoDao assoDao = new AssoDao();
             Association asso = assoDao.searchAssoById(assoId);
             if(asso!=null){
+                int assoid=asso.getAssociationId();
+                String path="img/"+assoid+".jpg";
         %>
-        <div class="page-header no-margin-bottom">
+        <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom"><%=asso.getAssociationName()%></h2>
             </div>
         </div>
         <!-- Breadcrumb-->
-        <div class="d-block" style="margin-left: 100px; margin-top: 70px; width: 100%;">
-            <img src="${pageContext.request.contextPath }/img/logo2.jpg" style=" border-radius: 30px; float: left; width: 20%;">
+        <div class="messages-block block">
+        <div class="messages" style="margin-left: 100px; margin-top: 70px; width: 100%;">
+            <img src="${pageContext.request.contextPath }/<%=path%>" style=" border-radius: 30px; float: left; width: 20%;">
             <div style="font-family:'agency fb';color:#db6574;float: right; margin-top: 8%;margin-right: 25%; " class="test"><b><%=asso.getAssociationName()%></b></div>
 
         </div>
         <div class="d-block" style="margin-top: 350px; margin-left: 100px;">
             <strong style="font-size:38px ; font-family: '微软雅黑';">简介</strong>
             <p style="font-family: '微软雅黑'; font-size: 20px; margin-right: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=asso.getIntro()%></p>
+        </div>
         </div>
         <%}%>
     </div>

@@ -5,21 +5,20 @@
   Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.PlaceDao" %>
-<%@ page import="dao.StuDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dao.AssoDao" %>
 <%@ page import="entity.Place" %>
-<%@ page import="dao.AnnoDao" %>
 <%@ page import="entity.Announcement" %>
+<%@ page import="entity.Activity" %>
+<%@ page import="dao.*" %>
+<%@ page import="entity.Message" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>活动公告</title>
+    <title>活动详情</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -41,6 +40,30 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <%
+        StuDao stuDao=new StuDao();
+        ActDao actDao=new ActDao();
+        AnnoDao annDao = new AnnoDao();
+
+        int annoid = Integer.valueOf(request.getParameter("annoid"));
+        int actid = annDao.searchAnnoById(annoid).getActivityId();
+        String in=request.getParameter("in");
+        String special = request.getParameter("special");
+        String sno=stuDao.getCurID();
+    %>
+    <script>
+        function check() {
+            <%
+             boolean bool=actDao.isJoinedAct(actid,sno);
+             if(bool==true){
+            %>
+                alert("已报名当前活动");
+                return false;
+            <%}%>
+            return true;
+
+        }
+    </script>
     <style type="text/css">
         .apply {
             margin-left: 80px;
@@ -64,8 +87,8 @@
 
         .apply-submit {
             padding-top: 30px;
-        }</style>
-
+        }
+    </style>
 </head>
 
 <body>
@@ -73,37 +96,37 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
-                <!-- Navbar Header-->
-                <a href="actAnno.jsp" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong
-                            class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
-                    <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div>
-                </a>
+                <!-- Navbar Header--><a href="actAnno.jsp" class="navbar-brand">
+                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">ZUCC</strong><strong>SOCIETY</strong></div>
+                <div class="brand-text brand-sm"><strong class="text-primary">Z</strong><strong>S</strong></div></a>
                 <!-- Sidebar Toggle Btn-->
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <%--                <div class="list-inline-item dropdown">--%>
-                <%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"--%>
-                <%--                       aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span--%>
-                <%--                            class="badge dashbg-1">1</span></a>--%>
-                <%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-                <%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-                <%--                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid">--%>
-                <%--                                <div class="status online"></div>--%>
-                <%--                            </div>--%>
-                <%--                            <div class="content"><strong class="d-block">姓名</strong><span--%>
-                <%--                                    class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-                <%--                        </a>--%>
-                <%--                        <a href="actAnno.jsp" class="dropdown-item text-center message">--%>
-                <%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
-                <!-- Log out               -->
-                <div class="list-inline-item logout">
-                    <a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i
-                            class="icon-logout"></i></a>
+                <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i></a>
+                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
+                        <%
+                            List<Message> result=stuDao.messageInStu(sno);
+                            for (int i=0;i<result.size() && i<=4;i++){
+                                Message m=result.get(i);
+                                String sendsno=m.getSendsno();
+                                String sendname=stuDao.findStu(sendsno).getName();
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                String date = formatter.format(m.getSenddate());
+
+                        %>
+                        <a href="#" class="dropdown-item message d-flex align-items-center">
+                            <div class="profile"><img src="img/t1.jpg" alt="..." class="img-fluid"></div>
+                            <div class="content" > <strong class="d-block"><%=sendname%>></strong><span class="d-block"><%=m.getContent()%></span><small class="date d-block"><%=date%></small></div></a>
+                        <%
+                            }
+                        %>
+                        <a href="message.jsp" class="dropdown-item text-center message">
+                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>
+                    </div>
                 </div>
+                <!-- Log out               -->
+                <div class="list-inline-item logout"><a id="logout" href="index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -114,7 +137,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <%
-                StuDao stuDao = new StuDao();
+                stuDao = new StuDao();
                 String name = stuDao.findStu(stuDao.getCurID()).getName();
                 if (name != null) {
             %>
@@ -122,25 +145,36 @@
                 <img src="img/t7.jpg" alt="..." class="img-fluid rounded-circle">
             </div>
             <div class="title">
-                <h1 class="h5"><%=name %>
-                </h1>
+                <h1 class="h5"><a href="modifyInfo.jsp"><%=name %></a></h1>
             </div>
             <%} %>
         </div>
         <ul class="list-unstyled">
+            <%
+                if(in.equals("yes")&&special.equals("no")){
+            %>
             <li class="active">
+            <%}else{%>
+            <li>
+            <%}%>
                 <a href="actAnno.jsp"> <i class="icon-home"></i>活动公告 </a>
             </li>
+            <%
+                if(special.equals("yes")){
+            %>
+            <li class="active">
+            <%} else {%>
             <li>
+            <%}%>
                 <a href="#exampledropdownDropdown" data-toggle="collapse"> <i class="icon-windows"></i>我的社团 </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <%
                         AssoDao assoDao = new AssoDao();
                         List<Integer> list = assoDao.assoPersonList(stuDao.getCurID());
                         for (int i = 0; i < list.size(); i++) {
-                            String assoName = assoDao.searchAssoById(list.get(i)).getAssociationName();
+                            int id = list.get(i);
                     %>
-                    <li><a href="society.jsp?assoName=<%=assoName%>"><%=assoName%>
+                    <li><a href="society.jsp?assoid=<%=id%>"><%=assoDao.searchAssoById(id).getAssociationName()%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -153,19 +187,25 @@
                 if (assoDao.isLeader(stuDao.getCurID())) {
             %>
             <li>
-                <a href="#exampledropdownDropdown" data-toggle="collapse1"> <i class="icon-settings"></i>社团管理 </a>
+                <a> <i class="icon-settings"></i>社团管理 </a>
                 <ul  class="collapse1 list-unstyled ">
                     <li>
                         <a href="societyact-leader.jsp">活动列表</a>
                     </li>
+                    <%
+                        if(in.equals("no")&&special.equals("no")){
+                    %>
+                    <li class="active">
+                    <%}else{%>
                     <li>
+                    <%}%>
                         <a href="societyanno-leader.jsp">公告列表</a>
                     </li>
                     <li>
-                        <a href="addstu-leader.jsp">添加社员</a>
+                        <a href="addstu-leader.jsp?check=0">添加社员</a>
                     </li>
                     <li>
-                        <a href="changeleader.jsp">更换社长</a>
+                        <a href="changeleader.jsp">修改社团信息</a>
                     </li>
                 </ul>
             </li>
@@ -183,22 +223,27 @@
                 <h2 class="h5 no-margin-bottom">报名活动</h2>
             </div>
         </div>
-        <% Integer id=Integer.valueOf(request.getParameter("id"));
-            System.out.println(id);
+        <%
+//            System.out.println(id);
+            Announcement anno = annDao.searchAnnoById(annoid);
+            if(anno!=null){
         %>
         <div  class="messages-block block"style="height: 90%;">
             <div class="messages"  style="width: 85%;padding-top: 50px">
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;">第十八届学生社团联盟第一次全体大会暨干训动员大会
-                </strong></div>
-                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;">2019年11月29日，由学生社团联盟举办的第十八届学生社团联盟第一次全体大会暨干训动员大会于文一109顺利举行。参加本次会议的有学生社团联盟指导老师叶敏、主席朱林俊、副主席王琪、许昀萱、苏礼荣、兰艺鑫以及各部门部长、干事。</small></div>
-                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=id%>" method="post">
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%;"><strong style="font-size: 35px; padding-left: 20px;"><%=anno.gettitle()%></strong></div>
+                <div style="width: 100%; padding-left: 15%; padding-top: 2%; padding-bottom: 100px"><small style="font-size: 20px; padding-left: 20px;"><%=anno.getAnnoContent()%></small></div>
+                <form action="${pageContext.request.contextPath}/doJoinAct?id=<%=actid%>" method="post" onsubmit="return check()">
+                <%
+                    if(in.equals("yes")){
+                %>
                 <div class="col-sm-9 ml-auto" style="float: right; width:20%;" >
                     <button type="submit" class="btn btn-primary" >报名活动</button>
                 </div>
+                <%}%>
                 </form>
             </div>
         </div>
-
+        <%}%>
     </div>
 </div>
 <!-- JavaScript files-->

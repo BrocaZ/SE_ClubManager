@@ -87,21 +87,32 @@
             border-left: 0px;
         }
     </style>
+    <script type="text/javascript">
+        function check(){
+            var mymessage=confirm("确定要删除吗？");
+            if(mymessage==true){
+                return true;
+            }
+            else if(mymessage==false){
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
+
+<%
+    Object message = session.getAttribute("message");
+    if(message!=null && !"".equals(message)){
+%>
+<script type="text/javascript">
+    alert("<%=message%>");
+</script>
+<%      session.setAttribute("message",null);
+} %>
+
 <header class="header">
     <nav class="navbar navbar-expand-lg">
-        <!--    <div class="search-panel">-->
-        <!--      <div class="search-inner d-flex align-items-center justify-content-center">-->
-        <!--        <div class="close-btn">关闭 <i class="fa fa-close"></i></div>-->
-        <!--        <form id="searchForm" action="#">-->
-        <!--          <div class="form-group">-->
-        <!--            <input type="search" name="search" placeholder="输入关键词...">-->
-        <!--            <button type="submit" class="submit">搜索</button>-->
-        <!--          </div>-->
-        <!--        </form>-->
-        <!--      </div>-->
-        <!--    </div>-->
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header-->
@@ -113,19 +124,6 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-<%--                <div class="list-inline-item dropdown">--%>
-<%--                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">1</span></a>--%>
-<%--                    <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">--%>
-<%--                        <a href="#" class="dropdown-item message d-flex align-items-center">--%>
-<%--                            <div class="profile"><img src="${pageContext.request.contextPath }/img/t1.jpg" alt="..." class="img-fluid">--%>
-<%--                                <div class="status online"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="content"> <strong class="d-block">姓名</strong><span class="d-block">理四开例会</span><small class="date d-block">9:30am</small></div>--%>
-<%--                        </a>--%>
-<%--                        <a href="approve.jsp" class="dropdown-item text-center message">--%>
-<%--                            <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <div class="list-inline-item logout">
                     <a id="logout" href="${pageContext.request.contextPath }/index.jsp" class="nav-link"> <span class="d-none d-sm-inline">退出 </span><i class="icon-logout"></i></a>
                 </div>
@@ -145,22 +143,27 @@
             %>
             <div class="avatar"><img src="${pageContext.request.contextPath }/img/t7.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h5"><%=name%></h1>
+                <h1 class="h5"><a href="modPassword.jsp"><%=name %></a></h1>
                 <!--            <p>Web Designer</p>-->
             </div>
             <%}%>
         </div>
-        <!-- Sidebar Navidation Menus-->
-        <!--        <span class="heading">Main</span>-->
+
         <ul class="list-unstyled">
             <li>
-                <a href="approve.jsp"> <i class="icon-home"></i>审批列表 </a>
+                <a href="approve.jsp"> <i class="icon-home"></i>社团审批列表 </a>
+            </li>
+            <li>
+                <a href="checkActList.jsp"> <i class="icon-list"></i>活动审批列表 </a>
             </li>
             <li>
                 <a href="assoCheck.jsp"> <i class="icon-grid"></i>社团列表 </a>
             </li>
             <li class="active">
                 <a href="place.jsp"> <i class="icon-windows"></i>场地列表</a>
+            </li>
+            <li>
+                <a href="resetPassword.jsp"> <i class="icon-user"></i>密码重置</a>
             </li>
         </ul>
     </nav>
@@ -170,11 +173,6 @@
         <div class="page-header no-margin-bottom">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">场地列表</h2>
-                <!--        <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>-->
-                <%--                <div class="col-sm-9 ml-auto" style="float: right; width:30%;">--%>
-                <%--                    <button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</button>--%>
-                <%--                    <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删减社团</button>--%>
-                <%--                </div>--%>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -184,54 +182,41 @@
                 <button></button>
             </form>
         </div>
-        <!--    <div class="row">-->
+
         <div class="messages-block block">
             <!-- <div class="title"><strong>New Messages</strong></div> -->
-            <div class="messages">
+            <div id="apply" style="margin-left: 86.5%; background-color: white;">
+                <a href="addPlace.jsp" style="font-size: 18px; font-weight: 600;"><i class="icon-new-file" style="padding-right: 5px;"></i>增加场地</a>
+            </div>
+
+            <div class="messages" style="margin-left: 3%;margin-right: 3%;padding-top: 15px;">
                 <%
+                    String keyword=request.getParameter("keyword");
                     PlaceDao placeDao = new PlaceDao();
-                    List<Place> placeList = placeDao.placeList();
+                    List<Place> placeList = placeDao.placeLikeList(keyword);
                     for(int i=0;i<placeList.size();i++){
                 %>
-                <a href="" class="message d-flex align-items-center">
-                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">
-                    <div class="message d-flex align-items-center" style="width: 100%;">
-                        <strong class="d-block" style="padding-left: 2%; padding-right: 5%; width: 30%;"><%=placeList.get(i).getPlaceName()%></strong>
-                        <span class="d-block" style="width: 70%;">容量：<%=placeList.get(i).getAvailable()%></span>
+                <a class="message d-flex align-items-center">
+<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
+                    <div class="message d-flex align-items-center" style="width: 92%;">
+                        <strong class="d-block" style="padding-left: 3%; padding-right: 5%; width: 45%;"><%=placeList.get(i).getPlaceName()%></strong>
+                        <span class="d-block" style="width: 55%;">容量：<%=placeList.get(i).getAvailable()%></span>
                     </div>
+                    <form action="${pageContext.request.contextPath }/delPlace?id=<%=placeList.get(i).getPlaceId()%>" onclick="return check()" method="post">
+                        <button type="submit" style="background-color: rgba(0,0,0,0);border: none"><i class="icon-close" style="margin-left: 15px; color: gray;"></i></button>
+                    </form>
                 </a>
                 <%}%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="message d-flex align-items-center" style="width: 100%;"><strong class="d-block" style="padding-left: 2%; padding-right: 5%;width: 30%;">文四332</strong><span class="d-block" style="width: 70%;">容量:100人</span></div>--%>
-<%--                </a>--%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="message d-flex align-items-center" style="width: 100%;"><strong class="d-block" style="padding-left: 2%; padding-right: 5%;width: 30%;">图书馆门口的空地</strong><span class="d-block" style="width: 70%;">容量:1000人</span></div>--%>
-<%--                </a>--%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="message d-flex align-items-center" style="width: 100%;"><strong class="d-block" style="padding-left: 2%; padding-right: 5%;width: 30%;">羽毛球场</strong><span class="d-block" style="width: 70%;">容量:600人</span></div>--%>
-<%--                </a>--%>
-<%--                <a href="#" class="message d-flex align-items-center">--%>
-<%--                    <input id="inlineCheckbox1" type="checkbox" value="option1" style="width: 30px; height: 20px;">--%>
-<%--                    <div class="message d-flex align-items-center" style="width: 100%;"><strong class="d-block" style="padding-left: 2%; padding-right: 5%;width: 30%;">网球场</strong><span class="d-block" style="width: 70%;">容量:500人</span></div>--%>
-<%--                </a>--%>
             </div>
         </div>
-        <div class="col-sm-9 ml-auto" style="float: right; width:25%;">
-            <button class="btn btn-primary" style=" "><i class="icon-new-file" style="padding-right: 5px;"></i>增加社团</button>
-            <button class="btn btn-secondary" style="padding-right: 15px;"><i class="icon-close" style="padding-right: 5px;"></i>删减社团</button>
-        </div>
+
     </div>
 </div>
 <!-- JavaScript files-->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath }/vendor/popper.js/umd/popper.min.js">
-</script>
+<script src="${pageContext.request.contextPath }/vendor/popper.js/umd/popper.min.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath }/vendor/jquery.cookie/jquery.cookie.js">
-</script>
+<script src="${pageContext.request.contextPath }/vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="https://cdn.bootcss.com/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath }/vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/front.js"></script>
